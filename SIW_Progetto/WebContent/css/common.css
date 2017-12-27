@@ -1,0 +1,38 @@
+aside{
+	margin-top: 10px;
+}
+
+#search{
+	margin-top: 8px;
+}
+#lens{
+	margin-top: 8px;
+}
+
+#brand{
+	margin-left: 1px;	
+}
+
+h1{
+	text-align: center;
+	border-bottom: 1px solid white;
+}
+
+h2{
+	text-align: center;
+}
+
+#welcome{
+	color: white;
+}
+
+#description{
+   background: rgba(0, 50, 50, 0.3);
+}
+
+footer{
+	font-size:small;
+	text-align: right;
+	color: white;
+	margin-right: 10px;
+}
