@@ -18,9 +18,10 @@ public void dropDatabase(){
 	Connection connection = dataSource.getConnection();
 	try {
 		String delete = "drop SEQUENCE if EXISTS sequenza_id;"
-				+ "drop table if exists utente;"
+				+ "drop table if exists evento;"
 				+ "drop table if exists luogo;"							
-				+ "drop table if exists evento;";
+				+ "drop table if exists utente;"
+				;
 		PreparedStatement statement = connection.prepareStatement(delete);
 		
 		statement.executeUpdate();
@@ -45,9 +46,10 @@ public void createDatabase(){
 	try {
 		
 		String delete = "create SEQUENCE sequenza_id;"
-				+ "create table utente (\"piva\" varchar(255) primary key, nome varchar(255));"
-				+ "create table evento (\"codice\" varchar(255) primary key, nome varchar(255));"
-				+ "create table luogo (\"codice\" varchar(255) primary key, nome varchar(255));";
+				+ "create table utente(\"piva\" varchar(255) primary key, \"nome\" varchar(255));"
+				+ "create table luogo(\"titolare\" varchar(255) REFERENCES utente(\"piva\"), \"nome\" varchar(255), \"codice\" varchar(255) primary key, \"provincia\" varchar(255), \"comune\" varchar(255), \"indirizzo\" varchar(255));"
+				+ "create table evento(\"descrizione\" varchar(255), \"codice\" varchar(255) primary key, \"data\" DATE, \"luogo\" varchar(255) REFERENCES luogo(\"codice\"));"
+				;
 		
 		PreparedStatement statement = connection.prepareStatement(delete);
 		

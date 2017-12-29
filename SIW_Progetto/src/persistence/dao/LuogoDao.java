@@ -1,5 +1,13 @@
 package persistence.dao;
 
-public interface LuogoDao {
+import java.util.List;
 
+import model.Luogo;
+
+public interface LuogoDao {
+	public void save(Luogo luogo);  // Create
+	public Luogo findByPrimaryKey(String codice);     // Retrieve
+	public List<Luogo> findAll();       
+	public void update(Luogo luogo); //Update
+	public void delete(Luogo luogo); //Delete	
 }

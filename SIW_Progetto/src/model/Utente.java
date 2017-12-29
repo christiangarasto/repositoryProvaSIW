@@ -34,6 +34,28 @@ public class Utente {
 		this.luoghi = luoghi;
 	}
 	
+	public String getParsedUtente() {
+		return pIva + ":" + nome;
+	}
+
+	public void create(String string) {
+		boolean change = false;
+		for(int i = 0; i < string.length(); i++) {
+			if(string.charAt(i) == ':')
+				change = true;
+			
+			if(change) {
+				nome += string.charAt(i);
+			}else {
+				pIva += string.charAt(i);
+			}
+		}
+	}
 	
+	@Override
+	public String toString() {
+		return "Nome: " + nome + 
+				"\nPIva: " + pIva;
+	}
 	
 }
