@@ -10,4 +10,6 @@ public interface UtenteDao {
 	public List<Utente> findAll();       
 	public void update(Utente utente); //Update
 	public void delete(Utente utente); //Delete	
+	public void setPassword(Utente u, String password);
+	public void setEmail(Utente u, String email);
 }

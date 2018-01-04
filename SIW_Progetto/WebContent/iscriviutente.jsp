@@ -1,19 +1,28 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<jsp:useBean id="u" class="model.Utente" scope="request" />
+
 <!DOCTYPE html>
 <html>
 <head lang="it">
-
 	<title>Calabria E20</title>
 	<meta charset="utf-8">
-	
+
+	<link href="css/iscrizione.css" rel="stylesheet">
 	<link href="css/common.css" rel="stylesheet">
 	<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+	
 	<script src="jquery/jquery-3.2.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	
+	<link href="js/utility.js" rel="stylesheet">
+	<script src="js/utility.js"></script>
+	
 </head>
 
-<body style="background-image: url('images/home_image.jpg');">
-	<header>
+<body>
+	<header>		
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
 
@@ -31,7 +40,7 @@
 
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="#">Home</a></li>
+						<li><a href="homepage.jsp">Home</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Eventi <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -48,7 +57,7 @@
 							<li><a href="#">Twitter</a></li>
 							</ul>
 						</li>
-						<li><a href="iscrizione.html">Diventa uno di noi</a></li>
+						<li class="active"><a href="#">Diventa uno di noi</a></li>
 						<li><a href="#">Contattaci</a></li>
 
 						<li class="navbar navbar-nav form-inline navbar-right">
@@ -68,47 +77,27 @@
 			</div>
 		</nav>
 		
-		<div class="container">
-			<div class="row">
-				
-				<div class="col-sm-3"></div>
-				
-				<div class="col-sm-6">
-					<div class="jumbotron" id="description">
-						<h2>Benvenuti sul sito</h2>
-						<h1>Calabria E20</h1>
-						<p>
-							Il nostro servizio web offre la possibilità di trovare gli eventi
-							a te più vicini scegliendo tra un vasto assortimento di eventi
-							raggruppati per genere e zona.<br> Calabria E20 ti concede
-							la possibilità di prenotare presso i locali che aderiscono al
-							nostro sito per sponsorizzare il loro evento. Offriamo inoltre la
-							possibilità di acquistare il biglietto per il concerto del tuo
-							cantante preferito in occasione della sua tappa nella nostra
-							splendida terra.
-						</p>
-					</div>
-				</div>
-							
-				<div class="col-sm-3">
-					<div class="jumbotron" id="log">
-						<h4><strong>Area riservata</strong></h4>
-						<h6>Sei un utente registrato? Effettua da qui il login</h6>
-						<form>
-							<div class="form-group">
-								<input type="text" placeholder="e-mail" name="email">
-								<input type="password" placeholder="password" name="password">
-								<input type="button" value="Login" class="btn btn-success"/>
-							</div>
-						</form>
-					</div>
-				</div>
-				
-			</div>
-		</div>
+		<h1>Diventa membro di Calabria E20</h1>
+		<h3>Compila il form qui di seguito per entrare a far parte della community e sponsorizzare i tuoi eventi</h3>
 		
 	</header>
-	<footer> Sito web sviluppato dagli studenti Garasto Christian
-		e Ventura Paolo </footer>
+	<section class="row" class="moduloRegistrazione">
+		<div class="col-sm-3">
+			<form method="post" action="iscriviutente">
+				<div class="form-group"><label for="nome">Nome:</label><input id="nome" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="cognome">Cognome:</label><input id="cognome" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="piva">Partita Iva:</label><input id="piva" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="email">E-mail:</label><input id="email" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="password">Password:</label><input id="password" type="password" class="form-control" /></div>
+				<div class="form-group"><label for="conferma">Conferma Password:</label><input id="conferma" type="password" class="form-control" /></div>
+				<div class="form-group">
+					<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="valida()"/>
+					<input name="resetDati" type="reset" value="Reset Dati"  class="btn btn-danger" />
+					<input name="inviaDati" type="submit" value="Invia Dati"  class="btn btn-success"/>
+				</div>
+			</form>
+		</div>
+	</section>
+	
 </body>
 </html>

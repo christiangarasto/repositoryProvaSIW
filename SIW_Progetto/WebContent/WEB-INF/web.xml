@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>Calabria E20</display-name>
+	<welcome-file-list>
+		<!-- i seguenti file di"benvenuto" servono per la visualizzazione di default 
+			di un url generico su gestionesegreteria -->
+		<welcome-file>homepage.html</welcome-file>
+		<welcome-file>homepage.htm</welcome-file>
+		<welcome-file>homepage.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>IscriviUtenteServlet</servlet-name>
+		<servlet-class>controller.IscriviUtente</servlet-class>   <!-- package e nome della classe -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IscriviUtenteServlet</servlet-name>
+		<url-pattern>/iscriviutente</url-pattern>
+	</servlet-mapping>
+
+</web-app>

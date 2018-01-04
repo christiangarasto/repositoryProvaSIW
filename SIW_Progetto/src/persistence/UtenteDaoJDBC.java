@@ -131,4 +131,44 @@ public class UtenteDaoJDBC implements UtenteDao{
 		}
 	}
 
+	@Override
+	public void setPassword(Utente utente, String password) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update utente SET password = ? WHERE piva=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, password);
+			statement.setString(2, utente.getpIva());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
+
+	@Override
+	public void setEmail(Utente utente, String email) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update utente SET email = ? WHERE piva=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, email);
+			statement.setString(2, utente.getpIva());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
+
 }

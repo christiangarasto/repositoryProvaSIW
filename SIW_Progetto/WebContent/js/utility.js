@@ -33,7 +33,29 @@ function valida() {
 		}
 	}
 	
+	return controllo;
 	
-	
-}   
+}  
 
+
+//var nome = $("#nome").val();
+//var cognome = $("#cognome").val();
+//var piva = $("#piva").val();
+//var email = $("#email").val();
+//var password = $("#password").val();
+//var conferma = $("#conferma").val();
+
+
+//var utente = new Utente
+
+
+function registraUtente(){
+	
+	if(valida()){
+	
+		console.log("registra");
+
+	}else{
+		alert("Errore nella validazione");
+	}
+}
