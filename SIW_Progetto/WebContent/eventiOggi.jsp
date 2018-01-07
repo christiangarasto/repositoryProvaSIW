@@ -1,3 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head lang="it">
@@ -28,12 +31,12 @@
 	
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="homepage.html">Home</a></li>
+						<li><a href="homepage.jsp">Home</a></li>
 						<li class="active dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventi vicino a te <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventi Oggi <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-							<li><a href="eventiOggi.html">Eventi Oggi</a></li>
-							<li><a href="eventi.html">Tutti gli eventi</a></li>
+							<li><a href="eventi.jsp">Tutti gli eventi</a></li>
+							<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
 							</ul>
 						</li>
 						<li><a href="#">Recensioni</a></li>
@@ -45,7 +48,7 @@
 							<li><a href="#">Twitter</a></li>
 							</ul>
 						</li>
-						<li><a href="iscrizione.html">Diventa uno di noi</a></li>
+						<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
 						<li><a href="#">Contattaci</a></li>
 						
 						<li class="navbar navbar-nav form-inline navbar-right">

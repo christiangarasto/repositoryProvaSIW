@@ -44,9 +44,9 @@
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Eventi <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="eventiOggi.html">Eventi oggi</a></li>
-								<li><a href="#">Tutti gli eventi</a></li>
-								<li><a href="#">Eventi vicino a te</a></li>
+								<li><a href="eventi.jsp">Tutti gli eventi</a></li>
+								<li><a href="eventiOggi.jsp">Eventi oggi</a></li>
+								<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
 							</ul></li>
 						<li><a href="#">Recensioni</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
