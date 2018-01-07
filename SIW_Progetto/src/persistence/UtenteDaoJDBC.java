@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-
 import model.Utente;
 import persistence.dao.UtenteDao;
 
 public class UtenteDaoJDBC implements UtenteDao{
+	
 	private DataSource dataSource;
 
 	public UtenteDaoJDBC(DataSource dataSource) {
@@ -142,7 +142,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			statement.setString(2, utente.getpIva());
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new PersistenceException(e.getMessage());
+ 
 		} finally {
 			try {
 				connection.close();

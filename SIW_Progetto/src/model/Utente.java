@@ -7,6 +7,7 @@ public class Utente {
 	private String pIva;
 	private String nome;
 	private ArrayList<Luogo> luoghi;
+	private String password;
 	
 	public Utente() {}
 	
@@ -56,6 +57,10 @@ public class Utente {
 	public String toString() {
 		return "Nome: " + nome + 
 				"\nPIva: " + pIva;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }
