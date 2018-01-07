@@ -84,12 +84,12 @@
 	<section class="row" class="moduloRegistrazione">
 		<div class="col-sm-3">
 			<form method="post" action="iscriviutente">
-				<div class="form-group"><label for="nome">Nome:</label><input id="nome" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="cognome">Cognome:</label><input id="cognome" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="piva">Partita Iva:</label><input id="piva" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="email">E-mail:</label><input id="email" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="password">Password:</label><input id="password" type="password" class="form-control" /></div>
-				<div class="form-group"><label for="conferma">Conferma Password:</label><input id="conferma" type="password" class="form-control" /></div>
+				<div class="form-group"><label for="nome">Nome:</label><input name="nome" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="cognome">Cognome:</label><input name="cognome" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="piva">Partita Iva:</label><input name="piva" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="email">E-mail:</label><input name="email" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="password">Password:</label><input name="password" type="password" class="form-control" /></div>
+				<div class="form-group"><label for="conferma">Conferma Password:</label><input name="conferma" type="password" class="form-control" /></div>
 				<div class="form-group">
 					<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="valida()"/>
 					<input name="resetDati" type="reset" value="Reset Dati"  class="btn btn-danger" />

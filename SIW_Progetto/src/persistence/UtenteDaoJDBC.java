@@ -21,7 +21,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void save(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-		String insert = "insert into utente(pIva, nome) values (?,?)";
+		String insert = "insert into utente(piva, nome) values (?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, utente.getpIva());
 			statement.setString(2, utente.getNome());
@@ -30,7 +30,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			try {
-				connection.close();
+				if(connection != null)
+					connection.close();
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}

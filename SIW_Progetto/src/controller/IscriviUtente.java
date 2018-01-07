@@ -21,7 +21,7 @@ public class IscriviUtente extends HttpServlet{
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		String nome = req.getParameter("nome");
 		String cognome = req.getParameter("cognome");
 		String piva = req.getParameter("piva");
