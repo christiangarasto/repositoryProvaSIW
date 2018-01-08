@@ -172,4 +172,31 @@ public class UtenteDaoJDBC implements UtenteDao{
 		}
 	}
 
+	@Override
+	public boolean findByCredenziali(String email, String password) {
+		Connection connection = this.dataSource.getConnection();
+		boolean utentePresente = false;
+		try {
+			PreparedStatement statement;
+			String query = "select * from utente where email = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, email);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				if(result.getString("password").equals(password)) {
+					utentePresente = true;
+				}
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+		return utentePresente;
+	}
+
 }

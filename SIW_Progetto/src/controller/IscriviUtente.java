@@ -42,12 +42,9 @@ public class IscriviUtente extends HttpServlet{
 			utenteDao.setEmail(u, email);
 			
 			req.setAttribute("utente", u);
-			System.out.println("Utente salvato");
 			resp.sendRedirect("homepage.jsp");
 			
 		}else {
-			
-			System.out.println("Utente non salvato");
 			resp.sendRedirect("iscriviutente.jsp");
 		}
 			

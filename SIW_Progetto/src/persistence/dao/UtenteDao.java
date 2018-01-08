@@ -12,4 +12,5 @@ public interface UtenteDao {
 	public void delete(Utente utente); //Delete	
 	public void setPassword(Utente u, String password);
 	public void setEmail(Utente u, String email);
+	public boolean findByCredenziali(String nome, String password);
 }

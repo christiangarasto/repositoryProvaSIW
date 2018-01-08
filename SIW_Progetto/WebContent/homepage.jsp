@@ -52,7 +52,6 @@
 							</ul></li>
 						<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
 						<li><a href="#">Contattaci</a></li>
-
 						<li class="navbar navbar-nav form-inline navbar-right">
 							<div id="search" class="input-group">
 								<input type="text" class="form-control">
@@ -64,20 +63,40 @@
 
 							</div>
 						</li>
+						
+						<c:if test="${loggato}">
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">${messaggio}<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Profilo</a></li>
+									<li><a href="effettualogout">Logout</a></li>
+								</ul>
+						</c:if>
+
 
 					</ul>
 				</div>
 			</div>
 		</nav>
 
-		<c:if test="${loggato}">
-			<p>${messaggio}</p>
-		</c:if>
 		<c:if test="${not loggato}">
-			<p>
-				<a href="effettualogin">Login</a>
-			</p>
+			<div class="col-sm-3">
+				<div class="jumbotron" id="log">
+					<h4>
+						<strong>Area riservata</strong>
+					</h4>
+					<h6>Sei un utente registrato? Effettua da qui il login</h6>
+					<form method="post" action="effettualogin">
+						<div class="form-group">
+							<input type="text" placeholder="e-mail" name="email"><br>
+							<input type="password" placeholder="password" name="password"><br>
+							<input type="submit" value="Login" class="btn btn-success">
+						</div>
+					</form>
+				</div>
+			</div>
 		</c:if>
+
 
 		<div class="container">
 			<div class="row">
@@ -100,25 +119,6 @@
 						</p>
 					</div>
 				</div>
-
-
-<!-- 
-				<div class="col-sm-3">
-					<div class="jumbotron" id="log">
-						<h4>
-							<strong>Area riservata</strong>
-						</h4>
-						<h6>Sei un utente registrato? Effettua da qui il login</h6>
-						<form>
-							<div class="form-group">
-								<input type="text" placeholder="e-mail" name="email"> <input
-									type="password" placeholder="password" name="password">
-
-							</div>
-						</form>
-					</div>
-				</div>
--->
 			</div>
 		</div>
 
