@@ -63,7 +63,7 @@
 
 							</div>
 						</li>
-						
+
 						<c:if test="${loggato}">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">${messaggio}<b class="caret"></b></a>
@@ -78,25 +78,6 @@
 				</div>
 			</div>
 		</nav>
-
-		<c:if test="${not loggato}">
-			<div class="col-sm-3">
-				<div class="jumbotron" id="log">
-					<h4>
-						<strong>Area riservata</strong>
-					</h4>
-					<h6>Sei un utente registrato? Effettua da qui il login</h6>
-					<form method="post" action="effettualogin">
-						<div class="form-group">
-							<input type="text" placeholder="e-mail" name="email"><br>
-							<input type="password" placeholder="password" name="password"><br>
-							<input type="submit" value="Login" class="btn btn-success">
-						</div>
-					</form>
-				</div>
-			</div>
-		</c:if>
-
 
 		<div class="container">
 			<div class="row">
@@ -119,6 +100,23 @@
 						</p>
 					</div>
 				</div>
+				<c:if test="${not loggato}">
+					<div class="col-sm-3">
+						<div class="jumbotron" id="log">
+							<h4>
+								<strong>Area riservata</strong>
+							</h4>
+							<h6>Sei un utente registrato? Effettua da qui il login</h6>
+							<form method="post" action="effettualogin">
+								<div class="form-group">
+									<input type="text" placeholder="e-mail" name="email"><br>
+									<input type="password" placeholder="password" name="password"><br>
+									<input type="submit" value="Login" class="btn btn-success">
+								</div>
+							</form>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 
