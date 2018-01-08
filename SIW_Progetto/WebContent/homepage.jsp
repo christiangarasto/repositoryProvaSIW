@@ -1,18 +1,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
 <head lang="it">
 
-	<title>Calabria E20</title>
-	<meta charset="utf-8">
-	
-	<link href="css/common.css" rel="stylesheet">
-	<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-	<script src="jquery/jquery-3.2.1.min.js"></script>
-	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	
+<title>Calabria E20</title>
+<meta charset="utf-8">
+
+<link href="css/common.css" rel="stylesheet">
+<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+<script src="jquery/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
 </head>
 
 <body style="background-image: url('images/home_image.jpg');">
@@ -46,11 +46,10 @@
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Social Media <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-							<li><a href="#">Facebook</a></li>
-							<li><a href="#">Instagram</a></li>
-							<li><a href="#">Twitter</a></li>
-							</ul>
-						</li>
+								<li><a href="#">Facebook</a></li>
+								<li><a href="#">Instagram</a></li>
+								<li><a href="#">Twitter</a></li>
+							</ul></li>
 						<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
 						<li><a href="#">Contattaci</a></li>
 
@@ -70,46 +69,59 @@
 				</div>
 			</div>
 		</nav>
-		
+
+		<c:if test="${loggato}">
+			<p>${messaggio}</p>
+		</c:if>
+		<c:if test="${not loggato}">
+			<p>
+				<a href="effettualogin">Login</a>
+			</p>
+		</c:if>
+
 		<div class="container">
 			<div class="row">
-				
+
 				<div class="col-sm-3"></div>
-				
+
 				<div class="col-sm-6">
 					<div class="jumbotron" id="description">
 						<h2>Benvenuti sul sito</h2>
 						<h1>Calabria E20</h1>
 						<p>
-							Il nostro servizio web offre la possibilitÃ  di trovare gli eventi
-							a te più vicini scegliendo tra un vasto assortimento di eventi
-							raggruppati per genere e zona.<br> Calabria E20 ti concede
-							la possibilità  di prenotare presso i locali che aderiscono al
-							nostro sito per sponsorizzare il loro evento. Offriamo inoltre la
-							possibilità  di acquistare il biglietto per il concerto del tuo
-							cantante preferito in occasione della sua tappa nella nostra
-							splendida terra.
+							Il nostro servizio web offre la possibilitÃ  di trovare gli
+							eventi a te più vicini scegliendo tra un vasto assortimento di
+							eventi raggruppati per genere e zona.<br> Calabria E20 ti
+							concede la possibilità  di prenotare presso i locali che
+							aderiscono al nostro sito per sponsorizzare il loro evento.
+							Offriamo inoltre la possibilità  di acquistare il biglietto per
+							il concerto del tuo cantante preferito in occasione della sua
+							tappa nella nostra splendida terra.
 						</p>
 					</div>
 				</div>
-							
+
+
+<!-- 
 				<div class="col-sm-3">
 					<div class="jumbotron" id="log">
-						<h4><strong>Area riservata</strong></h4>
+						<h4>
+							<strong>Area riservata</strong>
+						</h4>
 						<h6>Sei un utente registrato? Effettua da qui il login</h6>
 						<form>
 							<div class="form-group">
-								<input type="text" placeholder="e-mail" name="email">
-								<input type="password" placeholder="password" name="password">
-								<input type="button" value="Login" class="btn btn-success"/>
+								<input type="text" placeholder="e-mail" name="email"> <input
+									type="password" placeholder="password" name="password">
+
 							</div>
 						</form>
 					</div>
 				</div>
-				
+-->
 			</div>
 		</div>
-		
+
 	</header>
 	<footer> Sito web sviluppato dagli studenti Garasto Christian
 		e Ventura Paolo </footer>

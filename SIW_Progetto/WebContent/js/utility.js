@@ -4,16 +4,17 @@ function valida() {
 	
 	var controllo = true;
 	
-	var nome = $("#nome").val();
-	var cognome = $("#cognome").val();
-	var piva = $("#piva").val();
-	var email = $("#email").val();
-	var password = $("#password").val();
-	var conferma = $("#conferma").val();
+	var nome = $("#idNome").val();
+	var cognome = $("#idCognome").val();
+	var piva = $("#idPIva").val();
+	var email = $("#idEmail").val();
+	var password = $("#idPassword").val();
+	var conferma = $("#idConferma").val();
 
 	if(nome.length == 0 || cognome.length == 0 || piva.length == 0 || email.length == 0 || password.length == 0 || conferma.length == 0)
 	{
 		alert("tutti i campi devono essere riempiti!");
+		controllo = false;
 	}
 	else
 	{
@@ -25,11 +26,17 @@ function valida() {
 		if(piva.length != 11 && controllo)
 		{
 			alert("partita Iva non valida");
+			controllo = false;
 		}
 		
 		if(controllo)
 		{
 			console.log("cerco nel database");
+			/*
+			 * 
+			 * 
+			 * 
+			 */
 		}
 	}
 	
@@ -37,25 +44,25 @@ function valida() {
 	
 }  
 
+/*
+$("#inviaDati").on(function(e){
+	if(valida()){
+		console.log("registra");
+	}else{
+		alert("Errore nella validazione");
+		e.preventDefault();
+	}
+	
+});
+*/
 
-//var nome = $("#nome").val();
-//var cognome = $("#cognome").val();
-//var piva = $("#piva").val();
-//var email = $("#email").val();
-//var password = $("#password").val();
-//var conferma = $("#conferma").val();
-
-
-//var utente = new Utente
-
-
-function registraUtente(){
+function registraUtente(event){
+	alert("saluti");
 	
 	if(valida()){
-	
 		console.log("registra");
-
 	}else{
+		event.preventDefault();
 		alert("Errore nella validazione");
 	}
 }

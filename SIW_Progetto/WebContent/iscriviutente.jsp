@@ -16,7 +16,7 @@
 	<script src="jquery/jquery-3.2.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	
-	<link href="js/utility.js" rel="stylesheet">
+<!-- <link href="js/utility.js" rel="stylesheet">  -->	
 	<script src="js/utility.js"></script>
 	
 </head>
@@ -84,16 +84,16 @@
 	<section class="row" class="moduloRegistrazione">
 		<div class="col-sm-3">
 			<form method="post" action="iscriviutente">
-				<div class="form-group"><label for="nome">Nome:</label><input name="nome" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="cognome">Cognome:</label><input name="cognome" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="piva">Partita Iva:</label><input name="piva" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="email">E-mail:</label><input name="email" type="text" class="form-control"/></div>
-				<div class="form-group"><label for="password">Password:</label><input name="password" type="password" class="form-control" /></div>
-				<div class="form-group"><label for="conferma">Conferma Password:</label><input name="conferma" type="password" class="form-control" /></div>
+				<div class="form-group"><label for="nome">Nome:</label><input name="nome" id="idNome" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="cognome">Cognome:</label><input name="cognome" id="idCognome" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="piva">Partita Iva:</label><input name="piva" id="idPIva" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="email">E-mail:</label><input name="email" id="idEmail" type="text" class="form-control"/></div>
+				<div class="form-group"><label for="password">Password:</label><input name="password" id="idPassword" type="password" class="form-control" /></div>
+				<div class="form-group"><label for="conferma">Conferma Password:</label><input name="conferma" id="idConferma" type="password" class="form-control" /></div>
 				<div class="form-group">
 					<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="valida()"/>
 					<input name="resetDati" type="reset" value="Reset Dati"  class="btn btn-danger" />
-					<input name="inviaDati" type="submit" value="Invia Dati"  class="btn btn-success"/>
+					<input id="inviaDati" type="submit" value="Invia Dati"  class="btn btn-success" onclick="registraUtente(event);"/>
 				</div>
 			</form>
 		</div>

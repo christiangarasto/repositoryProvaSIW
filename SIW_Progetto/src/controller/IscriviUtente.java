@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Utente;
 import persistence.DatabaseManager;
@@ -29,19 +30,27 @@ public class IscriviUtente extends HttpServlet{
 		String password = req.getParameter("password");
 		
 		System.out.println(nome + " " + cognome + " " + piva + " " + email + " " + password);
-	
-		Utente u = new Utente(piva, nome+" "+cognome);
 		
-			System.out.println(u.getpIva() + ", " + u.getNome());
+		Utente u = new Utente(piva, nome+" "+cognome);		
 		UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+		
+		Utente find = utenteDao.findByPrimaryKey(piva);
+		
+		if(find == null) {
 			utenteDao.save(u);
 			utenteDao.setPassword(u, password);
 			utenteDao.setEmail(u, email);
 			
 			req.setAttribute("utente", u);
+			System.out.println("Utente salvato");
+			resp.sendRedirect("homepage.jsp");
 			
-			RequestDispatcher dispatcher = req.getRequestDispatcher("iscriviutente.jsp");
-			dispatcher.forward(req, resp);
+		}else {
+			
+			System.out.println("Utente non salvato");
+			resp.sendRedirect("iscriviutente.jsp");
+		}
+			
 	
 	
 	}

@@ -24,4 +24,23 @@
 		<url-pattern>/iscriviutente</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>EffettuaLoginServlet</servlet-name>
+		<servlet-class>controller.EffettuaLogin</servlet-class>   <!-- package e nome della classe -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EffettuaLoginServlet</servlet-name>
+		<url-pattern>/effettualogin</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>controller.Home</servlet-class>   <!-- package e nome della classe -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>
