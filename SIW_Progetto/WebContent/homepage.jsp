@@ -12,11 +12,11 @@
 <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 <script src="jquery/jquery-3.2.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-
 </head>
 
 <body style="background-image: url('images/home_image.jpg');">
 	<header>
+
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
 
@@ -78,6 +78,7 @@
 				</div>
 			</div>
 		</nav>
+		
 
 		<div class="container">
 			<div class="row">
@@ -100,6 +101,7 @@
 						</p>
 					</div>
 				</div>
+				
 				<c:if test="${not loggato}">
 					<div class="col-sm-3">
 						<div class="jumbotron" id="log">
@@ -112,6 +114,19 @@
 									<input type="text" placeholder="e-mail" name="email"><br>
 									<input type="password" placeholder="password" name="password"><br>
 									<input type="submit" value="Login" class="btn btn-success">
+								</div>
+							</form>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${loggato}">
+					<div class="col-sm-3">
+						<div class="jumbotron" id="log">
+							<h5>${messaggio}</h5>
+							<form method="post" action="effettualogout">
+								<div class="form-group">
+									<input type="submit" value="effettualogout" class="btn btn-success">
+									<a href="gestioneProfilo.jsp" type="button" class="btn btn-primary">Profilo</button>
 								</div>
 							</form>
 						</div>
