@@ -1,37 +1,39 @@
-aside{
+aside {
 	margin-top: 10px;
 }
 
-#search{
-	margin-top: 8px;
-}
-#lens{
+#search {
 	margin-top: 8px;
 }
 
-#brand{
-	margin-left: 1px;	
+#lens {
+	margin-top: 8px;
 }
 
-h1{
+#brand {
+	margin-left: 1px;
+}
+
+h1 {
 	text-align: center;
 	border-bottom: 1px solid white;
 }
 
-h2{
+h2 {
 	text-align: center;
 }
 
-#description{
-   background: rgba(0, 50, 50, 0.3);
-   color: white;
+#description {
+	background: rgba(0, 50, 50, 0.3);
+	color: white;
 }
 
-#log{
-   background: rgba(0, 50, 50, 0.3);
+#log {
+	background: rgba(0, 50, 50, 0.3);
 }
-#log.jumbotron{
-	color:white;
+
+#log.jumbotron {
+	color: white;
 	padding-top: 5px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -39,12 +41,12 @@ h2{
 	text-align: center;
 }
 
-form{
+form {
 	color: black;
 }
 
-footer{
-	font-size:small;
+footer {
+	font-size: small;
 	text-align: right;
 	color: white;
 	margin-right: 10px;
