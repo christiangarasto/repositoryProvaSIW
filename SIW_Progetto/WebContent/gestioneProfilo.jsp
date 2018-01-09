@@ -8,8 +8,8 @@
 <title>Calabria E20</title>
 <meta charset="utf-8">
 
+<link href="css/getioneProfilo.css" rel="stylesheet">
 <link href="css/common.css" rel="stylesheet">
-<link href="css/background.css" rel="stylesheet">
 <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 <script src="jquery/jquery-3.2.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -66,8 +66,8 @@
 							<aside class="pull-right">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 									data-toggle="dropdown"><img src="images/profilo.png"
-										height="30"><b class="caret"></b></a> 
-									<c:if test="${loggato}">
+										height="30"><b class="caret"></b></a> <c:if
+										test="${loggato}">
 										<ul class="dropdown-menu">
 											<li><p class="bg-success">${username}</p></li>
 											<li class="active"><a href="gestioneProfilo.jsp">Profilo</a></li>
@@ -81,5 +81,104 @@
 			</div>
 		</nav>
 
+		<div class="container">
+			<h1>Gestione Profilo</h1>
+			<hr>
+			<div class="row">
+				<div class="col-md-9 personal-info">
+					<form class="form-horizontal" method="post" action="modificaprofilo">
+						<div class="form-group">
+							<label class="col-lg-3 control-label">Nome:</label>
+							<div class="col-lg-8">
+								<input class="form-control" name="input_nome" value="${nome}" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label">Partita Iva:</label>
+							<div class="col-lg-8">
+								<input class="form-control" name="input_piva" value="${piva}" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Email:</label>
+							<div class="col-md-8">
+								<input class="form-control" name="input_email" value="${email}" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Password:</label>
+							<div class="col-md-8">
+								<input class="form-control" name="input_password" value="${password}" type="password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Conferma password:</label>
+							<div class="col-md-8">
+								<input class="form-control" name="input_confermapassword" value="${password}" type="password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label"></label>
+							<div class="col-md-8">
+								<input class="btn btn-success" type="submit" value="Salva cambiamenti">
+								<input class="btn btn-default" value="Annulla" type="reset">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<hr>
+
+		<!--  		
+		<div class="container">
+			<div class="row">
+
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<section class="row" class="moduloRegistrazione">
+						<form method="post" action="iscriviutente">
+							<div class="form-group">
+								<label for="nome">Nome:</label><input name="nome" id="idNome"
+									type="text" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="cognome">Cognome:</label><input name="cognome"
+									id="idCognome" type="text" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="piva">Partita Iva:</label><input name="piva"
+									id="idPIva" type="text" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="email">E-mail:</label><input name="email"
+									id="idEmail" type="text" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="password">Password:</label><input name="password"
+									id="idPassword" type="password" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="conferma">Conferma Password:</label><input
+									name="conferma" id="idConferma" type="password"
+									class="form-control" />
+							</div>
+							<div class="form-group">
+								<input name="validaDati" type="button" value="Valida Dati"
+									class="btn btn-warning" onclick="valida()" />
+							</div>
+						</form>
+					</section>
+				</div>
+
+
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<input name="validaDati" type="button" value="Salva modifiche"
+				class="btn btn-success" onclick="valida()" />
+		</div>
+		-->
 </body>
 </html>

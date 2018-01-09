@@ -38,8 +38,8 @@ public class IscriviUtente extends HttpServlet{
 		
 		if(find == null) {
 			utenteDao.save(u);
-			utenteDao.setPassword(u, password);
-			utenteDao.setEmail(u, email);
+			utenteDao.setPassword(piva, password);
+			utenteDao.setEmail(piva, email);
 			
 			req.setAttribute("utente", u);
 			resp.sendRedirect("homepage.jsp");

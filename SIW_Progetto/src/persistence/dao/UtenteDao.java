@@ -10,7 +10,9 @@ public interface UtenteDao {
 	public List<Utente> findAll();       
 	public void update(Utente utente); //Update
 	public void delete(Utente utente); //Delete	
-	public void setPassword(Utente u, String password);
-	public void setEmail(Utente u, String email);
+	public void setPassword(String piva, String password);
+	public void setEmail(String piva, String email);
 	public String findByCredenziali(String nome, String password);
+	public boolean passwordCambiata(String piva, String passwordNuovo);
+	public boolean emailCambiata(String piva, String emailNuovo);
 }

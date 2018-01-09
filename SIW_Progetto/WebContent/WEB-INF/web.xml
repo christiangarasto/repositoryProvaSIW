@@ -9,20 +9,13 @@
 			di un url generico su gestionesegreteria -->
 		<welcome-file>Home</welcome-file>
 	</welcome-file-list>
-	
-	<!-- 
-	
-		<welcome-file>homepage.html</welcome-file>
-		<welcome-file>homepage.htm</welcome-file>
-		<welcome-file>homepage.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	
-	 -->
-	
-	
-	
+
+	<!-- <welcome-file>homepage.html</welcome-file> <welcome-file>homepage.htm</welcome-file> 
+		<welcome-file>homepage.jsp</welcome-file> <welcome-file>default.html</welcome-file> 
+		<welcome-file>default.htm</welcome-file> <welcome-file>default.jsp</welcome-file> -->
+
+
+
 
 	<servlet>
 		<servlet-name>IscriviUtenteServlet</servlet-name>
@@ -50,14 +43,23 @@
 		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/Home</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>EffettuaLogoutServlet</servlet-name>
 		<servlet-class>controller.EffettuaLogout</servlet-class>   <!-- package e nome della classe -->
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>EffettuaLogoutServlet</servlet-name>
 		<url-pattern>/effettualogout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ModificaProfiloServlet</servlet-name>
+		<servlet-class>controller.ModificaProfilo</servlet-class>   <!-- package e nome della classe -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModificaProfiloServlet</servlet-name>
+		<url-pattern>/modificaprofilo</url-pattern>
 	</servlet-mapping>
 
 

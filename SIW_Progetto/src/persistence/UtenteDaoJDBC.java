@@ -134,13 +134,13 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public void setPassword(Utente utente, String password) {
+	public void setPassword(String piva, String password) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			String update = "update utente SET password = ? WHERE piva=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, password);
-			statement.setString(2, utente.getpIva());
+			statement.setString(2, piva);
 			statement.executeUpdate();
 		} catch (SQLException e) {
  
@@ -154,13 +154,13 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public void setEmail(Utente utente, String email) {
+	public void setEmail(String piva, String email) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			String update = "update utente SET email = ? WHERE piva=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, email);
-			statement.setString(2, utente.getpIva());
+			statement.setString(2, piva);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -185,7 +185,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			
 			if (result.next()) {
 				if(result.getString("password").equals(password)) {
-					return result.getString("nome");
+					return result.getString("piva");
 					
 				}
 			}
@@ -200,5 +200,59 @@ public class UtenteDaoJDBC implements UtenteDao{
 		}	
 		return null;
 	}
+
+	@Override
+	public boolean passwordCambiata(String piva, String passwordNuovo) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			PreparedStatement statement;
+			String query = "select * from utente where piva = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, piva);
+			ResultSet result = statement.executeQuery();
+			
+			if (result.next()) {
+				if(result.getString("password").equals(passwordNuovo)) {
+					return false;					
+				}
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+		return true;
+	}
+
+	@Override
+	public boolean emailCambiata(String piva, String emailNuovo) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			PreparedStatement statement;
+			String query = "select * from utente where piva = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, piva);
+			ResultSet result = statement.executeQuery();
+			
+			if (result.next()) {
+				if(result.getString("email").equals(emailNuovo)) {
+					return false;					
+				}
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+		return true;
+	}	
 
 }
