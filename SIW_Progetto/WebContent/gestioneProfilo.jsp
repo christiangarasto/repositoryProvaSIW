@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="it">
+
 <title>Calabria E20</title>
 <meta charset="utf-8">
 
@@ -15,8 +16,8 @@
 </head>
 
 <body>
-
 	<header>
+
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
 				<div class="row">
@@ -39,14 +40,12 @@
 						<div class="collapse navbar-collapse navHeaderCollapse">
 							<ul class="nav navbar-nav">
 								<li><a href="homepage.jsp">Home</a></li>
-								<li class="dropdown" class="active"><a href="#"
-									class="dropdown-toggle" data-toggle="dropdown">Eventi <b
-										class="caret"></b></a>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown">Eventi <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 										<li><a href="eventiOggi.jsp">Eventi oggi</a></li>
 										<li><a href="eventi.jsp">Tutti gli eventi</a></li>
-										<li class="active"><a href="eventiZona.jsp">Eventi
-												vicino a te</a></li>
+										<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
 									</ul></li>
 								<li><a href="#">Recensioni</a></li>
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -67,11 +66,11 @@
 							<aside class="pull-right">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 									data-toggle="dropdown"><img src="images/profilo.png"
-										height="30"><b class="caret"></b></a> <c:if
-										test="${loggato}">
+										height="30"><b class="caret"></b></a> 
+									<c:if test="${loggato}">
 										<ul class="dropdown-menu">
 											<li><p class="bg-success">${username}</p></li>
-											<li><a href="#">Profilo</a></li>
+											<li class="active"><a href="gestioneProfilo.jsp">Profilo</a></li>
 											<li><a href="effettualogout">Logout</a></li>
 										</ul>
 									</c:if>
@@ -81,7 +80,6 @@
 				</div>
 			</div>
 		</nav>
-	</header>
 
 </body>
 </html>

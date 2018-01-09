@@ -69,8 +69,8 @@
 										height="30"><b class="caret"></b></a> 
 									<c:if test="${loggato}">
 										<ul class="dropdown-menu">
-											<li><p class="bg-primary">${username}</p></li>
-											<li><a href="#">Profilo</a></li>
+											<li><p class="bg-success">${username}</p></li>
+											<li><a href="gestioneProfilo.jsp">Profilo</a></li>
 											<li><a href="effettualogout">Logout</a></li>
 										</ul>
 									</c:if>
