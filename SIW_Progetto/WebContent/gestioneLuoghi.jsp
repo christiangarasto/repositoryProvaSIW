@@ -93,15 +93,65 @@
 		<div class="container">
 			<h1>Gestione Luoghi</h1>
 			<hr>
+
+			<button type="button" class="btn btn-info btn-md" data-toggle="modal"
+				data-target="#nuovoLuogo" data-backdrop="static">Aggiungi
+				nuovo luogo</button>
+			<div class="modal fade" id="nuovoLuogo" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">×</button>
+							<h4 class="modal-title">Aggiungi nuovo luogo</h4>
+						</div>
+						<div class="modal-body">
+							<p>Aggiungi le informazioni per aggiungere un nuovo luogo.</p>
+						</div>
+						
+						<!--  
+							
+						
+						
+						
+											AGGIUNTA FORM PER LA REGISTRAZIONE DEL LUOGO SUL SITO					
+						
+						
+						
+						
+						
+						
+						
+						-->
+						
+						<div class="modal-footer">
+							<form action="aggiunginuovoluogo" method="post">
+								<button type="submit" class="btn btn-default">Salva</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Annulla</button>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
 			<div class="row">
 				<div class="col-md-9 personal-info">
-					<form>
-						<c:forEach items="${luoghi}" var="luogo">
+					<c:forEach items="${luoghi}" var="luogo">
 						<div class="form-group">
-							<label class="col-lg-3 control-label">${luogo.nome}</label>
+							<label class="col-lg-3 control-label">Nome: ${luogo.nome}</label><br>
+							<label class="col-lg-3 control-label">Titolare:
+								${luogo.titolare}</label><br> <label class="col-lg-3 control-label">Provincia:
+								${luogo.provincia}</label><br> <label
+								class="col-lg-3 control-label">Comune: ${luogo.comune}</label><br>
+							<label class="col-lg-3 control-label">Indirizzo:
+								${luogo.indirizzo}</label><br>
 						</div>
-						</c:forEach>
-					</form>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

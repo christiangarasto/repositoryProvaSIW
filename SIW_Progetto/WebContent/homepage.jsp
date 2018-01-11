@@ -8,13 +8,13 @@
 <title>Calabria E20</title>
 <meta charset="utf-8">
 
-	<link href="css/common.css?111" rel="stylesheet">
-	<link href="css/background.css" rel="stylesheet">
-	<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-	<script src="jquery/jquery-3.2.1.min.js"></script>
-	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link href="css/common.css?111" rel="stylesheet">
+<link href="css/background.css" rel="stylesheet">
+<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+<script src="jquery/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-	<script src="js/creazioneevento.js"></script>
+<script src="js/creazioneevento.js"></script>
 
 </head>
 
@@ -32,10 +32,10 @@
 
 						<a id="brand" class="navbar-brand">Calabria E20</a>
 
-						<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-							<span class="icon-bar"></span> 
-							<span class="icon-bar"></span> 
-							<span class="icon-bar"></span>
+						<button class="navbar-toggle" data-toggle="collapse"
+							data-target=".navHeaderCollapse">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
 						</button>
 					</div>
 
@@ -65,25 +65,27 @@
 
 					</div>
 
-<c:if test="${loggato}">
+					<c:if test="${loggato}">
 
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-					<figure>
-						<li class="dropdown">
-							<aside class="pull-right">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<img src="images/profilo.png" class="img-circle" height="30"><b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><p class="bg-primary">${username}</p></li>
-									<li><a href="gestioneProfilo.jsp">Profilo</a></li>
-									<li><a href="effettualogout">Logout</a></li>
-								</ul>
-							</aside>
-						</li>
-					</figure>
-				</div>								
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+							<figure>
+								<li class="dropdown">
+									<aside class="pull-right">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<img src="images/profilo.png" class="img-circle" height="30"><b
+											class="caret"></b>
+										</a>
+										<ul class="dropdown-menu">
+											<li><p class="bg-primary">${username}</p></li>
+											<li><a href="gestioneProfilo.jsp">Profilo</a></li>
+											<li><a href="effettualogout">Logout</a></li>
+										</ul>
+									</aside>
+								</li>
+							</figure>
+						</div>
 
-</c:if>
+					</c:if>
 				</div>
 			</div>
 		</nav>
@@ -91,117 +93,143 @@
 
 		<div class="container" id="info">
 			<div class="row">
-			
-<c:if test="${not loggato}">
 
-				<div class="col-sm-3"></div>
+				<c:if test="${not loggato}">
 
-				<div class="col-sm-6">
-					<div class="jumbotron" id="description">
-						<h2>Benvenuti sul sito</h2>
-						<h1>Calabria E20</h1>
-						<p>
-							Il nostro servizio web offre la possibilità di trovare gli
-							eventi a te più vicini scegliendo tra un vasto assortimento di
-							eventi raggruppati per genere e zona.<br> Calabria E20 ti
-							concede la possibilità  di prenotare presso i locali che
-							aderiscono al nostro sito per sponsorizzare il loro evento.
-							Offriamo inoltre la possibilità  di acquistare il biglietto per
-							il concerto del tuo cantante preferito in occasione della sua
-							tappa nella nostra splendida terra.
-						</p>
+					<div class="col-sm-3"></div>
+
+					<div class="col-sm-6">
+						<div class="jumbotron" id="description">
+							<h2>Benvenuti sul sito</h2>
+							<h1>Calabria E20</h1>
+							<p>
+								Il nostro servizio web offre la possibilità di trovare gli
+								eventi a te più vicini scegliendo tra un vasto assortimento di
+								eventi raggruppati per genere e zona.<br> Calabria E20 ti
+								concede la possibilità  di prenotare presso i locali che
+								aderiscono al nostro sito per sponsorizzare il loro evento.
+								Offriamo inoltre la possibilità  di acquistare il biglietto per
+								il concerto del tuo cantante preferito in occasione della sua
+								tappa nella nostra splendida terra.
+							</p>
+						</div>
 					</div>
-				</div>
 
-				<div class="col-sm-3">
-					<div class="jumbotron" id="log">
-						<h4>
-							<strong>Area riservata</strong>
-						</h4>
-						<h6>Sei un utente registrato? Effettua da qui il login</h6>
-						<form method="post" action="effettualogin">
-							<div class="form-group">
-								<input type="text" placeholder="e-mail" name="email"><br>
-								<input type="password" placeholder="password" name="password"><br>
-								<input type="submit" value="Login" class="btn btn-success">
+					<div class="col-sm-3">
+						<div class="jumbotron" id="log">
+							<h4>
+								<strong>Area riservata</strong>
+							</h4>
+							<h6>Sei un utente registrato? Effettua da qui il login</h6>
+							<form method="post" action="effettualogin">
+								<div class="form-group">
+
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-user"></i></span> <input id="email"
+											type="text" class="form-control" name="email"
+											placeholder="Email">
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-lock"></i></span> <input id="password"
+											type="password" class="form-control" name="password"
+											placeholder="Password">
+									</div>
+									<br>
+									<input type="submit" value="Login" class="btn btn-success">
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</c:if>
+
+				<c:if test="${loggato}">
+
+					<div class="col-sm-2">
+						<div class="jumbotron" id="log">
+							<img src="images/profilo.png" class="img-circle"
+								alt="immagine del profilo" style="width: 50%;">
+							<h3>${username}</h3>
+						</div>
+					</div>
+
+					<div class="col-sm-10">
+						<div class="jumbotron" id="description">
+
+							<button onclick="showEventForm()" class="btn btn-default btn-xs">+</button>
+							crea evento
+							<div class="jumbotron" id="eventForm">
+								<form method="post" action="creazioneEvento">
+									<div class="form-group">
+										<label for="descrizione">Titolo:</label><input name="titolo"
+											id="idTitolo" type="text" class="form-control" />
+									</div>
+									<div class="form-group dropdown">
+										<button type="button" class="btn btn-default dropdown-toggle"
+											data-toggle="dropdown">
+											Luogo <b class="caret"></b>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="#">Luogo salvato in database 1</a></li>
+											<li><a href="#">Luogo salvato in database 2</a></li>
+											<li><a href="#">Luogo salvato in database 3</a></li>
+											<li class="divider"></li>
+											<li><a href="#">Aggiungi</a></li>
+										</ul>
+									</div>
+									<div class="form-group dropdown">
+										<button type="button" class="btn btn-default dropdown-toggle"
+											data-toggle="dropdown">
+											Genere <b class="caret"></b>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="#">Arte</a></li>
+											<li><a href="#">Cultura</a></li>
+											<li><a href="#">Gastronomia</a></li>
+											<li><a href="#">Musica</a></li>
+											<li><a href="#">Sport</a></li>
+										</ul>
+									</div>
+									<div class="form-group">
+										<label for="descrizione">Descrizione:</label> <input
+											name="descrizione" id="idDescrizione" type="text"
+											class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="data">Data svolgimento:</label> <input name="data"
+											type="datetime-local" />
+									</div>
+									<div class="form-group">
+										<label for="fileupload">allega locandina</label> <input
+											type="file" name="fileupload" id="fileupload">
+									</div>
+									<div class="form-group">
+										<input name="validaDati" type="button" value="Valida Dati"
+											class="btn btn-warning" onclick="validaEvento()" /> <input
+											name="resetDati" type="reset" value="Reset Dati"
+											class="btn btn-danger" /> <input id="inviaDati"
+											type="submit" value="Invia Dati" class="btn btn-success"
+											onclick="registraEvento(event);" />
+									</div>
+								</form>
 							</div>
-						</form>
+
+							<h2>Eventi in Bacheca</h2>
+
+						</div>
 					</div>
-				</div>
-				
-</c:if>
 
-<c:if test="${loggato}">
-
-	<div class="col-sm-2">
-		<div class="jumbotron" id="log">
-			<img src="images/profilo.png" class="img-circle" alt="immagine del profilo" style="width:50%;">
-			<h3>${username}</h3>
-		</div>
-	</div>
-
-	<div class="col-sm-10">
-		<div class="jumbotron" id="description">
-
-			<button onclick="showEventForm()" class="btn btn-default btn-xs">+</button>	crea evento
-				<div class="jumbotron" id="eventForm">
-					<form method="post" action="creazioneEvento">
-						<div class="form-group">
-							<label for="descrizione">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
-						</div>
-						<div class="form-group dropdown">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Luogo <b class="caret"></b></button>
-								<ul class="dropdown-menu">
-								    <li><a href="#">Luogo salvato in database 1</a></li>
-								    <li><a href="#">Luogo salvato in database 2</a></li>
-								    <li><a href="#">Luogo salvato in database 3</a></li>
-								    <li class="divider"></li>
-								    <li><a href="#">Aggiungi</a></li>
-								  </ul>
-						</div>
-						<div class="form-group dropdown">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Genere <b class="caret"></b></button>
-								<ul class="dropdown-menu">
-								    <li><a href="#">Arte</a></li>
-								    <li><a href="#">Cultura</a></li>
-								    <li><a href="#">Gastronomia</a></li>
-								    <li><a href="#">Musica</a></li>
-								    <li><a href="#">Sport</a></li>
-								  </ul>
-						</div>
-						<div class="form-group">
-							<label for="descrizione">Descrizione:</label>
-								<input name="descrizione" id="idDescrizione" type="text" class="form-control" />
-						</div>
-						<div class="form-group">
-							<label for="data">Data svolgimento:</label>
-								<input name="data" type="datetime-local" />
-						</div>
-						<div class="form-group">
-							<label for = "fileupload">allega locandina</label>
-							<input type="file" name = "fileupload" id = "fileupload">						
-						</div>
-						<div class="form-group">
-							<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="validaEvento()" /> 
-							<input name="resetDati" type="reset" value="Reset Dati" class="btn btn-danger" /> 
-							<input id="inviaDati" type="submit" value="Invia Dati" class="btn btn-success" onclick="registraEvento(event);" />
-						</div>
-					</form>
-				</div>
-			
-			<h2>Eventi in Bacheca</h2>
-
-		</div>
-	</div>
-
-</c:if>
+				</c:if>
 
 			</div>
 		</div>
 
 	</header>
-	
-	<footer> Sito web sviluppato dagli studenti Garasto Christian e Ventura Paolo </footer>
-	
+
+	<footer> Sito web sviluppato dagli studenti Garasto Christian
+		e Ventura Paolo </footer>
+
 </body>
 </html>

@@ -64,8 +64,6 @@ public class Luogo {
 				"\n	Codice: " + codice + 
 				"\n	Indirizzo: " + indirizzo + " [Provincia: " + provincia + ", Comune: " + comune + "]";
 	}
-
-	
 	
 	public Utente getTitolare() {
 		return titolare;
