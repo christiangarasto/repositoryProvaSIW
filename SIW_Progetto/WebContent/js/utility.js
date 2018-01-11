@@ -66,3 +66,8 @@ function registraUtente(event){
 		alert("Errore nella validazione");
 	}
 }
+
+function prova(){
+	alert("provissima");
+	return true;
+}

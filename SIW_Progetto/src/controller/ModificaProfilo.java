@@ -22,13 +22,34 @@ public class ModificaProfilo extends HttpServlet{
 		String passwordNuovo = (String) req.getParameter("input_password");
 		String confermaPasswordNuovo = (String) req.getParameter("input_confermapassword");
 		
-		boolean aggiornamentoDaEseguire = true;
+		System.out.println(nomeNuovo + ", " + pivaNuovo + ", " + emailNuovo + ", " + passwordNuovo + ", " + confermaPasswordNuovo);
 		
-		if(pivaNuovo.length() != 11 ||
-		   passwordNuovo != confermaPasswordNuovo ||
-		   !emailValida(emailNuovo)) {
-			System.out.println(passwordNuovo + " - " + confermaPasswordNuovo);
+		
+		boolean aggiornamentoDaEseguire = true;
+
+//		if(pivaNuovo.length() != 11 ||
+//				   passwordNuovo != confermaPasswordNuovo ||
+//				   !emailValida(emailNuovo)) {
+//					System.out.println("nuovo piva, dimensione: " + pivaNuovo.length());
+//					System.out.println(passwordNuovo + " - " + confermaPasswordNuovo);
+//					aggiornamentoDaEseguire = false;
+//				}
+//				
+		
+		if(pivaNuovo.length() != 11) {
+			System.out.println("Dimensione piva non corretta: " + pivaNuovo.length());
 			aggiornamentoDaEseguire = false;
+			
+		}
+		if(!passwordNuovo.equals(confermaPasswordNuovo)) {
+			System.out.println("Password diverse: " + passwordNuovo + " - " + confermaPasswordNuovo);
+			aggiornamentoDaEseguire = false;
+			
+		}
+		if(!emailValida(emailNuovo)) {
+			System.out.println("email non valida");
+			aggiornamentoDaEseguire = false;
+
 		}
 		
 		
@@ -37,7 +58,9 @@ public class ModificaProfilo extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 
-		if(utenteDaModificare != null && aggiornamentoDaEseguire) {			
+		boolean profiloModificato = false;
+		
+		if(utenteDaModificare != null && aggiornamentoDaEseguire) {					
 			if(ud.passwordCambiata(utenteDaModificare.getpIva(), passwordNuovo) || 
 			   ud.emailCambiata(utenteDaModificare.getpIva(), emailNuovo) ||
 			   utenteDaModificare.getNome() != nomeNuovo ||
@@ -50,14 +73,15 @@ public class ModificaProfilo extends HttpServlet{
 				session.setAttribute("nome", nomeNuovo);
 				session.setAttribute("piva", pivaNuovo);
 				session.setAttribute("email", emailNuovo);
-				session.setAttribute("password", passwordNuovo);
+				session.setAttribute("password", passwordNuovo);	
 				
-				
+				profiloModificato = true;
+
+				session.setAttribute("profiloModificato", true);
 			}
 		}
 		
-		session.setAttribute("profiloModificato", aggiornamentoDaEseguire);
-		
+		session.setAttribute("profiloModificato", profiloModificato);
 		
 		resp.sendRedirect("gestioneProfilo.jsp");
 	}
@@ -79,12 +103,17 @@ public class ModificaProfilo extends HttpServlet{
 			
 			if(nAT == 0) {
 				primaAT += email.charAt(i);
-			}else if(nAT == 1) {
+			}else if(nAT == 1 && nDOT == 0) {
 				dopoAT += email.charAt(i);
 			}else if(nDOT == 1) {
 				dopoDOT += email.charAt(i);
 			}		
 		}
+		
+//		System.out.println("Controllo email:");
+//			System.out.println("prima@: " + primaAT + "\ndopo@: " + dopoAT + "\ndopoDOT: " + dopoDOT + "\nnAT: " + nAT + "\nnDOT: " + nDOT);
+		
+		
 		
 		if(nAT == 0 ||
 		   nDOT == 0 ||
