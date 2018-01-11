@@ -144,20 +144,29 @@
 		<div class="jumbotron" id="description">
 
 			<button onclick="showEventForm()" class="btn btn-default btn-xs">+</button>	crea evento
+
 				<div class="jumbotron" id="eventForm">
-					<form method="post" action="creazioneEvento">
+					<form method="post" action="gestioneevento">
 						<div class="form-group">
 							<label for="descrizione">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
 						</div>
 						<div class="form-group dropdown">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Luogo <b class="caret"></b></button>
-								<ul class="dropdown-menu">
-								    <li><a href="#">Luogo salvato in database 1</a></li>
-								    <li><a href="#">Luogo salvato in database 2</a></li>
-								    <li><a href="#">Luogo salvato in database 3</a></li>
-								    <li class="divider"></li>
-								    <li><a href="#">Aggiungi</a></li>
-								  </ul>
+<!-- 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Luogo <b class="caret"></b></button> -->
+							<a href="gestioneevento" class="btn btn-default">Luogo <b class="caret"></b></a>
+
+								<c:if test="${location}">
+									<ul>
+									    <li class="divider"></li>
+									    <li><a href="#">Aggiungi...</a></li>
+									</ul>
+								</c:if>
+
+<!-- 									<ul class="dropdown-menu">
+									    <li><a href="#">Luogo salvato in database 1</a></li>
+									    <li class="divider"></li>
+									    <li><a href="#">Aggiungi...</a></li>
+									  </ul>
+-->							
 						</div>
 						<div class="form-group dropdown">
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Genere <b class="caret"></b></button>

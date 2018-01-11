@@ -2,6 +2,7 @@ package persistence.dao;
 
 import java.util.List;
 
+import model.Luogo;
 import model.Utente;
 
 public interface UtenteDao {
@@ -15,4 +16,7 @@ public interface UtenteDao {
 	public String findByCredenziali(String nome, String password);
 	public boolean passwordCambiata(String piva, String passwordNuovo);
 	public boolean emailCambiata(String piva, String emailNuovo);
+	
+	public List<Luogo> findAllLocation(String pIva);
+
 }

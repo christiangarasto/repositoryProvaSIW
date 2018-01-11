@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.Luogo;
 import model.Utente;
 import persistence.dao.UtenteDao;
 
@@ -253,6 +254,40 @@ public class UtenteDaoJDBC implements UtenteDao{
 			}
 		}	
 		return true;
+	}
+
+	@Override
+	public List<Luogo> findAllLocation(String pIva) 
+	{
+		Connection connection = this.dataSource.getConnection();
+		List<Luogo> luoghi = new LinkedList<>();
+		try {
+			Luogo luogo;
+			PreparedStatement statement;
+			String query = "select * from luogo";
+			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			
+			UtenteDao ut = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+			Utente utente = ut.findByPrimaryKey(pIva);
+ 
+			while (result.next()) {
+				luogo = new Luogo();
+				luogo.setTitolare(utente);				
+				luogo.setNome(result.getString("nome"));
+				luogo.setCodice(result.getString("codice"));
+				luogo.setProvincia(result.getString("provincia"));
+				luogo.setComune(result.getString("comune"));
+				luogo.setIndirizzo(result.getString("indirizzo"));
+				luoghi.add(luogo);
+			}
+		} catch (SQLException e) { throw new PersistenceException(e.getMessage()); }	 
+		finally 
+		{
+			try { connection.close(); } 
+			catch (SQLException e) { throw new PersistenceException(e.getMessage()); }
+		}
+		return luoghi;
 	}	
 
 }
