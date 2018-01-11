@@ -51,3 +51,10 @@ footer {
 	color: white;
 	margin-right: 10px;
 }
+
+/*SEZIONE CREAZIONE EVENTO NEL PROFILO DOPO AVER FATTO IL LOGIN*/
+#eventForm{
+	display: none;
+	background: white;
+	color: black;	
+}

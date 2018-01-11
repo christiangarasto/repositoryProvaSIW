@@ -16,7 +16,6 @@
 <script src="jquery/jquery-3.2.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-<!-- <link href="js/utility.js" rel="stylesheet">  -->
 <script src="js/utility.js"></script>
 
 </head>
