@@ -75,7 +75,7 @@
 								<img src="images/profilo.png" class="img-circle" height="30"><b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><p class="bg-primary">${username}</p></li>
-									<li><a href="#">Profilo</a></li>
+									<li><a href="gestioneProfilo.jsp">Profilo</a></li>
 									<li><a href="effettualogout">Logout</a></li>
 								</ul>
 							</aside>

@@ -86,72 +86,21 @@
 		</nav>
 
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#">Gestione Profilo</a></li>
-			<li><a href="gestioneLuoghi.jsp">Gestione Luoghi</a></li>
+			<li><a href="gestioneProfilo.jsp">Gestione Profilo</a></li>
+			<li class="active"><a href="#">Gestione Luoghi</a></li>
 		</ul>
 
 		<div class="container">
-			<h1>Gestione Profilo</h1>
+			<h1>Gestione Luoghi</h1>
 			<hr>
 			<div class="row">
 				<div class="col-md-9 personal-info">
-					<form class="form-horizontal" method="post"
-						action="modificaprofilo">
+					<form>
+						<c:forEach items="${luoghi}" var="luogo">
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Nome:</label>
-							<div class="col-lg-8">
-								<input class="form-control" name="input_nome" value="${nome}"
-									type="text">
-							</div>
+							<label class="col-lg-3 control-label">${luogo.nome}</label>
 						</div>
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Partita Iva:</label>
-							<div class="col-lg-8">
-								<input class="form-control" name="input_piva" value="${piva}"
-									type="text">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">Email:</label>
-							<div class="col-md-8">
-								<input class="form-control" name="input_email" value="${email}"
-									type="text">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">Password:</label>
-							<div class="col-md-8">
-								<input class="form-control" name="input_password"
-									value="${password}" type="password">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">Conferma password:</label>
-							<div class="col-md-8">
-								<input class="form-control" name="input_confermapassword"
-									value="${password}" type="password">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label"></label>
-							<div class="col-md-8">
-								<input class="btn btn-success" type="submit"
-									value="Salva cambiamenti"> <input
-									class="btn btn-default" value="Annulla" type="reset">
-							</div>
-						</div>
-
-						<c:if test="${profiloModificato}">
-							<div class="alert alert-success">Tutte le modifiche sono
-								state salvate con successo!</div>
-						</c:if>
-						<c:if test="${not profiloModificato}">
-							<div class="alert alert-warning">
-								<strong>Attenzione: </strong> Verificare che tutti i campi siano
-								correttamente inseriti.
-							</div>
-						</c:if>
+						</c:forEach>
 					</form>
 				</div>
 			</div>

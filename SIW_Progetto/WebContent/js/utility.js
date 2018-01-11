@@ -67,12 +67,7 @@ function registraUtente(event){
 	}
 }
 
-function notificaCambioProfilo(){alert("pipino");
-$.notify({
-	// options
-	message: 'Hello World' 
-},{
-	// settings
-	type: 'danger'
-});
+function prova(){
+	alert("provissima");
+	return true;
 }
