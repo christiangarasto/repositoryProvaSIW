@@ -13,6 +13,7 @@
 <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 <script src="jquery/jquery-3.2.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -86,44 +87,61 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-9 personal-info">
-					<form class="form-horizontal" method="post" action="modificaprofilo">
+					<form class="form-horizontal" method="post"
+						action="modificaprofilo">
 						<div class="form-group">
 							<label class="col-lg-3 control-label">Nome:</label>
 							<div class="col-lg-8">
-								<input class="form-control" name="input_nome" value="${nome}" type="text">
+								<input class="form-control" name="input_nome" value="${nome}"
+									type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-3 control-label">Partita Iva:</label>
 							<div class="col-lg-8">
-								<input class="form-control" name="input_piva" value="${piva}" type="text">
+								<input class="form-control" name="input_piva" value="${piva}"
+									type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Email:</label>
 							<div class="col-md-8">
-								<input class="form-control" name="input_email" value="${email}" type="text">
+								<input class="form-control" name="input_email" value="${email}"
+									type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Password:</label>
 							<div class="col-md-8">
-								<input class="form-control" name="input_password" value="${password}" type="password">
+								<input class="form-control" name="input_password"
+									value="${password}" type="password">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Conferma password:</label>
 							<div class="col-md-8">
-								<input class="form-control" name="input_confermapassword" value="${password}" type="password">
+								<input class="form-control" name="input_confermapassword"
+									value="${password}" type="password">
 							</div>
 						</div>
+
 						<div class="form-group">
 							<label class="col-md-3 control-label"></label>
 							<div class="col-md-8">
-								<input class="btn btn-success" type="submit" value="Salva cambiamenti">
-								<input class="btn btn-default" value="Annulla" type="reset">
+								<input class="btn btn-success" type="submit"
+									value="Salva cambiamenti"> <input
+									class="btn btn-default" value="Annulla" type="reset">
 							</div>
 						</div>
+
+						<c:if test="${profiloModificato}">
+							<script type="text/javascript">
+								alert("appapà");
+							</script>
+
+						</c:if>
+
+
 					</form>
 				</div>
 			</div>

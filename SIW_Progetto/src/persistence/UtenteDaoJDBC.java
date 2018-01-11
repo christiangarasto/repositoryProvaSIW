@@ -213,9 +213,13 @@ public class UtenteDaoJDBC implements UtenteDao{
 			
 			if (result.next()) {
 				if(result.getString("password").equals(passwordNuovo)) {
+					System.out.println("Password invariata");
 					return false;					
+				}else {
+					return true;
 				}
 			}
+			return false;
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -225,7 +229,6 @@ public class UtenteDaoJDBC implements UtenteDao{
 				throw new PersistenceException(e.getMessage());
 			}
 		}	
-		return true;
 	}
 
 	@Override
@@ -241,8 +244,11 @@ public class UtenteDaoJDBC implements UtenteDao{
 			if (result.next()) {
 				if(result.getString("email").equals(emailNuovo)) {
 					return false;					
+				}else {
+					return true;
 				}
 			}
+		return false;
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -252,7 +258,6 @@ public class UtenteDaoJDBC implements UtenteDao{
 				throw new PersistenceException(e.getMessage());
 			}
 		}	
-		return true;
 	}	
 
 }

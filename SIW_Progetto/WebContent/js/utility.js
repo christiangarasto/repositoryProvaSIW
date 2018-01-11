@@ -66,3 +66,13 @@ function registraUtente(event){
 		alert("Errore nella validazione");
 	}
 }
+
+function notificaCambioProfilo(){alert("pipino");
+$.notify({
+	// options
+	message: 'Hello World' 
+},{
+	// settings
+	type: 'danger'
+});
+}
