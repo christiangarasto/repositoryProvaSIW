@@ -1,17 +1,17 @@
 package persistence;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
 
 import model.Evento;
 import model.Luogo;
 import model.Utente;
+import persistence.dao.EventoDao;
 import persistence.dao.LuogoDao;
+import persistence.dao.UtenteDao;
 
 
 public class LuogoDaoJDBC implements LuogoDao{
@@ -30,6 +30,7 @@ public class LuogoDaoJDBC implements LuogoDao{
 			
 		String insert = "insert into luogo(titolare, nome, codice, provincia, comune, indirizzo) values (?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
+			
 			statement.setString(1, luogo.getTitolare().getpIva());
 			statement.setString(2, luogo.getNome());
 			statement.setString(3, luogo.getCodice());
@@ -37,8 +38,6 @@ public class LuogoDaoJDBC implements LuogoDao{
 			statement.setString(5, luogo.getComune());
 			statement.setString(6, luogo.getIndirizzo());
 			statement.executeUpdate();
-			
-			System.out.println("Luogo " + luogo.getCodice() + " aggiunto con successo!");
 			
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -90,15 +89,16 @@ public class LuogoDaoJDBC implements LuogoDao{
 		Connection connection = this.dataSource.getConnection();
 		LinkedList<Luogo> luoghi= new LinkedList<>();
 		try {
-			Luogo luogo;
 			PreparedStatement statement;
 			String query = "select * from luogo";
 			statement = connection.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
+			
+			UtenteDao ud = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+			
 			while (result.next()) {
-				luogo = new Luogo();	
-				Utente titolare = new Utente();
-					titolare.create(result.getString("titolare"));
+				Luogo luogo = new Luogo();
+				Utente titolare = ud.findByPrimaryKey(result.getString("titolare"));
 			
 				luogo.setTitolare(titolare);				
 				luogo.setNome(result.getString("nome"));	
@@ -179,10 +179,11 @@ public class LuogoDaoJDBC implements LuogoDao{
 }
 
 	@Override
-	public List<Evento> findAllEvents() 
+	public LinkedList<Evento> findAllEvents() 
 	{
 		Connection connection = this.dataSource.getConnection();
-		List<Evento> eventi = new LinkedList<>();
+		EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+		LinkedList<Evento> eventi = new LinkedList<>();
 		try {
 			Evento evento;
 			PreparedStatement statement;
@@ -192,8 +193,7 @@ public class LuogoDaoJDBC implements LuogoDao{
 
 			while (result.next()) {
 				evento = new Evento();
-				Luogo luogo = new Luogo();
-					luogo.create(result.getString("luogo"));
+				Luogo luogo = findByPrimaryKey(result.getString("luogo"));
 			
 				evento.setLuogo(luogo);
 				evento.setDescrizione(result.getString("descrizione"));	
@@ -214,42 +214,4 @@ public class LuogoDaoJDBC implements LuogoDao{
 		}
 		return eventi;
 	}
-	
-	public LinkedList<Luogo> findByTitolare(String pivaTitolare) {
-		Connection connection = this.dataSource.getConnection();
-		LinkedList<Luogo> luoghi = new LinkedList<Luogo>();
-		try {
-			Luogo luogo;
-			PreparedStatement statement;
-			String query = "select * from luogo where titolare = ?";
-			statement = connection.prepareStatement(query);
-			statement.setString(1, pivaTitolare);
-			
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				luogo = new Luogo();	
-				Utente titolare = new Utente();
-					titolare.create(result.getString("titolare"));
-			
-				luogo.setTitolare(titolare);				
-				luogo.setNome(result.getString("nome"));	
-				luogo.setCodice(result.getString("codice"));	
-				luogo.setProvincia(result.getString("provincia"));	
-				luogo.setComune(result.getString("comune"));	
-				luogo.setIndirizzo(result.getString("indirizzo"));	
-		
-				luoghi.add(luogo);
-			}
-			return luoghi;
-		} catch (SQLException e) {
-			throw new PersistenceException(e.getMessage());
-		}	 finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
-		}
-	}
-
 }

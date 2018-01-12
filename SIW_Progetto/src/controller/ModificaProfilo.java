@@ -22,19 +22,8 @@ public class ModificaProfilo extends HttpServlet{
 		String passwordNuovo = (String) req.getParameter("input_password");
 		String confermaPasswordNuovo = (String) req.getParameter("input_confermapassword");
 		
-		System.out.println(nomeNuovo + ", " + pivaNuovo + ", " + emailNuovo + ", " + passwordNuovo + ", " + confermaPasswordNuovo);
-		
 		
 		boolean aggiornamentoDaEseguire = true;
-
-//		if(pivaNuovo.length() != 11 ||
-//				   passwordNuovo != confermaPasswordNuovo ||
-//				   !emailValida(emailNuovo)) {
-//					System.out.println("nuovo piva, dimensione: " + pivaNuovo.length());
-//					System.out.println(passwordNuovo + " - " + confermaPasswordNuovo);
-//					aggiornamentoDaEseguire = false;
-//				}
-//				
 		
 		if(pivaNuovo.length() != 11) {
 			System.out.println("Dimensione piva non corretta: " + pivaNuovo.length());
@@ -110,20 +99,13 @@ public class ModificaProfilo extends HttpServlet{
 			}		
 		}
 		
-//		System.out.println("Controllo email:");
-//			System.out.println("prima@: " + primaAT + "\ndopo@: " + dopoAT + "\ndopoDOT: " + dopoDOT + "\nnAT: " + nAT + "\nnDOT: " + nDOT);
-		
-		
-		
 		if(nAT == 0 ||
 		   nDOT == 0 ||
 		   primaAT.length() == 0 ||
 		   dopoAT.length() == 0 ||
 		   dopoDOT.length() == 0) {
-			System.out.println("Email non valida");
 			return false;
 		}
-		System.out.println("Email valida");
 		return true;
 	}
 }

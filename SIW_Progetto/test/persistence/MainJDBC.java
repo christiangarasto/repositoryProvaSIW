@@ -19,8 +19,19 @@ public class MainJDBC {
 		
 		UtenteDao utenteDao = factory.getUtenteDAO();
 			Utente utente1 = new Utente("00000001","Ciccio s.r.l");
+			utenteDao.save(utente1);
+			utenteDao.setEmail(utente1.getpIva(), "ciccio@azienda.it");
+			utenteDao.setPassword(utente1.getpIva(), "ciccio");
+			
 			Utente utente2 = new Utente("00000002", "Carletto s.p.a");
+			utenteDao.save(utente2);
+			utenteDao.setEmail(utente2.getpIva(), "carletto@azienda.it");
+			utenteDao.setPassword(utente2.getpIva(), "carletto");
+			
 			Utente utente3 = new Utente("00000003", "Roma Capitale");
+			utenteDao.save(utente3);
+			utenteDao.setEmail(utente3.getpIva(), "romacapitale@azienda.it");
+			utenteDao.setPassword(utente3.getpIva(), "romacapitale");
 
 		LuogoDao luogoDao = factory.getLuogoDAO();
 			Luogo woodstock = new Luogo(utente1, "Woodstock", "Cosenza", "Corigliano Calabro", "Via le mani dal naso 8");
@@ -34,9 +45,6 @@ public class MainJDBC {
 			Evento capodanno = new Evento("Capodanno 2018 Roma", new java.sql.Date(2017,12,31), colosseo);
 
 		//CREATE
-		utenteDao.save(utente1);
-		utenteDao.save(utente2);
-		utenteDao.save(utente3);
 		
 		luogoDao.save(woodstock);
 		luogoDao.save(colosseo);

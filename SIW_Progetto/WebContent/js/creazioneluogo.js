@@ -37,10 +37,10 @@ $(window)
 													comuneInput : comune,
 													indirizzoInput : indirizzo
 												},
-//												success : function(data) {
-//													alert(data);
-//												}
-											});
+												success : function(data) {
+													    $('#nuovoLuogo').modal('hide');
+												}											
+											}); 
 										}
 
 									});

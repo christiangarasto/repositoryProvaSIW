@@ -16,29 +16,27 @@ import persistence.DatabaseManager;
 import persistence.dao.LuogoDao;
 import persistence.dao.UtenteDao;
 
-public class GestioneLuoghi extends HttpServlet 
-{
+public class GestioneLuoghi extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		System.out.println("GET");
 		HttpSession session = req.getSession();
 		String piva = (String) session.getAttribute("piva");
 
-		UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO(); 
-		
+		UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+
 		Utente utente = utentedao.findByPrimaryKey(piva);
-		
+
 		List<Luogo> luoghi = new LinkedList<>();
-		
-		if(utente != null)
-		{
+
+		if (utente != null) {
 			luoghi = utentedao.findAllLocation(utente.getpIva());
 		}
-		
+
 		session.setAttribute("luoghi", luoghi);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -49,8 +47,6 @@ public class GestioneLuoghi extends HttpServlet
 		String comune = (String) req.getParameter("comuneInput");
 		String indirizzo = (String) req.getParameter("indirizzoInput");
 		
-		System.out.println(nomeLuogo + ", " + provincia + ", " + comune+ ", " + indirizzo);
-		
 		HttpSession session = req.getSession();
 		
 		
@@ -58,35 +54,36 @@ public class GestioneLuoghi extends HttpServlet
 		
 		String pivaTitolare = (String) session.getAttribute("piva");
 		
-//		LinkedList<Luogo> luoghiDelTitolare = luogoDao.findByTitolare(pivaTitolare);
 		LinkedList<Luogo> luoghi = luogoDao.findAll();
-		LinkedList<Luogo> luoghiDelTitolare = new LinkedList();
+		LinkedList<Luogo> luoghiDelTitolare = new LinkedList<Luogo>();
 		
-		boolean luogoNuovo = false;
 		
-		System.out.println("Luoghi del titolare: " + luoghiDelTitolare.size());
-		
+		for(Luogo l : luoghi){
+			
+			if(l.getTitolare().getpIva().equals(pivaTitolare)) {
+				luoghiDelTitolare.add(l);
+			}
+		}
+
+		boolean luogoNuovo = true;
 		for(Luogo luogo : luoghiDelTitolare) {
 			
-			if(luogo.getNome().toLowerCase() != nomeLuogo.toLowerCase() ||
-			   luogo.getProvincia().toLowerCase() != provincia.toLowerCase() ||
-			   luogo.getComune().toLowerCase() != comune.toLowerCase() ||
-			   luogo.getIndirizzo().toLowerCase() != indirizzo.toLowerCase()) {
-							luogoNuovo = true;
+			if((luogo.getNome().toLowerCase().equals(nomeLuogo.toLowerCase())) &&
+				(luogo.getProvincia().toLowerCase().equals(provincia.toLowerCase())) &&
+				(luogo.getComune().toLowerCase().equals(comune.toLowerCase())) &&
+				(luogo.getIndirizzo().toLowerCase().equals(indirizzo.toLowerCase()))) {
+							luogoNuovo = false;
 			}
 		}
 		
 		if(luogoNuovo) {
-			System.out.println("Luogo nuovo quindi salvo");
 			Luogo nuovo = new Luogo((Utente)session.getAttribute("utente"), nomeLuogo, provincia, comune, indirizzo);
 			luogoDao.save(nuovo);
-			session.setAttribute("luogoCreato", true);
+			req.setAttribute("luogoCreato", true);
 			
 		}else {
-			System.out.println("Luogo non nuovo quindi niente");
-			session.setAttribute("luogoEsistente", true);
+			req.setAttribute("luogoEsistente", true);
 		}
 		
-		
-
-		resp.sendRedirect("gestioneLuoghi.jsp");}}
+		resp.sendRedirect("gestioneLuoghi.jsp");}
+}

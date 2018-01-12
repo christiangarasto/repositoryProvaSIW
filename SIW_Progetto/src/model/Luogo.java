@@ -15,42 +15,42 @@ public class Luogo {
 	public Luogo() {}
 
 	public Luogo(Utente titolare, String nome, String provincia, String comune, String indirizzo) {
-		super();
 		this.titolare = titolare;
 		this.nome = nome;
-		this.codice = codice;
 		this.provincia = provincia;
 		this.comune = comune;
 		this.indirizzo = indirizzo;
 	}
 
-	public void create(String luogo) {
-		Luogo l;
-		
-		int c = 0;
-		int index = 0;
-		String[] valori = new String[6];
-			for(int i = 0; i < valori.length; i++) {
-				valori[i] = "";
-			}
-			
-		for(int i = 0; i < luogo.length(); i++) {
-			if(luogo.charAt(i) == ':') {
-				index++;
-			}
-			
-			valori[index] += luogo.charAt(i);		
-		}
-		
-		System.out.println(valori[0]);
-		
-		//titolare = valori[0];
-		nome = valori[1];
-		codice = valori[2];
-		provincia = valori[3];
-		comune = valori[4];
-		indirizzo = valori[5];
-	}
+//	public void create(String luogo) {		
+//		Luogo l;
+//		
+//		int c = 0;
+//		int index = 0;
+//		String[] valori = new String[6];
+//			for(int i = 0; i < valori.length; i++) {
+//				valori[i] = "";
+//			}
+//			
+//		for(int i = 0; i < luogo.length(); i++) {
+//			if(luogo.charAt(i) == ':') {
+//				index++;
+//			}
+//			
+//			if(luogo.charAt(i) != ':')
+//				valori[index] += luogo.charAt(i);		
+//		}
+//		
+//		System.out.println(valori[0]);
+//		
+//		
+//		//titolare = valori[0];
+//		nome = valori[1];
+//		codice = valori[2];
+//		provincia = valori[3];
+//		comune = valori[4];
+//		indirizzo = valori[5];
+//	}
 	
 	public String getParsedLuogo() {
 		return titolare + ":" + nome + ":" + codice + ":" + provincia + ":" + comune + ":" + indirizzo;

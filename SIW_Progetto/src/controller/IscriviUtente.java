@@ -29,8 +29,6 @@ public class IscriviUtente extends HttpServlet{
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		
-		System.out.println(nome + " " + cognome + " " + piva + " " + email + " " + password);
-		
 		Utente u = new Utente(piva, nome+" "+cognome);		
 		UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 		

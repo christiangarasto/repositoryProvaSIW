@@ -158,14 +158,17 @@
 
 						</div>
 						<div class="modal-footer">
-							<c:if test="${luogoCreato}">
-								<div class="alert alert-success">Luogo salvato con
-									successo!</div>
+							
+<!-- 							<c:if test="${luogoCreato}">
+								<div class="alert alert-success">Luogo salvato con successo!</div>
 							</c:if>
 							<c:if test="${luogoEsistente}">
 								<div class="alert alert-warning">Luogo già presente!</div>
 							</c:if>
-
+ -->
+ 
+ 							<div id="salvataggioLuogoRisposta"></div>
+							
 							<form>
 								<button type="button" class="btn btn-success" id="salvaLuogo">Salva</button>
 								<button type="button" class="btn btn-info aggiungiLuogoButton"

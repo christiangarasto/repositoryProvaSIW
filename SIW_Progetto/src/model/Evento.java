@@ -20,7 +20,6 @@ public class Evento {
 	
 	@Override
 	public String toString() {
-		System.out.println("Luogo!!!!!!!!!!!!!!!!!!!!!!!!!!!     " + luogo.getNome());
 		return "Evento: " + codice +
 				"\n	Descrizione: " + descrizione + 
 				"\n	Data: " + data +

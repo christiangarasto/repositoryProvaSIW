@@ -13,7 +13,6 @@ public interface LuogoDao {
 	public void update(Luogo luogo); //Update
 	public void delete(Luogo luogo); //Delete	
 
-	public List<Evento> findAllEvents();
-	public LinkedList<Luogo> findByTitolare(String pivaTitolare);
+	public LinkedList<Evento> findAllEvents();
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import model.Evento;
 import model.Luogo;
 import persistence.dao.EventoDao;
+import persistence.dao.LuogoDao;
 
 public class EventoDaoJDBC implements EventoDao {
 	private DataSource dataSource;
@@ -45,6 +46,7 @@ public class EventoDaoJDBC implements EventoDao {
 	@Override
 	public Evento findByPrimaryKey(String codice) {
 		Connection connection = this.dataSource.getConnection();
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 		Evento evento = null;
 		try {
 			PreparedStatement statement;
@@ -59,8 +61,7 @@ public class EventoDaoJDBC implements EventoDao {
 					long secs = result.getDate("data").getTime();
 					statement.setDate(4, new java.sql.Date(secs));
 				evento.setData(new java.sql.Date(secs));	
-				Luogo l = new Luogo();
-					l.create(result.getString("luogo"));
+				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
 				evento.setLuogo(l);
 			}
 		} catch (SQLException e) {
@@ -79,6 +80,9 @@ public class EventoDaoJDBC implements EventoDao {
 	public List<Evento> findAll() {
 		Connection connection = this.dataSource.getConnection();
 		List<Evento> eventi = new LinkedList<>();
+		
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+		
 		try {
 			Evento evento;
 			PreparedStatement statement;
@@ -93,8 +97,7 @@ public class EventoDaoJDBC implements EventoDao {
 				long secs = result.getDate("data").getTime();
 				evento.setData(new java.sql.Date(secs));	
 				
-				Luogo l = new Luogo();
-				l.create(result.getString("luogo"));
+				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
 				evento.setLuogo(l);
 				
 				eventi.add(evento);
