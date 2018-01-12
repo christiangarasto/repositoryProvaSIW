@@ -1,84 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="WebApp_ID" version="3.0">
-	<display-name>Calabria E20</display-name>
-	<welcome-file-list>
-		<!-- i seguenti file di"benvenuto" servono per la visualizzazione di default 
-			di un url generico su gestionesegreteria -->
-		<welcome-file>Home</welcome-file>
-	</welcome-file-list>
-
-	<!-- <welcome-file>homepage.html</welcome-file> <welcome-file>homepage.htm</welcome-file> 
-		<welcome-file>homepage.jsp</welcome-file> <welcome-file>default.html</welcome-file> 
-		<welcome-file>default.htm</welcome-file> <welcome-file>default.jsp</welcome-file> -->
-
-
-
-
-	<servlet>
-		<servlet-name>IscriviUtenteServlet</servlet-name>
-		<servlet-class>controller.IscriviUtente</servlet-class>   <!-- package e nome della classe -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>IscriviUtenteServlet</servlet-name>
-		<url-pattern>/iscriviutente</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>EffettuaLoginServlet</servlet-name>
-		<servlet-class>controller.EffettuaLogin</servlet-class>   <!-- package e nome della classe -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EffettuaLoginServlet</servlet-name>
-		<url-pattern>/effettualogin</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>HomeServlet</servlet-name>
-		<servlet-class>controller.Home</servlet-class>   <!-- package e nome della classe -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>HomeServlet</servlet-name>
-		<url-pattern>/Home</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>EffettuaLogoutServlet</servlet-name>
-		<servlet-class>controller.EffettuaLogout</servlet-class>   <!-- package e nome della classe -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EffettuaLogoutServlet</servlet-name>
-		<url-pattern>/effettualogout</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>ModificaProfiloServlet</servlet-name>
-		<servlet-class>controller.ModificaProfilo</servlet-class>   <!-- package e nome della classe -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ModificaProfiloServlet</servlet-name>
-		<url-pattern>/modificaprofilo</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>AggiungiNuovoLuogoServlet</servlet-name>
-		<servlet-class>controller.AggiungiNuovoLuogo</servlet-class>   <!-- package e nome della classe -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AggiungiNuovoLuogoServlet</servlet-name>
-		<url-pattern>/aggiunginuovoluogo</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>GestioneLuoghiServlet</servlet-name>
-		<servlet-class>controller.GestioneLuoghi</servlet-class>   <!-- package e nome della classe -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GestioneLuoghiServlet</servlet-name>
-		<url-pattern>/gestioneluoghi</url-pattern>
-	</servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Calabria E20</display-name>
+  <welcome-file-list>
+    <welcome-file>Home</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>IscriviUtenteServlet</servlet-name>
+    <servlet-class>controller.IscriviUtente</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IscriviUtenteServlet</servlet-name>
+    <url-pattern>/iscriviutente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EffettuaLoginServlet</servlet-name>
+    <servlet-class>controller.EffettuaLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EffettuaLoginServlet</servlet-name>
+    <url-pattern>/effettualogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>controller.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EffettuaLogoutServlet</servlet-name>
+    <servlet-class>controller.EffettuaLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EffettuaLogoutServlet</servlet-name>
+    <url-pattern>/effettualogout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModificaProfiloServlet</servlet-name>
+    <servlet-class>controller.ModificaProfilo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModificaProfiloServlet</servlet-name>
+    <url-pattern>/modificaprofilo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AggiungiNuovoLuogoServlet</servlet-name>
+    <servlet-class>controller.AggiungiNuovoLuogo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiungiNuovoLuogoServlet</servlet-name>
+    <url-pattern>/aggiunginuovoluogo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GestioneLuoghiServlet</servlet-name>
+    <servlet-class>controller.GestioneLuoghi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestioneLuoghiServlet</servlet-name>
+    <url-pattern>/gestioneluoghi</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>GestioneEventiServlet</servlet-name>
+    <servlet-class>controller.GestioneEventi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestioneEventiServlet</servlet-name>
+    <url-pattern>/gestioneeventi</url-pattern>
+  </servlet-mapping>
 
 </web-app>

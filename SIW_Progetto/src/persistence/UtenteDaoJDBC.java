@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -265,7 +266,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public List<Luogo> findAllLocation(String pIva) 
 	{
 		Connection connection = this.dataSource.getConnection();
-		List<Luogo> luoghi = new LinkedList<>();
+		List<Luogo> luoghi = null;
 		try {
 			Luogo luogo;
 			PreparedStatement statement;
@@ -275,24 +276,27 @@ public class UtenteDaoJDBC implements UtenteDao{
 			
 			UtenteDao ut = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			Utente utente = ut.findByPrimaryKey(pIva);
- 
-			while (result.next()) {
-				luogo = new Luogo();
-				luogo.setTitolare(utente);				
-				luogo.setNome(result.getString("nome"));
-				luogo.setCodice(result.getString("codice"));
-				luogo.setProvincia(result.getString("provincia"));
-				luogo.setComune(result.getString("comune"));
-				luogo.setIndirizzo(result.getString("indirizzo"));
-				luoghi.add(luogo);
+			if(utente != null)
+			{
+				luoghi = new LinkedList<>();
+				while (result.next()) {
+					luogo = new Luogo();
+					luogo.setTitolare(utente);				
+					luogo.setNome(result.getString("nome"));
+					luogo.setCodice(result.getString("codice"));
+					luogo.setProvincia(result.getString("provincia"));
+					luogo.setComune(result.getString("comune"));
+					luogo.setIndirizzo(result.getString("indirizzo"));
+					luoghi.add(luogo);
+				}
 			}
+			return luoghi;
 		} catch (SQLException e) { throw new PersistenceException(e.getMessage()); }	 
 		finally 
 		{
 			try { connection.close(); } 
 			catch (SQLException e) { throw new PersistenceException(e.getMessage()); }
 		}
-		return luoghi;
 	}	
 
 }
