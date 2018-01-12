@@ -68,4 +68,5 @@
     <servlet-name>GestioneEventiServlet</servlet-name>
     <url-pattern>/gestioneeventi</url-pattern>
   </servlet-mapping>
+
 </web-app>

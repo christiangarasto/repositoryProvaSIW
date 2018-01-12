@@ -2,8 +2,7 @@ package model;
 
 import java.util.LinkedList;
 
-public class Luogo {
-
+public class Luogo {	
 	private Utente titolare;
 	private String nome;
 	private String codice;
@@ -15,7 +14,7 @@ public class Luogo {
 	
 	public Luogo() {}
 
-	public Luogo(Utente titolare, String nome, String codice, String provincia, String comune, String indirizzo) {
+	public Luogo(Utente titolare, String nome, String provincia, String comune, String indirizzo) {
 		super();
 		this.titolare = titolare;
 		this.nome = nome;

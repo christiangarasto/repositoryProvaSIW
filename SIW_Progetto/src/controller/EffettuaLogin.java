@@ -21,23 +21,25 @@ public class EffettuaLogin extends HttpServlet{
 		UtenteDao ut = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 		
 		String piva = ut.findByCredenziali(email, password);
+		HttpSession session = req.getSession();
 		
 		if(piva != null) {
-			HttpSession session = req.getSession();
 			
 			Utente utente = ut.findByPrimaryKey(piva);
 			
-				System.out.println("nel db trovo: " + utente.getNome() + ", " + utente.getpIva() + ", " + email + ", " + password);
-			
+			session.setAttribute("utente", utente);
 			session.setAttribute("nome", utente.getNome());
 			session.setAttribute("piva", utente.getpIva());
 			session.setAttribute("email", email);
 			session.setAttribute("password", password);
-			session.setAttribute("loggato", true);		
+			session.setAttribute("loggato", true);
+			
+			session.setAttribute("credenzialiErrate", false);		
 			resp.sendRedirect("Home");
 		}else {
-			//per ora chiedo di iscriversi
-			resp.sendRedirect("iscriviutente.jsp");
+			
+			session.setAttribute("credenzialiErrate", true);
+			resp.sendRedirect("Home");
 		}
 	}
 	

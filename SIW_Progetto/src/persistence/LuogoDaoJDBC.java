@@ -25,6 +25,9 @@ public class LuogoDaoJDBC implements LuogoDao{
 	public void save(Luogo luogo) {
 		Connection connection = this.dataSource.getConnection();
 		try {
+			Long id = IDBroker.getId(connection);
+			luogo.setCodice("lu" + Long.toString(id));
+			
 		String insert = "insert into luogo(titolare, nome, codice, provincia, comune, indirizzo) values (?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, luogo.getTitolare().getpIva());
@@ -34,6 +37,9 @@ public class LuogoDaoJDBC implements LuogoDao{
 			statement.setString(5, luogo.getComune());
 			statement.setString(6, luogo.getIndirizzo());
 			statement.executeUpdate();
+			
+			System.out.println("Luogo " + luogo.getCodice() + " aggiunto con successo!");
+			
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -207,6 +213,43 @@ public class LuogoDaoJDBC implements LuogoDao{
 			}
 		}
 		return eventi;
+	}
+	
+	public LinkedList<Luogo> findByTitolare(String pivaTitolare) {
+		Connection connection = this.dataSource.getConnection();
+		LinkedList<Luogo> luoghi = new LinkedList<Luogo>();
+		try {
+			Luogo luogo;
+			PreparedStatement statement;
+			String query = "select * from luogo where titolare = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, pivaTitolare);
+			
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				luogo = new Luogo();	
+				Utente titolare = new Utente();
+					titolare.create(result.getString("titolare"));
+			
+				luogo.setTitolare(titolare);				
+				luogo.setNome(result.getString("nome"));	
+				luogo.setCodice(result.getString("codice"));	
+				luogo.setProvincia(result.getString("provincia"));	
+				luogo.setComune(result.getString("comune"));	
+				luogo.setIndirizzo(result.getString("indirizzo"));	
+		
+				luoghi.add(luogo);
+			}
+			return luoghi;
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		}	 finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
 	}
 
 }

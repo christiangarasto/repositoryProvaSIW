@@ -1,5 +1,6 @@
 package persistence.dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Evento;
@@ -11,6 +12,8 @@ public interface LuogoDao {
 	public List<Luogo> findAll();       
 	public void update(Luogo luogo); //Update
 	public void delete(Luogo luogo); //Delete	
-	
+
 	public List<Evento> findAllEvents();
+	public LinkedList<Luogo> findByTitolare(String pivaTitolare);
+
 }
