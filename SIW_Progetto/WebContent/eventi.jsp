@@ -62,22 +62,28 @@
 						</div>
 
 					</div>
-					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-						<figure>
-							<aside class="pull-right">
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown"><img src="images/profilo.png"
-										height="30"><b class="caret"></b></a> <c:if
-										test="${loggato}">
+					
+<c:if test="${loggato}">
+
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+							<figure>
+								<li class="dropdown">
+									<aside class="pull-right">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<img src="images/profilo.png" class="img-circle" height="30"><b
+											class="caret"></b>
+										</a>
 										<ul class="dropdown-menu">
-											<li><p class="bg-success">${username}</p></li>
-											<li><a href="#">Profilo</a></li>
+											<li><p class="bg-primary">${username}</p></li>
+											<li><a href="gestioneProfilo.jsp">Profilo</a></li>
 											<li><a href="effettualogout">Logout</a></li>
 										</ul>
-									</c:if>
-							</aside>
-						</figure>
-					</div>
+									</aside>
+								</li>
+							</figure>
+						</div>
+
+</c:if>
 				</div>
 			</div>
 		</nav>
