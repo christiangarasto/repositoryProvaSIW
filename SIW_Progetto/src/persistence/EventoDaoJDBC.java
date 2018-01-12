@@ -22,6 +22,8 @@ public class EventoDaoJDBC implements EventoDao {
 	public void save(Evento evento) {
 		Connection connection = this.dataSource.getConnection();
 		try {
+			Long id = IDBroker.getId(connection);
+			evento.setCodice("ev" + Long.toString(id));
 		String insert = "insert into evento(descrizione, codice, data, luogo) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, evento.getDescrizione());

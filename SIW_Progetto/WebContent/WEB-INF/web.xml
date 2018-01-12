@@ -73,12 +73,12 @@
 
 
 	<servlet>
-		<servlet-name>GestioneEventoServlet</servlet-name>
-		<servlet-class>controller.GestioneEvento</servlet-class>   <!-- package e nome della classe -->
+		<servlet-name>GestioneLuoghiServlet</servlet-name>
+		<servlet-class>controller.GestioneLuoghi</servlet-class>   <!-- package e nome della classe -->
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>GestioneEventoServlet</servlet-name>
-		<url-pattern>/gestioneevento</url-pattern>
+		<servlet-name>GestioneLuoghiServlet</servlet-name>
+		<url-pattern>/gestioneluoghi</url-pattern>
 	</servlet-mapping>
 
 </web-app>

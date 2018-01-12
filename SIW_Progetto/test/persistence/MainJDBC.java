@@ -20,23 +20,31 @@ public class MainJDBC {
 		UtenteDao utenteDao = factory.getUtenteDAO();
 			Utente utente1 = new Utente("00000001","Ciccio s.r.l");
 			Utente utente2 = new Utente("00000002", "Carletto s.p.a");
+			Utente utente3 = new Utente("00000003", "Roma Capitale");
 
 		LuogoDao luogoDao = factory.getLuogoDAO();
-			Luogo woodstock = new Luogo(utente1, "Woodstock", "cod1", "Cosenza", "Corigliano Calabro", "Via le mani dal naso 8");
+			Luogo woodstock = new Luogo(utente1, "Woodstock", "Cosenza", "Corigliano Calabro", "Via le mani dal naso 8");
+			Luogo plaza = new Luogo(utente2, "Plaza", "Cosenza", "Rende", "Via esempio1 snc");
+			Luogo colosseo = new Luogo(utente3, "Colosseo", "Roma", "Roma", "Piazza del colosseo");
 		
 		
 		EventoDao eventoDao = factory.getEventoDAO();		
-			Evento rapinaDay = new Evento("Vi svaligiamo il portafogli", "ev1", new java.sql.Date(2001,10,02), woodstock);
-			Evento rapinaDay2 = new Evento("Vi svaligiamo il portafogli, per la seconda volta", "ev2", new java.sql.Date(2018,10,02), woodstock);
+			Evento rapinaDay = new Evento("Vi svaligiamo il portafogli", new java.sql.Date(2001,10,02), woodstock);
+			Evento rapinaDay2 = new Evento("Vi svaligiamo il portafogli, per la seconda volta", new java.sql.Date(2018,10,02), woodstock);
+			Evento capodanno = new Evento("Capodanno 2018 Roma", new java.sql.Date(2017,12,31), colosseo);
 
 		//CREATE
 		utenteDao.save(utente1);
 		utenteDao.save(utente2);
+		utenteDao.save(utente3);
 		
 		luogoDao.save(woodstock);
+		luogoDao.save(colosseo);
+		luogoDao.save(plaza);
 		
 		eventoDao.save(rapinaDay);
 		eventoDao.save(rapinaDay2);
+		eventoDao.save(capodanno);
 		
 		//RETRIEVE		
 		System.out.println("---- Elenco utenti");

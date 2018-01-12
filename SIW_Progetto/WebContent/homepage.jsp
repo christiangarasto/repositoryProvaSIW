@@ -137,6 +137,12 @@
 											placeholder="Password">
 									</div>
 									<br>
+									<c:if test="${credenzialiErrate}">
+										<div class="container">
+											<div class="alert alert-warning">Nome o password errati!</div>
+										</div>
+									</c:if>
+
 									<input type="submit" value="Login" class="btn btn-success">
 								</div>
 							</form>
@@ -144,6 +150,7 @@
 					</div>
 
 				</c:if>
+
 
 				<c:if test="${loggato}">
 
@@ -158,26 +165,34 @@
 					<div class="col-sm-10">
 						<div class="jumbotron" id="description">
 
-							<button onclick="showEventForm()" class="btn btn-default btn-xs">+</button>
+							<button onclick="showEventForm()"
+								class="btn btn-default btn-xs active">+</button>
 							crea evento
+
 							<div class="jumbotron" id="eventForm">
-								<form method="post" action="creazioneEvento">
+								<form method="post" action="gestioneevento">
 									<div class="form-group">
 										<label for="descrizione">Titolo:</label><input name="titolo"
 											id="idTitolo" type="text" class="form-control" />
 									</div>
 									<div class="form-group dropdown">
-										<button type="button" class="btn btn-default dropdown-toggle"
-											data-toggle="dropdown">
-											Luogo <b class="caret"></b>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Luogo salvato in database 1</a></li>
-											<li><a href="#">Luogo salvato in database 2</a></li>
-											<li><a href="#">Luogo salvato in database 3</a></li>
-											<li class="divider"></li>
-											<li><a href="#">Aggiungi</a></li>
-										</ul>
+										<!-- 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Luogo <b class="caret"></b></button> -->
+										<a href="gestioneevento" class="btn btn-default">Luogo <b
+											class="caret"></b></a>
+
+										<c:if test="${location}">
+											<ul>
+												<li class="divider"></li>
+												<li><a href="#">Aggiungi...</a></li>
+											</ul>
+										</c:if>
+
+										<!-- 									<ul class="dropdown-menu">
+									    <li><a href="#">Luogo salvato in database 1</a></li>
+									    <li class="divider"></li>
+									    <li><a href="#">Aggiungi...</a></li>
+									  </ul>
+-->
 									</div>
 									<div class="form-group dropdown">
 										<button type="button" class="btn btn-default dropdown-toggle"
@@ -202,7 +217,7 @@
 											type="datetime-local" />
 									</div>
 									<div class="form-group">
-										<label for="fileupload">Allega locandina</label> <input
+										<label for="fileupload">allega locandina</label> <input
 											type="file" name="fileupload" id="fileupload">
 									</div>
 									<div class="form-group">
@@ -222,79 +237,6 @@
 					</div>
 
 				</c:if>
-<c:if test="${loggato}">
-
-	<div class="col-sm-2">
-		<div class="jumbotron" id="log">
-			<img src="images/profilo.png" class="img-circle" alt="immagine del profilo" style="width:50%;">
-			<h3>${username}</h3>
-		</div>
-	</div>
-
-	<div class="col-sm-10">
-		<div class="jumbotron" id="description">
-
-			<button onclick="showEventForm()" class="btn btn-default btn-xs">+</button>	crea evento
-
-				<div class="jumbotron" id="eventForm">
-					<form method="post" action="gestioneevento">
-						<div class="form-group">
-							<label for="descrizione">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
-						</div>
-						<div class="form-group dropdown">
-<!-- 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Luogo <b class="caret"></b></button> -->
-							<a href="gestioneevento" class="btn btn-default">Luogo <b class="caret"></b></a>
-
-								<c:if test="${location}">
-									<ul>
-									    <li class="divider"></li>
-									    <li><a href="#">Aggiungi...</a></li>
-									</ul>
-								</c:if>
-
-<!-- 									<ul class="dropdown-menu">
-									    <li><a href="#">Luogo salvato in database 1</a></li>
-									    <li class="divider"></li>
-									    <li><a href="#">Aggiungi...</a></li>
-									  </ul>
--->							
-						</div>
-						<div class="form-group dropdown">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Genere <b class="caret"></b></button>
-								<ul class="dropdown-menu">
-								    <li><a href="#">Arte</a></li>
-								    <li><a href="#">Cultura</a></li>
-								    <li><a href="#">Gastronomia</a></li>
-								    <li><a href="#">Musica</a></li>
-								    <li><a href="#">Sport</a></li>
-								  </ul>
-						</div>
-						<div class="form-group">
-							<label for="descrizione">Descrizione:</label>
-								<input name="descrizione" id="idDescrizione" type="text" class="form-control" />
-						</div>
-						<div class="form-group">
-							<label for="data">Data svolgimento:</label>
-								<input name="data" type="datetime-local" />
-						</div>
-						<div class="form-group">
-							<label for = "fileupload">allega locandina</label>
-							<input type="file" name = "fileupload" id = "fileupload">						
-						</div>
-						<div class="form-group">
-							<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="validaEvento()" /> 
-							<input name="resetDati" type="reset" value="Reset Dati" class="btn btn-danger" /> 
-							<input id="inviaDati" type="submit" value="Invia Dati" class="btn btn-success" onclick="registraEvento(event);" />
-						</div>
-					</form>
-				</div>
-			
-			<h2>Eventi in Bacheca</h2>
-
-		</div>
-	</div>
-
-</c:if>
 
 			</div>
 		</div>

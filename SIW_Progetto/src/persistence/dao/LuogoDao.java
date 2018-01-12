@@ -1,5 +1,6 @@
 package persistence.dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Luogo;
@@ -10,4 +11,5 @@ public interface LuogoDao {
 	public List<Luogo> findAll();       
 	public void update(Luogo luogo); //Update
 	public void delete(Luogo luogo); //Delete	
+	public LinkedList<Luogo> findByTitolare(String pivaTitolare);
 }

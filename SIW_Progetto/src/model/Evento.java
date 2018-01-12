@@ -11,10 +11,9 @@ public class Evento {
 	
 	public Evento() {}
 
-	public Evento(String descrizione, String codice, Date data1, Luogo luogo) {
+	public Evento(String descrizione, Date data1, Luogo luogo) {
 		super();
 		this.descrizione = descrizione;
-		this.codice = codice;
 		this.data = data1;
 		this.luogo = luogo;
 	}

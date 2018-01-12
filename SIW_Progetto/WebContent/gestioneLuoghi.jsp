@@ -16,6 +16,7 @@
 <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 <script src="jquery/jquery-3.2.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/creazioneluogo.js"></script>
 
 </head>
 
@@ -103,32 +104,65 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">×</button>
+							<button type="button" class="close aggiungiLuogoButton"
+								data-dismiss="modal">×</button>
 							<h4 class="modal-title">Aggiungi nuovo luogo</h4>
 						</div>
 						<div class="modal-body">
 							<p>Aggiungi le informazioni per aggiungere un nuovo luogo.</p>
 						</div>
-						
-						<!--  
-							
-						
-						
-						
-											AGGIUNTA FORM PER LA REGISTRAZIONE DEL LUOGO SUL SITO					
-						
-						
-						
-						
-						
-						
-						
-						-->
-						
 						<div class="modal-footer">
-							<form action="aggiunginuovoluogo" method="post">
-								<button type="submit" class="btn btn-default">Salva</button>
-								<button type="button" class="btn btn-default"
+							<div class="col-md-9 personal-info">
+								<form class="form-horizontal" method="post"
+									action="aggiunginuovoluogo">
+									<br>
+									<div class="form-group">
+										<label class="col-lg-4 control-label">Nome luogo:</label>
+										<div class="col-lg-8">
+											<input class="form-control" id="nomeLuogo"
+												name="input_nomeluogo" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Provincia:</label>
+										<div class="col-md-8">
+											<input class="form-control" id="provincia"
+												name="input_provincia" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Comune:</label>
+										<div class="col-md-8">
+											<input class="form-control" id="comune" name="input_comune"
+												type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Indirizzo:</label>
+										<div class="col-md-8">
+											<input class="form-control" id="indirizzo"
+												name="input_indirizzo" type="text">
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<hr>
+
+
+						</div>
+						<div class="modal-footer">
+							<c:if test="${luogoCreato}">
+								<div class="alert alert-success">Luogo salvato con
+									successo!</div>
+							</c:if>
+							<c:if test="${luogoEsistente}">
+								<div class="alert alert-warning">Luogo già presente!</div>
+							</c:if>
+
+							<form>
+								<button type="button" class="btn btn-success" id="salvaLuogo">Salva</button>
+								<button type="button" class="btn btn-info aggiungiLuogoButton"
 									data-dismiss="modal">Annulla</button>
 							</form>
 						</div>
@@ -136,6 +170,16 @@
 
 				</div>
 			</div>
+
+
+			<!-- 
+						<div class="modal-footer">
+							<form action="aggiunginuovoluogo" method="post">
+								<button type="submit" class="btn btn-success">Salva</button>
+								<button type="button" class="btn btn-info" data-dismiss="modal">Annulla</button>
+							</form>
+						</div>
+ -->
 
 
 
