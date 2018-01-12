@@ -120,12 +120,9 @@
 						class="form-control" />
 				</div>
 				<div class="form-group">
-					<input name="validaDati" type="button" value="Valida Dati"
-						class="btn btn-warning" onclick="valida()" /> <input
-						name="resetDati" type="reset" value="Reset Dati"
-						class="btn btn-danger" /> <input id="inviaDati" type="submit"
-						value="Invia Dati" class="btn btn-success"
-						onclick="registraUtente(event);" />
+					<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="valida()" /> 
+					<input name="resetDati" type="reset" value="Reset Dati" class="btn btn-danger" /> 
+					<input id="inviaDati" type="submit" value="Invia Dati" class="btn btn-success" onclick="registraUtente(event);" />
 				</div>
 			</form>
 		</div>

@@ -65,7 +65,7 @@
 
 					</div>
 
-					<c:if test="${loggato}">
+<c:if test="${loggato}">
 
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 							<figure>
@@ -85,7 +85,7 @@
 							</figure>
 						</div>
 
-					</c:if>
+</c:if>
 				</div>
 			</div>
 		</nav>
@@ -94,7 +94,7 @@
 		<div class="container" id="info">
 			<div class="row">
 
-				<c:if test="${not loggato}">
+<c:if test="${not loggato}">
 
 					<div class="col-sm-3"></div>
 
@@ -143,122 +143,42 @@
 						</div>
 					</div>
 
-				</c:if>
+</c:if>
 
-				<c:if test="${loggato}">
-
-					<div class="col-sm-2">
-						<div class="jumbotron" id="log">
-							<img src="images/profilo.png" class="img-circle"
-								alt="immagine del profilo" style="width: 50%;">
-							<h3>${username}</h3>
-						</div>
-					</div>
-
-					<div class="col-sm-10">
-						<div class="jumbotron" id="description">
-
-							<button onclick="showEventForm()" class="btn btn-default btn-xs">+</button>
-							crea evento
-							<div class="jumbotron" id="eventForm">
-								<form method="post" action="creazioneEvento">
-									<div class="form-group">
-										<label for="descrizione">Titolo:</label><input name="titolo"
-											id="idTitolo" type="text" class="form-control" />
-									</div>
-									<div class="form-group dropdown">
-										<button type="button" class="btn btn-default dropdown-toggle"
-											data-toggle="dropdown">
-											Luogo <b class="caret"></b>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Luogo salvato in database 1</a></li>
-											<li><a href="#">Luogo salvato in database 2</a></li>
-											<li><a href="#">Luogo salvato in database 3</a></li>
-											<li class="divider"></li>
-											<li><a href="#">Aggiungi</a></li>
-										</ul>
-									</div>
-									<div class="form-group dropdown">
-										<button type="button" class="btn btn-default dropdown-toggle"
-											data-toggle="dropdown">
-											Genere <b class="caret"></b>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Arte</a></li>
-											<li><a href="#">Cultura</a></li>
-											<li><a href="#">Gastronomia</a></li>
-											<li><a href="#">Musica</a></li>
-											<li><a href="#">Sport</a></li>
-										</ul>
-									</div>
-									<div class="form-group">
-										<label for="descrizione">Descrizione:</label> <input
-											name="descrizione" id="idDescrizione" type="text"
-											class="form-control" />
-									</div>
-									<div class="form-group">
-										<label for="data">Data svolgimento:</label> <input name="data"
-											type="datetime-local" />
-									</div>
-									<div class="form-group">
-										<label for="fileupload">Allega locandina</label> <input
-											type="file" name="fileupload" id="fileupload">
-									</div>
-									<div class="form-group">
-										<input name="validaDati" type="button" value="Valida Dati"
-											class="btn btn-warning" onclick="validaEvento()" /> <input
-											name="resetDati" type="reset" value="Reset Dati"
-											class="btn btn-danger" /> <input id="inviaDati"
-											type="submit" value="Invia Dati" class="btn btn-success"
-											onclick="registraEvento(event);" />
-									</div>
-								</form>
-							</div>
-
-							<h2>Eventi in Bacheca</h2>
-
-						</div>
-					</div>
-
-				</c:if>
 <c:if test="${loggato}">
 
 	<div class="col-sm-2">
 		<div class="jumbotron" id="log">
 			<img src="images/profilo.png" class="img-circle" alt="immagine del profilo" style="width:50%;">
-			<h3>${username}</h3>
+			<h3>${nome}</h3>
 		</div>
 	</div>
 
 	<div class="col-sm-10">
 		<div class="jumbotron" id="description">
 
-			<button onclick="showEventForm()" class="btn btn-default btn-xs">+</button>	crea evento
-
+			<button id="expand_form" class="btn btn-default btn-xs">+</button>	crea evento
 				<div class="jumbotron" id="eventForm">
-					<form method="post" action="gestioneevento">
+					<form> 
 						<div class="form-group">
 							<label for="descrizione">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
 						</div>
+
 						<div class="form-group dropdown">
-<!-- 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Luogo <b class="caret"></b></button> -->
-							<a href="gestioneevento" class="btn btn-default">Luogo <b class="caret"></b></a>
-
-								<c:if test="${location}">
-									<ul>
-									    <li class="divider"></li>
-									    <li><a href="#">Aggiungi...</a></li>
-									</ul>
-								</c:if>
-
-<!-- 									<ul class="dropdown-menu">
-									    <li><a href="#">Luogo salvato in database 1</a></li>
-									    <li class="divider"></li>
-									    <li><a href="#">Aggiungi...</a></li>
-									  </ul>
--->							
+						
+							<button id="luoghibutton" class="btn btn-default">Luogo <b class="caret"></b></button>
+							<c:if test="${location}">
+								<ul class="dropdown-menu">
+									<c:forEach var = "luogo" items = "${luoghi}">
+										<li><a href="#">${luogo.nome}</a></li>
+									</c:forEach> 
+								    <li class="divider"></li>
+								    <li><a href="gestioneLuoghi.jsp">Aggiungi...</a></li>
+								</ul>
+							</c:if>
+							
 						</div>
+						
 						<div class="form-group dropdown">
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Genere <b class="caret"></b></button>
 								<ul class="dropdown-menu">
@@ -280,17 +200,25 @@
 						<div class="form-group">
 							<label for = "fileupload">allega locandina</label>
 							<input type="file" name = "fileupload" id = "fileupload">						
-						</div>
-						<div class="form-group">
-							<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="validaEvento()" /> 
-							<input name="resetDati" type="reset" value="Reset Dati" class="btn btn-danger" /> 
-							<input id="inviaDati" type="submit" value="Invia Dati" class="btn btn-success" onclick="registraEvento(event);" />
+						</div><br>
+						<div class="form-group" align="center">
+							<input id="pubblicaevento" type="submit" value="Pubblica" class="btn btn-info" onclick="registraEvento(event);" />
 						</div>
 					</form>
 				</div>
 			
-			<h2>Eventi in Bacheca</h2>
-
+				<div id = "loadbacheca">
+			<c:if test = "${events}" >
+					<h2>Eventi in Bacheca</h2>
+				<c:forEach var = "evento" items = "${eventi}">
+						<h3>${evento.descrizione}</h3>
+				</c:forEach>
+			</c:if>
+			<c:if test = "${not events}" >
+					<h2>Nessun evento da visualizzare</h2>
+			</c:if>
+				</div>
+				
 		</div>
 	</div>
 

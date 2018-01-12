@@ -2,6 +2,7 @@ package persistence.dao;
 
 import java.util.List;
 
+import model.Evento;
 import model.Luogo;
 
 public interface LuogoDao {
@@ -10,4 +11,6 @@ public interface LuogoDao {
 	public List<Luogo> findAll();       
 	public void update(Luogo luogo); //Update
 	public void delete(Luogo luogo); //Delete	
+	
+	public List<Evento> findAllEvents();
 }

@@ -1,6 +1,7 @@
 package persistence;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -170,5 +171,42 @@ public class LuogoDaoJDBC implements LuogoDao{
 			statement.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();}
 }
+
+	@Override
+	public List<Evento> findAllEvents() 
+	{
+		Connection connection = this.dataSource.getConnection();
+		List<Evento> eventi = new LinkedList<>();
+		try {
+			Evento evento;
+			PreparedStatement statement;
+			String query = "select * from evento";
+			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				evento = new Evento();
+				Luogo luogo = new Luogo();
+					luogo.create(result.getString("luogo"));
+			
+				evento.setLuogo(luogo);
+				evento.setDescrizione(result.getString("descrizione"));	
+				evento.setCodice(result.getString("codice"));
+				long secs = result.getDate("data").getTime();
+				evento.setData( new java.sql.Date(secs));
+
+				eventi.add(evento);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		}	 finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return eventi;
+	}
 
 }
