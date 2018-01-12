@@ -42,6 +42,8 @@ public class GestioneLuoghi extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		System.out.println("2 post");
+		
 		String nomeLuogo = (String) req.getParameter("nomeLuogoInput");
 		String provincia = (String) req.getParameter("provinciaInput");
 		String comune = (String) req.getParameter("comuneInput");
@@ -56,9 +58,13 @@ public class GestioneLuoghi extends HttpServlet
 		
 		String pivaTitolare = (String) session.getAttribute("piva");
 		
-		LinkedList<Luogo> luoghiDelTitolare = luogoDao.findByTitolare(pivaTitolare);
+//		LinkedList<Luogo> luoghiDelTitolare = luogoDao.findByTitolare(pivaTitolare);
+		LinkedList<Luogo> luoghi = luogoDao.findAll();
+		LinkedList<Luogo> luoghiDelTitolare = new LinkedList();
 		
 		boolean luogoNuovo = false;
+		
+		System.out.println("Luoghi del titolare: " + luoghiDelTitolare.size());
 		
 		for(Luogo luogo : luoghiDelTitolare) {
 			
@@ -71,12 +77,13 @@ public class GestioneLuoghi extends HttpServlet
 		}
 		
 		if(luogoNuovo) {
-			
+			System.out.println("Luogo nuovo quindi salvo");
 			Luogo nuovo = new Luogo((Utente)session.getAttribute("utente"), nomeLuogo, provincia, comune, indirizzo);
 			luogoDao.save(nuovo);
 			session.setAttribute("luogoCreato", true);
 			
 		}else {
+			System.out.println("Luogo non nuovo quindi niente");
 			session.setAttribute("luogoEsistente", true);
 		}
 		

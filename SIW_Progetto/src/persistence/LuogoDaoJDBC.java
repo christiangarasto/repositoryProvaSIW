@@ -84,9 +84,9 @@ public class LuogoDaoJDBC implements LuogoDao{
 	}
 
 	@Override
-	public List<Luogo> findAll() {
+	public LinkedList<Luogo> findAll() {
 		Connection connection = this.dataSource.getConnection();
-		List<Luogo> luoghi= new LinkedList<>();
+		LinkedList<Luogo> luoghi= new LinkedList<>();
 		try {
 			Luogo luogo;
 			PreparedStatement statement;
@@ -107,6 +107,7 @@ public class LuogoDaoJDBC implements LuogoDao{
 		
 				luoghi.add(luogo);
 			}
+			return luoghi;
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		}	 finally {
@@ -116,7 +117,6 @@ public class LuogoDaoJDBC implements LuogoDao{
 				throw new PersistenceException(e.getMessage());
 			}
 		}
-		return luoghi;
 	}
 
 	@Override
