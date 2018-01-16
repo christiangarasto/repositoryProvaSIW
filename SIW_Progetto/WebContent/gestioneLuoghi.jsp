@@ -101,9 +101,7 @@
 			<h1>Gestione Luoghi</h1>
 			<hr>
 
-			<button type="button" class="btn btn-info btn-md" data-toggle="modal"
-				data-target="#nuovoLuogo" data-backdrop="static">Aggiungi
-				nuovo luogo</button>
+			<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#nuovoLuogo" data-backdrop="static">Aggiungi nuovo luogo</button>
 			<div class="modal fade" id="nuovoLuogo" role="dialog">
 				<div class="modal-dialog">
 
@@ -119,9 +117,7 @@
 						</div>
 						<div class="modal-footer">
 							<div class="col-md-9 personal-info">
-								<form class="form-horizontal" method="post"
-									action="aggiunginuovoluogo">
-									<br>
+								<form class="form-horizontal" method="post" action="aggiunginuovoluogo"><br>
 									<div class="form-group">
 										<label class="col-lg-4 control-label">Nome luogo:</label>
 										<div class="col-lg-8">
@@ -152,11 +148,11 @@
 									</div>
 								</form>
 							</div>
-
-							<hr>
-
+							
+						<hr>
 
 						</div>
+						
 						<div class="modal-footer">
 							
 <!-- 							<c:if test="${luogoCreato}">
@@ -180,7 +176,6 @@
 				</div>
 			</div>
 
-
 			<!-- 
 						<div class="modal-footer">
 							<form action="aggiunginuovoluogo" method="post">
@@ -190,24 +185,55 @@
 						</div>
  -->
 
-
-
-			<div class="row">
+		<!--	<div class="row">
 				<div class="col-md-9 personal-info">
+					<br>
 					<c:forEach items="${luoghi}" var="luogo">
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Nome: ${luogo.nome}</label><br>
-							<label class="col-lg-3 control-label">Titolare:
-								${luogo.titolare}</label><br> <label class="col-lg-3 control-label">Provincia:
-								${luogo.provincia}</label><br> <label
-								class="col-lg-3 control-label">Comune: ${luogo.comune}</label><br>
-							<label class="col-lg-3 control-label">Indirizzo:
-								${luogo.indirizzo}</label><br>
+							<label class="col-lg-3 control-label">Nome: ${luogo.nome}</label>
+					 	<label class="col-lg-3 control-label">Titolare:${luogo.titolare}</label><br>	  
+							<label class="col-lg-3 control-label">Provincia:${luogo.provincia}</label> 
+							<label class="col-lg-3 control-label">Comune: ${luogo.comune}</label>
+							<label class="col-lg-3 control-label">Indirizzo:${luogo.indirizzo}</label>
 						</div>
 					</c:forEach>
 				</div>
-			</div>
+			</div> -->
+			
+			<hr>
+			<br>
+			<div class="container">
+			<table class="table table-striped">
+			<thead>
+				<tr>
+					<th> Nome </th>
+					<th> Provincia </th>
+					<th> Comune </th>
+					<th> Indirizzo </th>
+				</tr>
+			</thead>
+			<tbody id="elenco">
+			<c:forEach items="${luoghi}" var="luogo">
+				<tr class="luogo">					
+						<td>${luogo.nome}</td> 
+						<td>${luogo.provincia}</td> 
+						<td>${luogo.comune}</td>
+						<td>${luogo.indirizzo}</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+			<tfoot>
+				<tr class="active">
+					<td><a href="#">Ordina per Nome</a></td>
+					<td><a href="#">Ordina per Provincia</a></td>
+					<td><a href="#">Ordina per Comune</a></td>
+					<td><a href="#">Ordina per Indirizzo</a></td>
+				</tr>
+			</tfoot>	
+		</table>
 		</div>
-		<hr>
+		</div>
+
+	</header>
 </body>
 </html>

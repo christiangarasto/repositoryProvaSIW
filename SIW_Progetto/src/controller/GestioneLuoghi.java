@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,24 +18,37 @@ import persistence.dao.LuogoDao;
 import persistence.dao.UtenteDao;
 
 public class GestioneLuoghi extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		System.out.println("GET");
+		System.out.println("GET LUOGHI");
+		
 		HttpSession session = req.getSession();
 		String piva = (String) session.getAttribute("piva");
 
 		UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-
 		Utente utente = utentedao.findByPrimaryKey(piva);
-
-		List<Luogo> luoghi = new LinkedList<>();
-
-		if (utente != null) {
+		
+		List<Luogo> luoghi = null;
+		if (utente != null) 
+		{
+			luoghi = new LinkedList<>();
 			luoghi = utentedao.findAllLocation(utente.getpIva());
+			if(luoghi != null) 
+			{
+	System.out.println("::::::::::::::::::::");
+				for(Luogo l : luoghi)
+				{
+					System.out.println("-" + l.getNome());
+				}
+	System.out.println("::::::::::::::::::::");
+				session.setAttribute("luoghi", luoghi);
+				session.setAttribute("locations", true);
+	System.out.println("(boolean)locations = " + session.getAttribute("locations"));
+				resp.sendRedirect("homepage.jsp");
+			}
 		}
-
-		session.setAttribute("luoghi", luoghi);
 	}
 
 	@Override

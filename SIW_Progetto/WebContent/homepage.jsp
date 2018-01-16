@@ -137,13 +137,11 @@
 											placeholder="Password">
 									</div>
 									<br>
-							<c:if test="${credenzialiErrate}">
+					<c:if test="${credenzialiErrate}">
 										<div class="container">
-											<div class="alert alert-warning">Nome o password
-												errati!</div>
+											<div class="alert alert-warning">Nome o password errati!</div>
 										</div>
-							</c:if>
-
+					</c:if>
 									<input type="submit" value="Login" class="btn btn-success">
 								</div>
 							</form>
@@ -152,92 +150,78 @@
 </c:if>
 
 <c:if test="${loggato}">
-			<div class="col-sm-2">
+					<div class="col-sm-2">
 						<div class="jumbotron" id="log">
-							<img src="images/profilo.png" class="img-circle"
-								alt="immagine del profilo" style="width: 50%;">
+							<img src="images/profilo.png" class="img-circle" alt="immagine del profilo" style="width: 50%;">
 							<h3>${nome}</h3>
 						</div>
 					</div>
-
 					<div class="col-sm-10">
+					
 						<div class="jumbotron" id="description">
+						
+							<button id="expand_form" class="btn btn-default btn-xs">+</button> crea evento
 
-							<button id="expand_form" class="btn btn-default btn-xs">+</button>
-							crea evento
 							<div class="jumbotron" id="eventForm">
 								<form>
 									<div class="form-group">
-										<label for="descrizione">Titolo:</label><input name="titolo"
-											id="idTitolo" type="text" class="form-control" />
-									</div>
-
-									<div class="form-group dropdown">
-
-										<button id="luoghibutton" class="btn btn-default">
-											Luogo <b class="caret"></b>
-										</button>
-								<c:if test="${location}">
-											<ul class="dropdown-menu">
-												<c:forEach var="luogo" items="${luoghi}">
-													<li><a href="#">${luogo.nome}</a></li>
-												</c:forEach>
-												<li class="divider"></li>
-												<li><a href="gestioneLuoghi.jsp">Aggiungi...</a></li>
-											</ul>
-								</c:if>
-
-									</div>
-
-									<div class="form-group dropdown">
-										<button type="button" class="btn btn-default dropdown-toggle"
-											data-toggle="dropdown">
-											Genere <b class="caret"></b>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Arte</a></li>
-											<li><a href="#">Cultura</a></li>
-											<li><a href="#">Gastronomia</a></li>
-											<li><a href="#">Musica</a></li>
-											<li><a href="#">Sport</a></li>
-										</ul>
+										<label for="descrizione">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
 									</div>
 									<div class="form-group">
-										<label for="descrizione">Descrizione:</label> <input
-											name="descrizione" id="idDescrizione" type="text"
-											class="form-control" />
+										<select id="luoghibutton" class="btn btn-default">
+											<option value = "#">Luogo</option>
+						<c:if test = "${locations}" >
+										<c:forEach var="luogo" items="${luoghi}">
+											<option value = "${luogo.nome}">${luogo.nome}</option>
+										</c:forEach>
+											<option class="divider"></option>
+											<option id="addlocation">Aggiungi...</option>
+						</c:if>
+						<c:if test = "${not locations}" >
+											<option id="addlocation">Aggiungi...</option>
+						</c:if>
+											</select>
 									</div>
 									<div class="form-group">
-										<label for="data">Data svolgimento:</label> <input name="data"
-											type="datetime-local" />
+										<select id="genere" class="btn btn-default">
+											<option value = "#">Genere</option>
+											<option value = "arte">Arte</option>
+											<option value = "cultura">Cultura</option>
+											<option value = "gastronomia">Gastronomia</option>
+											<option value = "musica">Musica</option>
+											<option value = "sport">Sport</option>
+										</select>
 									</div>
 									<div class="form-group">
-										<label for="fileupload">allega locandina</label> <input
-											type="file" name="fileupload" id="fileupload">
+										<label for="descrizione">Descrizione:</label> <input name="descrizione" id="idDescrizione" type="text" class="form-control" />
 									</div>
-									<br>
+									<div class="form-group">
+										<label for="data">Data svolgimento:</label> <input name="data" type="datetime-local" />
+									</div>
+									<div class="form-group">
+										<label for="fileupload">allega locandina</label> <input type="file" name="fileupload" id="fileupload">
+									</div><br>
 									<div class="form-group" align="center">
-										<input id="pubblicaevento" type="submit" value="Pubblica"
-											class="btn btn-info" onclick="registraEvento(event);" />
+										<input id="pubblicaevento" type="submit" value="Pubblica" class="btn btn-info" onclick="registraEvento(event);" />
 									</div>
 								</form>
 							</div>
-
+							
 							<div id="loadbacheca">
-								<c:if test="${events}">
+							
+						<c:if test="${events}">
 									<h2>Eventi in Bacheca</h2>
 									<c:forEach var="evento" items="${eventi}">
 										<h3>${evento.descrizione}</h3>
 									</c:forEach>
-								</c:if>
-								<c:if test="${not events}">
+						</c:if>
+						<c:if test="${not events}">
 									<h2>Nessun evento da visualizzare</h2>
-								</c:if>
+						</c:if>
+						
 							</div>
-
 						</div>
 					</div>
-
 			</div>
 		</div>
 </c:if>

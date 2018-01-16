@@ -44,20 +44,7 @@ function valida() {
 	
 }  
 
-/*
-$("#inviaDati").on(function(e){
-	if(valida()){
-		console.log("registra");
-	}else{
-		alert("Errore nella validazione");
-		e.preventDefault();
-	}
-	
-});
-*/
-
 function registraUtente(event){
-	alert("saluti");
 	
 	if(valida()){
 		console.log("registra");
@@ -65,9 +52,4 @@ function registraUtente(event){
 		event.preventDefault();
 		alert("Errore nella validazione");
 	}
-}
-
-function prova(){
-	alert("provissima");
-	return true;
 }

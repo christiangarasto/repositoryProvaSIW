@@ -265,23 +265,28 @@ public class UtenteDaoJDBC implements UtenteDao{
 	@Override
 	public List<Luogo> findAllLocation(String pIva) 
 	{
+		System.out.println("findAllLocation() is working...");
+		
 		Connection connection = this.dataSource.getConnection();
 		List<Luogo> luoghi = null;
 		try {
 			Luogo luogo;
 			PreparedStatement statement;
-			String query = "select * from luogo";
+			String query = "select * from luogo where titolare = ?";
 			statement = connection.prepareStatement(query);
+			statement.setString(1, pIva);
 			ResultSet result = statement.executeQuery();
 			
 			UtenteDao ut = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			Utente utente = ut.findByPrimaryKey(pIva);
+			
 			if(utente != null)
 			{
 				luoghi = new LinkedList<>();
-				while (result.next()) {
+				while (result.next()) 
+				{
 					luogo = new Luogo();
-					luogo.setTitolare(utente);				
+					luogo.setTitolare(utente);
 					luogo.setNome(result.getString("nome"));
 					luogo.setCodice(result.getString("codice"));
 					luogo.setProvincia(result.getString("provincia"));
@@ -291,7 +296,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 				}
 			}
 			return luoghi;
-		} catch (SQLException e) { throw new PersistenceException(e.getMessage()); }	 
+			
+		}catch (SQLException e) { throw new PersistenceException(e.getMessage()); }	 
 		finally 
 		{
 			try { connection.close(); } 

@@ -1,7 +1,4 @@
-$(window)
-		.on(
-				'load',
-				function() {
+$(window).on('load', function() {
 
 					$(".aggiungiLuogoButton").on('click', function() {
 						$("#nomeLuogo").val('');
@@ -10,10 +7,7 @@ $(window)
 						$("#indirizzo").val('');
 					});
 
-					$("#salvaLuogo")
-							.on(
-									'click',
-									function() {
+					$("#salvaLuogo").on('click',function() {
 
 										var nomeLuogo = $("#nomeLuogo").val();
 										var provincia = $("#provincia").val();
