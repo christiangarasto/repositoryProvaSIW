@@ -22,15 +22,27 @@ $(window).on('load', function()
 		    }
 		});
 		
-		$("#luoghibutton").on('click', function()
-		{
+//		$("#luoghibutton").on('click', function()
+//		{
 			$.ajax({
 				type : "GET",
 				url  : "gestioneluoghi",
 				
-				success : function(){
-					$("#locations").html();//?????????????????????????????????????????????????????????????????
+				success : function(result)
+				{
+					result = JSON.parse(result);
+					var i = 0;
+					var txt = "";
+					txt += "<select id=\"location\" class=\"selectpicker btn btn-default\"><option>Luogo</option>";
+					for( i in result )
+					{
+						txt += "<option value = \"" + result[i].nome + "\">" + result[i].nome + "</option>";
+					}
+					txt += "<option class = \"divider\" disabled></option>";
+					txt += "<option id=\"addlocation\">Aggiungi...</option>";
+					txt += "</select>";
+					document.getElementById("chooselocation").innerHTML = txt;
 				}
 			});
-		});
+//		});
 });

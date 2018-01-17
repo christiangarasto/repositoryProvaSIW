@@ -159,32 +159,36 @@
 					<div class="col-sm-10">
 					
 						<div class="jumbotron" id="description">
-						
-							<button id="expand_form" class="btn btn-default btn-xs">+</button> crea evento
-
+							<button id="expand_form" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button> crea evento<br>
 							<div class="jumbotron" id="eventForm">
 								<form>
 									<div class="form-group">
 										<label for="descrizione">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
 									</div>
-									<div class="form-group">
-										<select id="luoghibutton" class="btn btn-default">
-											<option value = "#">Luogo</option>
+									<div class="form-group" id = "chooselocation">
+<!-- 									<select id="luoghibutton" class="selectpicker btn btn-default"><option>Luogo</option>
+ 										</select>
+-->
+									</div>										
+<!--	VECCHIA VERSIONE
+
 						<c:if test = "${locations}" >
 										<c:forEach var="luogo" items="${luoghi}">
 											<option value = "${luogo.nome}">${luogo.nome}</option>
 										</c:forEach>
-											<option class="divider"></option>
 											<option id="addlocation">Aggiungi...</option>
+ 
 						</c:if>
 						<c:if test = "${not locations}" >
 											<option id="addlocation">Aggiungi...</option>
 						</c:if>
-											</select>
+ 										</select>
 									</div>
+ -->						
+									
 									<div class="form-group">
 										<select id="genere" class="btn btn-default">
-											<option value = "#">Genere</option>
+											<option value = "">Genere</option>
 											<option value = "arte">Arte</option>
 											<option value = "cultura">Cultura</option>
 											<option value = "gastronomia">Gastronomia</option>
