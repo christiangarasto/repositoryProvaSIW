@@ -1,7 +1,5 @@
 function valida() {
 	
-	console.log("valida");
-	
 	var controllo = true;
 	
 	var nome = $("#idNome").val();

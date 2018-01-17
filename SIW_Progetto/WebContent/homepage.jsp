@@ -157,72 +157,53 @@
 						</div>
 					</div>
 					<div class="col-sm-10">
-					
 						<div class="jumbotron" id="description">
+						
 							<button id="expand_form" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button> crea evento<br>
-							<div class="jumbotron" id="eventForm">
-								<form>
-									<div class="form-group">
-										<label for="descrizione">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
-									</div>
-									<div class="form-group" id = "chooselocation">
-<!-- 									<select id="luoghibutton" class="selectpicker btn btn-default"><option>Luogo</option>
- 										</select>
--->
-									</div>										
-<!--	VECCHIA VERSIONE
+								<div class="jumbotron" id="eventForm">
+									<form method="post" action="gestioneeventi">
+										<div class="form-group">
+											<label for="titolo">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
+										</div>
+										<div class="form-group" id = "chooselocation">
+									<!-- scelta dinamica dei luoghi in base all'utente -->
+										</div>						
 
-						<c:if test = "${locations}" >
-										<c:forEach var="luogo" items="${luoghi}">
-											<option value = "${luogo.nome}">${luogo.nome}</option>
-										</c:forEach>
-											<option id="addlocation">Aggiungi...</option>
- 
-						</c:if>
-						<c:if test = "${not locations}" >
-											<option id="addlocation">Aggiungi...</option>
-						</c:if>
- 										</select>
-									</div>
- -->						
-									
-									<div class="form-group">
-										<select id="genere" class="btn btn-default">
-											<option value = "">Genere</option>
-											<option value = "arte">Arte</option>
-											<option value = "cultura">Cultura</option>
-											<option value = "gastronomia">Gastronomia</option>
-											<option value = "musica">Musica</option>
-											<option value = "sport">Sport</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label for="descrizione">Descrizione:</label> <input name="descrizione" id="idDescrizione" type="text" class="form-control" />
-									</div>
-									<div class="form-group">
-										<label for="data">Data svolgimento:</label> <input name="data" type="datetime-local" />
-									</div>
-									<div class="form-group">
-										<label for="fileupload">allega locandina</label> <input type="file" name="fileupload" id="fileupload">
-									</div><br>
-									<div class="form-group" align="center">
-										<input id="pubblicaevento" type="submit" value="Pubblica" class="btn btn-info" onclick="registraEvento(event);" />
-									</div>
-								</form>
+										<div class="form-group">
+											<select id="genere" name = "genere" class="btn btn-default">
+												<option value = "">Genere</option>
+												<option value = "arte">Arte</option>
+												<option value = "cultura">Cultura</option>
+												<option value = "gastronomia">Gastronomia</option>
+												<option value = "musica">Musica</option>
+												<option value = "sport">Sport</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="descrizione">Descrizione:</label> <input name="descrizione" id="idDescrizione" type="text" class="form-control" />
+										</div>
+										<div class="form-group">
+											<label for="data">Data svolgimento:</label> <input name="data" type="datetime-local" />
+										</div>
+										<div class="form-group">
+											<label for="fileupload">allega locandina</label> <input type="file" name="fileupload" id="fileupload">
+										</div><br>
+										<div class="form-group" align="center">
+											<input id="pubblicaevento" type="submit" value="Pubblica" class="btn btn-success"/>
+										</div>
+									</form>
 							</div>
 							
 							<div id="loadbacheca">
-							
-						<c:if test="${events}">
+	<c:if test="${events}">
 									<h2>Eventi in Bacheca</h2>
 									<c:forEach var="evento" items="${eventi}">
 										<h3>${evento.descrizione}</h3>
 									</c:forEach>
-						</c:if>
-						<c:if test="${not events}">
+	</c:if>
+	<c:if test="${not events}">
 									<h2>Nessun evento da visualizzare</h2>
-						</c:if>
-						
+	</c:if>
 							</div>
 						</div>
 					</div>

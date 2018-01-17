@@ -108,8 +108,7 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close aggiungiLuogoButton"
-								data-dismiss="modal">×</button>
+							<button type="button" class="close aggiungiLuogoButton" data-dismiss="modal">×</button>
 							<h4 class="modal-title">Aggiungi nuovo luogo</h4>
 						</div>
 						<div class="modal-body">
@@ -148,57 +147,23 @@
 									</div>
 								</form>
 							</div>
-							
 						<hr>
 
 						</div>
 						
 						<div class="modal-footer">
-							
-<!-- 							<c:if test="${luogoCreato}">
-								<div class="alert alert-success">Luogo salvato con successo!</div>
-							</c:if>
-							<c:if test="${luogoEsistente}">
-								<div class="alert alert-warning">Luogo già presente!</div>
-							</c:if>
- -->
  
  							<div id="salvataggioLuogoRisposta"></div>
 							
 							<form>
 								<button type="button" class="btn btn-success" id="salvaLuogo">Salva</button>
-								<button type="button" class="btn btn-info aggiungiLuogoButton"
-									data-dismiss="modal">Annulla</button>
+								<button type="button" class="btn btn-info aggiungiLuogoButton" data-dismiss="modal">Annulla</button>
 							</form>
 						</div>
 					</div>
 
 				</div>
 			</div>
-
-			<!-- 
-						<div class="modal-footer">
-							<form action="aggiunginuovoluogo" method="post">
-								<button type="submit" class="btn btn-success">Salva</button>
-								<button type="button" class="btn btn-info" data-dismiss="modal">Annulla</button>
-							</form>
-						</div>
- -->
-
-		<!--	<div class="row">
-				<div class="col-md-9 personal-info">
-					<br>
-					<c:forEach items="${luoghi}" var="luogo">
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Nome: ${luogo.nome}</label>
-					 	<label class="col-lg-3 control-label">Titolare:${luogo.titolare}</label><br>	  
-							<label class="col-lg-3 control-label">Provincia:${luogo.provincia}</label> 
-							<label class="col-lg-3 control-label">Comune: ${luogo.comune}</label>
-							<label class="col-lg-3 control-label">Indirizzo:${luogo.indirizzo}</label>
-						</div>
-					</c:forEach>
-				</div>
-			</div> -->
 			
 			<hr>
 			<br>

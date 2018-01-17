@@ -47,7 +47,7 @@ public class GestioneLuoghi extends HttpServlet {
 //	System.out.println("(boolean)locations = " + session.getAttribute("locations"));
 
 				String jsonToReturn = new Gson().toJson(luoghi);
-				System.out.println(jsonToReturn);
+//				System.out.println(jsonToReturn);
 				resp.getWriter().write(jsonToReturn);
 			}
 		}

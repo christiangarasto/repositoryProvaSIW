@@ -15,6 +15,7 @@ import model.Evento;
 import model.Luogo;
 import model.Utente;
 import persistence.DatabaseManager;
+import persistence.dao.EventoDao;
 import persistence.dao.LuogoDao;
 import persistence.dao.UtenteDao;
 
@@ -60,8 +61,30 @@ public class GestioneEventi extends HttpServlet {
 		req.setAttribute("eventi", eventi);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+	{
 		System.out.println("***Post Gestione Eventi***");
-	}
+		
+		String titolo = (String) req.getParameter("titolo");
+		String luogo = (String) req.getParameter("location");
+		String genere = (String) req.getParameter("genere");
+		String descrizione = (String) req.getParameter("descrizione");
+		
+		HttpSession session = req.getSession();
+		
+		String pIva = (String) session.getAttribute("piva");
+		UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+		Utente utente = utenteDao.findByPrimaryKey(pIva);
+		
+		List<Luogo> luoghi = utenteDao.findAllLocation(pIva);
+		if(luoghi != null)
+		{
+			LuogoDao ldao =  DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+			List<Evento> eventi = ldao.findAllEvents();
+			
 
+		}
+
+
+	}
 }
