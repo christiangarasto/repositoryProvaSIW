@@ -196,6 +196,7 @@ public class LuogoDaoJDBC implements LuogoDao{
 				Luogo luogo = findByPrimaryKey(result.getString("luogo"));
 			
 				evento.setLuogo(luogo);
+				evento.setTitolo(result.getString("titolo"));
 				evento.setDescrizione(result.getString("descrizione"));	
 				evento.setCodice(result.getString("codice"));
 				long secs = result.getDate("data").getTime();

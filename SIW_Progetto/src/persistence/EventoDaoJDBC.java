@@ -25,12 +25,13 @@ public class EventoDaoJDBC implements EventoDao {
 		try {
 			Long id = IDBroker.getId(connection);
 			evento.setCodice("ev" + Long.toString(id));
-		String insert = "insert into evento(descrizione, codice, data, luogo) values (?,?,?,?)";
+		String insert = "insert into evento(titolo, descrizione, codice, data, luogo) values (?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-			statement.setString(1, evento.getDescrizione());
-			statement.setString(2, evento.getCodice());
-			statement.setDate(3, evento.getData());
-			statement.setString(4, evento.getLuogo().getCodice());
+			statement.setString(1, evento.getTitolo());
+			statement.setString(2, evento.getDescrizione());
+			statement.setString(3, evento.getCodice());
+			statement.setDate(4, evento.getData());
+			statement.setString(5, evento.getLuogo().getCodice());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -55,7 +56,8 @@ public class EventoDaoJDBC implements EventoDao {
 			statement.setString(1, codice);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
-				evento = new Evento();				
+				evento = new Evento();
+				evento.setDescrizione(result.getString("titolo"));
 				evento.setDescrizione(result.getString("descrizione"));				
 				evento.setCodice(result.getString("codice"));
 					long secs = result.getDate("data").getTime();
@@ -91,6 +93,7 @@ public class EventoDaoJDBC implements EventoDao {
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				evento = new Evento();
+				evento.setTitolo(result.getString("titolo"));
 				evento.setDescrizione(result.getString("descrizione"));				
 				evento.setCodice(result.getString("codice"));
 				
@@ -118,12 +121,13 @@ public class EventoDaoJDBC implements EventoDao {
 	public void update(Evento evento) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update evento SET descrizione = ?, data = ?, luogo = ? WHERE codice = ?";
+			String update = "update evento SET titolo = ?, descrizione = ?, data = ?, luogo = ? WHERE codice = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setString(1, evento.getDescrizione());
-			statement.setString(2, evento.getData().toString());
-			statement.setString(3, evento.getLuogo().getCodice());
-			statement.setString(4, evento.getCodice());
+			statement.setString(1, evento.getTitolo());
+			statement.setString(2, evento.getDescrizione());
+			statement.setString(3, evento.getData().toString());
+			statement.setString(4, evento.getLuogo().getCodice());
+			statement.setString(5, evento.getCodice());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

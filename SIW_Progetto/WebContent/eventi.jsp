@@ -7,11 +7,14 @@
 <title>Calabria E20</title>
 <meta charset="utf-8">
 
-<link href="css/common.css" rel="stylesheet">
-<link href="css/background.css" rel="stylesheet">
-<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-<script src="jquery/jquery-3.2.1.min.js"></script>
-<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<link href="css/common.css" rel="stylesheet">
+	<link href="css/background.css" rel="stylesheet">
+	<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+	<script src="jquery/jquery-3.2.1.min.js"></script>
+	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+	<script src="js/eventihandler.js"></script>
+
 </head>
 
 <body>
@@ -88,6 +91,10 @@
 			</div>
 		</nav>
 	</header>
+		
+		<h1>Bacheca Calabria E20</h1>
+		<section id = "show_all_events">
+		</section>
 
 </body>
 </html>

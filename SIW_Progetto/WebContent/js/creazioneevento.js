@@ -35,7 +35,7 @@ $(window).on('load', function()
 		    		txt += "<select id=\"location\" name=\"location\" class=\"selectpicker btn btn-default\"><option value = \"\">Luogo</option>";
 		    		for( i in result )
 		    		{
-		    			txt += "<option value = \"" + result[i].nome + "\">" + result[i].nome + "</option>";
+		    			txt += "<option value = \"" + result[i].codice + "\">" + result[i].nome + "</option>";
 		    		}
 		    		txt += "<option class = \"divider\" disabled></option>";
 		    		txt += "<option id=\"addlocation\">Aggiungi...</option>";
@@ -45,9 +45,4 @@ $(window).on('load', function()
 		    });
 		    
 		});
-});
-
-$("#pubblicaevento").on('click', function()
-{ 
-	alert('ok su questo');
 });

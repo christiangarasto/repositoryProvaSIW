@@ -182,9 +182,7 @@
 										<div class="form-group">
 											<label for="descrizione">Descrizione:</label> <input name="descrizione" id="idDescrizione" type="text" class="form-control" />
 										</div>
-										<div class="form-group">
-											<label for="data">Data svolgimento:</label> <input name="data" type="datetime-local" />
-										</div>
+											<label for="data">Data svolgimento:</label> <input name="data" type="datetime-local"/>
 										<div class="form-group">
 											<label for="fileupload">allega locandina</label> <input type="file" name="fileupload" id="fileupload">
 										</div><br>
@@ -198,7 +196,7 @@
 	<c:if test="${events}">
 									<h2>Eventi in Bacheca</h2>
 									<c:forEach var="evento" items="${eventi}">
-										<h3>${evento.descrizione}</h3>
+										<h3>${evento.titolo}</h3>
 									</c:forEach>
 	</c:if>
 	<c:if test="${not events}">
