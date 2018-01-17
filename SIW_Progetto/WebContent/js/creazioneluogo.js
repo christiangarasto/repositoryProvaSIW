@@ -1,4 +1,13 @@
 $(window).on('load', function() {
+	
+					$.ajax({
+						type : "GET",
+						url : "gestioneluoghi",
+						success : function() {
+							alert("olè");
+						}											
+					}); 
+	
 
 					$(".aggiungiLuogoButton").on('click', function() {
 						$("#nomeLuogo").val('');
@@ -21,7 +30,8 @@ $(window).on('load', function() {
 
 											alert("Compilare tutti i campi richiesti!");
 										} else {
-
+											$('#nuovoLuogo').modal('hide');
+											/*
 											$.ajax({
 												type : "POST",
 												url : "gestioneluoghi",
@@ -31,10 +41,15 @@ $(window).on('load', function() {
 													comuneInput : comune,
 													indirizzoInput : indirizzo
 												},
-												success : function(data) {
+												success : function(asd) {
 													    $('#nuovoLuogo').modal('hide');
+													    
+													    alert(luoghi);
+													    
+													    //$("#luoghi").html(asd);
 												}											
 											}); 
+											*/
 										}
 
 									});

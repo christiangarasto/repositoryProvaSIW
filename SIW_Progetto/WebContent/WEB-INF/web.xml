@@ -46,7 +46,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AggiungiNuovoLuogoServlet</servlet-name>
-    <servlet-class>controller.AggiungiNuovoLuogo</servlet-class>
+    <servlet-class>controller.GestioneLuoghi</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AggiungiNuovoLuogoServlet</servlet-name>

@@ -46,7 +46,8 @@ public class GestioneLuoghi extends HttpServlet {
 				session.setAttribute("luoghi", luoghi);
 				session.setAttribute("locations", true);
 	System.out.println("(boolean)locations = " + session.getAttribute("locations"));
-				resp.sendRedirect("homepage.jsp");
+//				RequestDispatcher dispatcher = req.getRequestDispatcher("gestioneLuoghi.jsp");
+//					dispatcher.forward(req, resp);
 			}
 		}
 	}
