@@ -92,7 +92,7 @@
 		</nav>
 	</header>
 		<div>
-			<h1>Bacheca Calabria E20</h1>
+			<h1>Bacheca Calabria E20</h1><hr>
 				<div id = "show_all_events">
 				</div>
 		</div>
