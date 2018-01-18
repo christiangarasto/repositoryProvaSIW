@@ -6,6 +6,7 @@ public class Evento
 {
 	private String codice;
 	private String titolo;
+	private String genere;
 	private String descrizione;
 	private Date data;
 
@@ -13,10 +14,11 @@ public class Evento
 	
 	public Evento() {}
 
-	public Evento(String titolo, String descrizione, Date data1, Luogo luogo) {
+	public Evento(String titolo, String descrizione, String genere, Date data1, Luogo luogo) {
 		super();
 		this.titolo = titolo;
 		this.descrizione = descrizione;
+		this.genere = genere;
 		this.data = data1;
 		this.luogo = luogo;
 	}
@@ -25,10 +27,10 @@ public class Evento
 	public String toString() {
 		return "Evento: " + codice +
 				"\n	Titolo: " + titolo +
-				"\n	Descrizione: " + descrizione + 
+				"\n	Descrizione: " + descrizione +
+				"\n	Genere: " + genere +
 				"\n	Data: " + data +
 				"\n	Luogo: " + luogo.getNome();
-		
 	}
 
 	public String getCodice() {
@@ -71,4 +73,11 @@ public class Evento
 		this.luogo = luogo;
 	}
 	
+	public String getGenere() {
+		return genere;
+	}
+
+	public void setGenere(String genere) {
+		this.genere = genere;
+	}	
 }
