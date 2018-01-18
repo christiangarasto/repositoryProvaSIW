@@ -215,4 +215,38 @@ public class LuogoDaoJDBC implements LuogoDao{
 		}
 		return eventi;
 	}
+
+	@Override
+	public Luogo findByName(String nomeLuogo) {
+		Connection connection = this.dataSource.getConnection();
+		Luogo luogo = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from luogo where nome = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, nomeLuogo);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				luogo = new Luogo();	
+					Utente titolare = new Utente();
+						titolare.create(result.getString("titolare"));
+				
+				luogo.setTitolare(titolare);				
+				luogo.setNome(result.getString("nome"));	
+				luogo.setCodice(result.getString("codice"));	
+				luogo.setProvincia(result.getString("provincia"));	
+				luogo.setComune(result.getString("comune"));	
+				luogo.setIndirizzo(result.getString("indirizzo"));	
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+		return luogo;
+	}
 }

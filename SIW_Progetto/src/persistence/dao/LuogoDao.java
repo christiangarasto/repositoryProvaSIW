@@ -14,5 +14,6 @@ public interface LuogoDao {
 	public void delete(Luogo luogo); //Delete	
 
 	public LinkedList<Evento> findAllEvents();
+	public Luogo findByName(String nomeLuogo);
 
 }

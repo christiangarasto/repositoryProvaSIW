@@ -4,6 +4,7 @@ package persistence;
 
 import persistence.dao.EventoDao;
 import persistence.dao.LuogoDao;
+import persistence.dao.TicketDao;
 import persistence.dao.UtenteDao;
 
 class PostgresDAOFactory extends DAOFactory {
@@ -46,9 +47,15 @@ class PostgresDAOFactory extends DAOFactory {
 		return new EventoDaoJDBC(dataSource);
 	}
 
-	
+	@Override
+	public TicketDao getTicketDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public UtilDao getUtilDAO(){
 		return new UtilDao(dataSource);
 	}
+
 }
