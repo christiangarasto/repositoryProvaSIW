@@ -2,20 +2,21 @@ $(window).on('load', function()
 {
 	$.ajax({
 		type : "GET",
-		url  : "gestioneeventi",
-    	success : function(result)
+		url  : "bachecavisitatori",
+    	success : function(eventi)
     	{
-    		result = JSON.parse(result);
-    		var i = 0;
+    		
+    		eventi = JSON.parse(eventi);
+    		var e = 0;
     		var txt = "";
-    		txt += "<div>";
-    		for( i in result )
+    		txt += "<div class=\"jumbotron\" id=\"bacheca\">";
+    		for( e in eventi )
     		{
-    			txt += "<h2>/" + result[i].titolo + "</h2>" ;
-    			txt += "<h3>/" + result[i].descrizione + "</h3>" ;
+    			txt += "<h3>" + eventi[e].titolo + "</h3>" ;
+    			txt += "<h4>" + eventi[e].descrizione + "</h4>" ;
     		}
     		txt += "</div>";
-    		document.getElementById("show_all_events").innerHTML = txt;
+    		$("#show_all_events").html(txt);
     	}
 	});
 });

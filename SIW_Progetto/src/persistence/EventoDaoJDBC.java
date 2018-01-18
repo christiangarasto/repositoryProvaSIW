@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.LinkedList;
-import java.util.List;
-
 import model.Evento;
 import model.Luogo;
 import persistence.dao.EventoDao;
@@ -27,14 +25,16 @@ public class EventoDaoJDBC implements EventoDao {
 		try {
 			Long id = IDBroker.getId(connection);
 			evento.setCodice("ev" + Long.toString(id));
-		String insert = "insert into evento(titolo, descrizione, codice, data, ora, luogo) values (?,?,?,?,?,?)";
+			String insert = "insert into evento(titolo, descrizione, genere, codice, data, ora, luogo) values (?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, evento.getTitolo());
 			statement.setString(2, evento.getDescrizione());
-			statement.setString(3, evento.getCodice());
-			statement.setDate(4, evento.getData());
-			statement.setTime(5, evento.getOra());
-			statement.setString(6, evento.getLuogo().getCodice());
+			statement.setString(3, evento.getGenere());
+			statement.setString(4, evento.getCodice());
+			statement.setDate(5, evento.getData());
+			statement.setTime(6, evento.getOra());
+			statement.setString(7, evento.getLuogo().getCodice());
+
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -61,11 +61,11 @@ public class EventoDaoJDBC implements EventoDao {
 			if (result.next()) {
 				evento = new Evento();
 				evento.setDescrizione(result.getString("titolo"));
-				evento.setDescrizione(result.getString("descrizione"));				
+				evento.setDescrizione(result.getString("descrizione"));
+				evento.setGenere(result.getString("genere"));
 				evento.setCodice(result.getString("codice"));
 				evento.setData(new java.sql.Date(result.getDate("data").getTime()));	
 				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
-				
 				
 				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
 				evento.setLuogo(l);
@@ -98,7 +98,8 @@ public class EventoDaoJDBC implements EventoDao {
 			while (result.next()) {
 				evento = new Evento();
 				evento.setTitolo(result.getString("titolo"));
-				evento.setDescrizione(result.getString("descrizione"));				
+				evento.setDescrizione(result.getString("descrizione"));
+				evento.setGenere(result.getString("genere"));
 				evento.setCodice(result.getString("codice"));
 				evento.setData(new java.sql.Date(result.getDate("data").getTime()));
 				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
@@ -124,14 +125,15 @@ public class EventoDaoJDBC implements EventoDao {
 	public void update(Evento evento) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update evento SET titolo = ?, descrizione = ?, data = ?, ora = ?, luogo = ? WHERE codice = ?";
+			String update = "update evento SET titolo = ?, descrizione = ?, genere = ?, data = ?, ora = ?, luogo = ? WHERE codice = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, evento.getTitolo());
 			statement.setString(2, evento.getDescrizione());
-			statement.setString(3, evento.getData().toString());
-			statement.setString(4, evento.getOra().toLocaleString());
-			statement.setString(5, evento.getLuogo().getCodice());
-			statement.setString(6, evento.getCodice());
+			statement.setString(3, evento.getGenere());
+			statement.setString(4, evento.getData().toString());
+			statement.setString(5, evento.getOra().toLocaleString());
+			statement.setString(6, evento.getLuogo().getCodice());
+			statement.setString(7, evento.getCodice());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -151,7 +153,7 @@ public class EventoDaoJDBC implements EventoDao {
 			String delete = "delete FROM evento WHERE codice = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, evento.getCodice());
-			
+
 			connection.setAutoCommit(false);
 			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
 			this.removeForeignKeyFromLuogo(evento, connection);

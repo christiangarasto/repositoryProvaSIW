@@ -48,7 +48,7 @@ public void createDatabase(){
 		String delete = "create SEQUENCE sequenza_id;"
 				+ "create table utente(\"piva\" varchar(255) primary key, \"nome\" varchar(255), \"email\" varchar(255), \"password\" varchar(50));"
 				+ "create table luogo(\"titolare\" varchar(255) REFERENCES utente(\"piva\"), \"nome\" varchar(255), \"codice\" varchar(255) primary key, \"provincia\" varchar(255), \"comune\" varchar(255), \"indirizzo\" varchar(255));"
-				+ "create table evento(\"titolo\" varchar(255),\"descrizione\" varchar(255), \"codice\" varchar(255) primary key, \"data\" DATE, \"luogo\" varchar(255) REFERENCES luogo(\"codice\"));"
+				+ "create table evento(\"titolo\" varchar(255),\"descrizione\" varchar(255),\"genere\" varchar(255), \"codice\" varchar(255) primary key, \"data\" DATE, \"luogo\" varchar(255) REFERENCES luogo(\"codice\"));"
 				;
 		
 		PreparedStatement statement = connection.prepareStatement(delete);

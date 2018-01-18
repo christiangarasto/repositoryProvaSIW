@@ -30,6 +30,7 @@ $(window).on('load', function()
 		    	success : function(result)
 		    	{
 		    		result = JSON.parse(result);
+
 		    		var i = 0;
 		    		var txt = "";
 		    		txt += "<select id=\"location\" name=\"location\" class=\"selectpicker btn btn-default\"><option value = \"\">Luogo</option>";

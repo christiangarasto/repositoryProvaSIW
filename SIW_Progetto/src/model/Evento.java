@@ -4,6 +4,7 @@ public class Evento
 {
 	private String codice;
 	private String titolo;
+	private String genere;
 	private String descrizione;
 	private java.sql.Date data;
 	private java.sql.Time ora;
@@ -12,12 +13,13 @@ public class Evento
 	
 	public Evento() {}
 
-	public Evento(String titolo, String descrizione, java.sql.Date data, java.sql.Time ora, Luogo luogo) {
+	public Evento(String titolo, String descrizione, String genere, java.sql.Date data, java.sql.Time ora, Luogo luogo) {
 		super();
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 		this.data = data;
 		this.ora = ora;
+		this.genere = genere;
 		this.luogo = luogo;
 	}
 	
@@ -25,11 +27,11 @@ public class Evento
 	public String toString() {
 		return "Evento: " + codice +
 				"\n	Titolo: " + titolo +
-				"\n	Descrizione: " + descrizione + 
+				"\n	Descrizione: " + descrizione +
+				"\n	Genere: " + genere +
 				"\n	Data: " + data +
 				"\n Ora: " + ora +
 				"\n	Luogo: " + luogo.getNome();
-		
 	}
 
 	public String getCodice() {
@@ -80,4 +82,11 @@ public class Evento
 		this.luogo = luogo;
 	}
 	
+	public String getGenere() {
+		return genere;
+	}
+
+	public void setGenere(String genere) {
+		this.genere = genere;
+	}	
 }
