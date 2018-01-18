@@ -1,5 +1,6 @@
 package persistence.dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Luogo;
@@ -17,6 +18,6 @@ public interface UtenteDao {
 	public boolean passwordCambiata(String piva, String passwordNuovo);
 	public boolean emailCambiata(String piva, String emailNuovo);
 	
-	public List<Luogo> findAllLocation(String pIva);
+	public LinkedList<Luogo> findAllLocation(String pIva);
 
 }

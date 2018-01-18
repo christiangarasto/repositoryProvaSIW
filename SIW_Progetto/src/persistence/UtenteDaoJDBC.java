@@ -262,12 +262,12 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public List<Luogo> findAllLocation(String pIva) 
+	public LinkedList<Luogo> findAllLocation(String pIva) 
 	{
 		System.out.println("findAllLocation() is working...");
 		
 		Connection connection = this.dataSource.getConnection();
-		List<Luogo> luoghi = null;
+		LinkedList<Luogo> luoghi = null;
 		try {
 			Luogo luogo;
 			PreparedStatement statement;

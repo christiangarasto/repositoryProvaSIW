@@ -119,8 +119,7 @@
 						</div>
 						<div class="modal-footer">
 							<div class="col-md-9 personal-info">
-								<form class="form-horizontal" method="post"
-									action="aggiunginuovoluogo">
+								<form class="form-horizontal">
 									<br>
 									<div class="form-group">
 										<label class="col-lg-4 control-label">Nome luogo:</label>
@@ -160,16 +159,17 @@
 
 							<div id="salvataggioLuogoRisposta"></div>
 
-							<form method="post" action="gestioneluoghi">
-								<button type="submit" class="btn btn-success" id="salvaLuogo">Salva</button>
+							<form>
+								<button type="button" class="btn btn-success" id="salvaLuogo">Salva</button>
 								<button type="button" class="btn btn-info aggiungiLuogoButton"
 									data-dismiss="modal">Annulla</button>
+							</form>
 						</div>
 					</div>
 
 				</div>
 			</div>
-			
+
 			<hr>
 			<br>
 			<div class="container">
@@ -184,7 +184,7 @@
 					</thead>
 					<tbody id="elenco">
 						<c:forEach items="${luoghi}" var="luogo">
-							<tr class="luoghissimo">
+							<tr>
 								<td>${luogo.nome}</td>
 								<td>${luogo.provincia}</td>
 								<td>${luogo.comune}</td>

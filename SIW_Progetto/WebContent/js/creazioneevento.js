@@ -40,7 +40,7 @@ $(window).on('load', function()
 		    		txt += "<option class = \"divider\" disabled></option>";
 		    		txt += "<option id=\"addlocation\">Aggiungi...</option>";
 		    		txt += "</select>";
-		    		document.getElementById("chooselocation").innerHTML = txt;
+		    		$("#chooselocation").html(txt);
 		    	}
 		    });
 		    
