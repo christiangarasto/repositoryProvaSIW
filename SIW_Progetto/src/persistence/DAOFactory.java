@@ -2,6 +2,7 @@ package persistence;
 
 import persistence.dao.EventoDao;
 import persistence.dao.LuogoDao;
+import persistence.dao.TicketDao;
 import persistence.dao.UtenteDao;
 
 public abstract class DAOFactory {
@@ -48,6 +49,8 @@ public abstract class DAOFactory {
 	public abstract LuogoDao getLuogoDAO();
 	
 	public abstract EventoDao getEventoDAO();
+	
+	public abstract TicketDao getTicketDAO();
 	
 	public abstract persistence.UtilDao getUtilDAO();
 

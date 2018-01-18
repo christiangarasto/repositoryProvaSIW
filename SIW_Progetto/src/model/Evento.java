@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.LinkedList;
 
 public class Evento 
 {
@@ -11,11 +12,11 @@ public class Evento
 	private Date data;
 
 	private Luogo luogo;
+	private LinkedList<Ticket> tickets;
 	
 	public Evento() {}
 
 	public Evento(String titolo, String descrizione, String genere, Date data1, Luogo luogo) {
-		super();
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 		this.genere = genere;
@@ -23,16 +24,6 @@ public class Evento
 		this.luogo = luogo;
 	}
 	
-	@Override
-	public String toString() {
-		return "Evento: " + codice +
-				"\n	Titolo: " + titolo +
-				"\n	Descrizione: " + descrizione +
-				"\n	Genere: " + genere +
-				"\n	Data: " + data +
-				"\n	Luogo: " + luogo.getNome();
-	}
-
 	public String getCodice() {
 		return codice;
 	}
@@ -79,5 +70,24 @@ public class Evento
 
 	public void setGenere(String genere) {
 		this.genere = genere;
-	}	
+	}
+
+	public LinkedList<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(LinkedList<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+	
+	@Override
+	public String toString() {
+		return "Evento: " + codice +
+				"\n	Titolo: " + titolo +
+				"\n	Descrizione: " + descrizione +
+				"\n	Genere: " + genere +
+				"\n	Data: " + data +
+				"\n	Luogo: " + luogo.getNome();
+	}
+
 }

@@ -2,19 +2,11 @@ aside {
 	margin-top: 10px;
 }
 
-#search {
-	margin-top: 8px;
-}
-
-#lens {
-	margin-top: 8px;
-}
-
 #brand {
 	margin-left: 1px;
 }
 
-h1 {
+#info h1{
 	text-align: center;
 	border-bottom: 1px solid white;
 }
@@ -57,4 +49,12 @@ footer {
 	background: white;
 	color: black;
 	display : none;
+}
+/*SEZIONE VISUALIZZAZIONE EVENTI*/
+#eventoinbacheca.jumbotron{
+	background: rgba(100, 150, 550, 0.3);
+}
+
+#title{
+	text-align: center;
 }

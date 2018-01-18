@@ -91,9 +91,13 @@
 			</div>
 		</nav>
 	</header>
-		<div>
-			<h1>Bacheca Calabria E20</h1><hr>
-				<div id = "show_all_events">
+		<div class = "container">
+			<div class = "jumbotron">
+				<h1 id = "title">Bacheca Calabria E20</h1>
+			</div>
+		</div>
+		<div class = "container">
+				<div id = "show_all_events" class = "col-sm-6">
 				</div>
 		</div>
 </body>
