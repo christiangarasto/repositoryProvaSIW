@@ -6,8 +6,8 @@ public class Utente {
 
 	private String pIva;
 	private String nome;
-	private ArrayList<Luogo> luoghi;
 	private String password;
+	private ArrayList<Luogo> luoghi;
 	
 	public Utente() {}
 	

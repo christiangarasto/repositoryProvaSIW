@@ -66,8 +66,8 @@
 						</div>
 
 					</div>
-					
-<c:if test="${loggato}">
+
+					<c:if test="${loggato}">
 
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 							<figure>
@@ -87,11 +87,11 @@
 							</figure>
 						</div>
 
-</c:if>
+					</c:if>
 				</div>
 			</div>
 		</nav>
-		
+
 		<ul class="nav nav-tabs">
 			<li><a href="gestioneProfilo.jsp">Gestione Profilo</a></li>
 			<li class="active"><a href="#">Gestione Luoghi</a></li>
@@ -101,7 +101,9 @@
 			<h1>Gestione Luoghi</h1>
 			<hr>
 
-			<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#nuovoLuogo" data-backdrop="static">Aggiungi nuovo luogo</button>
+			<button type="button" class="btn btn-info btn-md" data-toggle="modal"
+				data-target="#nuovoLuogo" data-backdrop="static">Aggiungi
+				nuovo luogo</button>
 			<div class="modal fade" id="nuovoLuogo" role="dialog">
 				<div class="modal-dialog">
 
@@ -117,7 +119,9 @@
 						</div>
 						<div class="modal-footer">
 							<div class="col-md-9 personal-info">
-								<form class="form-horizontal" method="post" action="aggiunginuovoluogo"><br>
+								<form class="form-horizontal" method="post"
+									action="aggiunginuovoluogo">
+									<br>
 									<div class="form-group">
 										<label class="col-lg-4 control-label">Nome luogo:</label>
 										<div class="col-lg-8">
@@ -148,60 +152,58 @@
 									</div>
 								</form>
 							</div>
-							
-						<hr>
+							<hr>
 
 						</div>
-						
+
 						<div class="modal-footer">
- 
- 							<div id="salvataggioLuogoRisposta"></div>
-							
+
+							<div id="salvataggioLuogoRisposta"></div>
+
 							<form method="post" action="gestioneluoghi">
 								<button type="submit" class="btn btn-success" id="salvaLuogo">Salva</button>
 								<button type="button" class="btn btn-info aggiungiLuogoButton"
 									data-dismiss="modal">Annulla</button>
-							</form>
 						</div>
 					</div>
 
 				</div>
 			</div>
-
+			
 			<hr>
 			<br>
 			<div class="container">
-			<table class="table table-striped">
-			<thead>
-				<tr>
-					<th> Nome </th>
-					<th> Provincia </th>
-					<th> Comune </th>
-					<th> Indirizzo </th>
-				</tr>
-			</thead>
-			<tbody id="elenco">
-			<c:forEach items="${luoghi}" var="luogo">
-				<tr class="luoghissimo">					
-						<td>${luogo.nome}</td> 
-						<td>${luogo.provincia}</td> 
-						<td>${luogo.comune}</td>
-						<td>${luogo.indirizzo}</td>
-				</tr>
-			</c:forEach>
-			</tbody>
-			<tfoot>
-				<tr class="active">
-					<td><a href="#">Ordina per Nome</a></td>
-					<td><a href="#">Ordina per Provincia</a></td>
-					<td><a href="#">Ordina per Comune</a></td>
-					<td><a href="#">Ordina per Indirizzo</a></td>
-				</tr>
-			</tfoot>	
-		</table>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Provincia</th>
+							<th>Comune</th>
+							<th>Indirizzo</th>
+						</tr>
+					</thead>
+					<tbody id="elenco">
+						<c:forEach items="${luoghi}" var="luogo">
+							<tr class="luoghissimo">
+								<td>${luogo.nome}</td>
+								<td>${luogo.provincia}</td>
+								<td>${luogo.comune}</td>
+								<td>${luogo.indirizzo}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+					<tfoot>
+						<tr class="active">
+							<td><a href="#">Ordina per Nome</a></td>
+							<td><a href="#">Ordina per Provincia</a></td>
+							<td><a href="#">Ordina per Comune</a></td>
+							<td><a href="#">Ordina per Indirizzo</a></td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
 		</div>
-		</div>
-		
+
 	</header>
 </body>
 </html>

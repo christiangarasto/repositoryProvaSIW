@@ -3,13 +3,13 @@ package controller;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import model.Luogo;
 import model.Utente;
@@ -33,21 +33,23 @@ public class GestioneLuoghi extends HttpServlet {
 		List<Luogo> luoghi = null;
 		if (utente != null) 
 		{
-			luoghi = new LinkedList<>();
 			luoghi = utentedao.findAllLocation(utente.getpIva());
 			if(luoghi != null) 
 			{
-	System.out.println("::::::::::::::::::::");
-				for(Luogo l : luoghi)
-				{
-					System.out.println("-" + l.getNome());
-				}
-	System.out.println("::::::::::::::::::::");
-				session.setAttribute("luoghi", luoghi);
-				session.setAttribute("locations", true);
-	System.out.println("(boolean)locations = " + session.getAttribute("locations"));
-//				RequestDispatcher dispatcher = req.getRequestDispatcher("gestioneLuoghi.jsp");
-//					dispatcher.forward(req, resp);
+
+//	System.out.println("::::::::::::::::::::");
+//				for(Luogo l : luoghi)
+//				{
+//					System.out.println("-" + l.getNome());
+//				}
+//	System.out.println("::::::::::::::::::::");
+//				  session.setAttribute("luoghi", luoghi);
+//				  session.setAttribute("locations", true);
+//	System.out.println("(boolean)locations = " + session.getAttribute("locations"));
+
+				String jsonToReturn = new Gson().toJson(luoghi);
+//				System.out.println(jsonToReturn);
+				resp.getWriter().write(jsonToReturn);
 			}
 		}
 	}

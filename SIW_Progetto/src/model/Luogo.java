@@ -2,7 +2,8 @@ package model;
 
 import java.util.LinkedList;
 
-public class Luogo {	
+public class Luogo 
+{
 	private Utente titolare;
 	private String nome;
 	private String codice;
