@@ -30,6 +30,7 @@ $(window).on('load', function()
 		    	success : function(result)
 		    	{
 		    		result = JSON.parse(result);
+
 		    		var i = 0;
 		    		var txt = "";
 		    		txt += "<select id=\"location\" name=\"location\" class=\"selectpicker btn btn-default\"><option value = \"\">Luogo</option>";
@@ -40,7 +41,7 @@ $(window).on('load', function()
 		    		txt += "<option class = \"divider\" disabled></option>";
 		    		txt += "<option id=\"addlocation\">Aggiungi...</option>";
 		    		txt += "</select>";
-		    		document.getElementById("chooselocation").innerHTML = txt;
+		    		$("#chooselocation").html(txt);
 		    	}
 		    });
 		    

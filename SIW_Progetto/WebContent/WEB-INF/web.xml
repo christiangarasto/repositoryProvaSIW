@@ -68,5 +68,12 @@
     <servlet-name>GestioneEventiServlet</servlet-name>
     <url-pattern>/gestioneeventi</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>BachecaVisitatoriServlet</servlet-name>
+    <servlet-class>controller.BachecaVisitatori</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BachecaVisitatoriServlet</servlet-name>
+    <url-pattern>/bachecavisitatori</url-pattern>
+  </servlet-mapping>
 </web-app>

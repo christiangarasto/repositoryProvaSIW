@@ -91,10 +91,10 @@
 			</div>
 		</nav>
 	</header>
-		
-		<h1>Bacheca Calabria E20</h1>
-		<section id = "show_all_events">
-		</section>
-
+		<div>
+			<h1>Bacheca Calabria E20</h1>
+				<section id = "show_all_events">
+				</section>
+		</div>
 </body>
 </html>

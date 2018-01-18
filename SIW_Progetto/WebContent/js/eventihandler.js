@@ -2,7 +2,7 @@ $(window).on('load', function()
 {
 	$.ajax({
 		type : "GET",
-		url  : "gestioneeventi",
+		url  : "bachecavisitatori",
     	success : function(result)
     	{
     		result = JSON.parse(result);
@@ -15,7 +15,7 @@ $(window).on('load', function()
     			txt += "<h3>/" + result[i].descrizione + "</h3>" ;
     		}
     		txt += "</div>";
-    		document.getElementById("show_all_events").innerHTML = txt;
+    		$("#show_all_events").html(txt);
     	}
 	});
 });
