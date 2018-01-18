@@ -30,7 +30,7 @@ public class Evento
 				"\n	Descrizione: " + descrizione +
 				"\n	Genere: " + genere +
 				"\n	Data: " + data +
-				"\n Ora: " + ora +
+				"\n	Ora: " + ora +
 				"\n	Luogo: " + luogo.getNome();
 	}
 

@@ -6,9 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
+
 import model.Evento;
 import model.Luogo;
+import model.Utente;
 import persistence.dao.EventoDao;
 import persistence.dao.LuogoDao;
 
@@ -52,6 +55,7 @@ public class EventoDaoJDBC implements EventoDao {
 		Connection connection = this.dataSource.getConnection();
 		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 		Evento evento = null;
+		
 		try {
 			PreparedStatement statement;
 			String query = "select * from evento where codice = ?";
@@ -64,7 +68,7 @@ public class EventoDaoJDBC implements EventoDao {
 				evento.setDescrizione(result.getString("descrizione"));
 				evento.setGenere(result.getString("genere"));
 				evento.setCodice(result.getString("codice"));
-				evento.setData(new java.sql.Date(result.getDate("data").getTime()));	
+				evento.setData(new java.sql.Date(result.getDate("data").getDate()));	
 				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
 				
 				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
@@ -101,7 +105,7 @@ public class EventoDaoJDBC implements EventoDao {
 				evento.setDescrizione(result.getString("descrizione"));
 				evento.setGenere(result.getString("genere"));
 				evento.setCodice(result.getString("codice"));
-				evento.setData(new java.sql.Date(result.getDate("data").getTime()));
+				evento.setData(new java.sql.Date(result.getDate("data").getDate()));
 				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
 				
 				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
@@ -130,7 +134,7 @@ public class EventoDaoJDBC implements EventoDao {
 			statement.setString(1, evento.getTitolo());
 			statement.setString(2, evento.getDescrizione());
 			statement.setString(3, evento.getGenere());
-			statement.setString(4, evento.getData().toString());
+			statement.setString(4, evento.getData().toLocaleString());
 			statement.setString(5, evento.getOra().toLocaleString());
 			statement.setString(6, evento.getLuogo().getCodice());
 			statement.setString(7, evento.getCodice());
@@ -211,8 +215,43 @@ public class EventoDaoJDBC implements EventoDao {
 
 	@Override
 	public LinkedList<Evento> eventiPerProvincia(String provincia) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = this.dataSource.getConnection();
+		LinkedList<Evento> eventi = new LinkedList<Evento>();
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+		
+		try {
+			String query = "select * "
+						+ "FROM evento JOIN luogo "
+                        + "WHERE luogo = codice and provincia = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, provincia);
+			
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Evento evento = new Evento();
+				evento.setTitolo(result.getString("titolo"));
+				evento.setDescrizione(result.getString("descrizione"));
+				evento.setGenere(result.getString("genere"));
+				evento.setCodice(result.getString("codice"));
+				evento.setData(new java.sql.Date(result.getDate("data").getDate()));
+				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
+				
+				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
+				evento.setLuogo(l);
+				
+				eventi.add(evento);
+			}
+		
+		return eventi;
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
 	}
 
 	@Override
@@ -235,14 +274,82 @@ public class EventoDaoJDBC implements EventoDao {
 
 	@Override
 	public LinkedList<Evento> eventiPerGenere(String genere) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = this.dataSource.getConnection();
+		LinkedList<Evento> eventi = new LinkedList<Evento>();
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+		
+		try {
+			String query = "select * FROM evento WHERE genere = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, genere);
+			
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Evento evento = new Evento();
+				evento.setTitolo(result.getString("titolo"));
+				evento.setDescrizione(result.getString("descrizione"));
+				evento.setGenere(result.getString("genere"));
+				evento.setCodice(result.getString("codice"));
+				evento.setData(new java.sql.Date(result.getDate("data").getDate()));
+				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
+				
+				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
+				evento.setLuogo(l);
+				
+				eventi.add(evento);
+			}
+		
+		return eventi;
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
 	}
 
 	@Override
-	public LinkedList<Evento> eventiPerLuogo(String luogo) {
-		// TODO Auto-generated method stub
-		return null;
+	public LinkedList<Evento> eventiPerLuogo(String nomeLuogo) {
+		Connection connection = this.dataSource.getConnection();
+		LinkedList<Evento> eventi = new LinkedList<Evento>();
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+		
+		Luogo luogo = ld.findByName(nomeLuogo);
+		
+		try {
+			String query = "select * FROM evento WHERE luogo = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, luogo.getCodice());
+			
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Evento evento = new Evento();
+				evento.setTitolo(result.getString("titolo"));
+				evento.setDescrizione(result.getString("descrizione"));
+				evento.setGenere(result.getString("genere"));
+				evento.setCodice(result.getString("codice"));
+				evento.setData(new java.sql.Date(result.getDate("data").getDate()));
+				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
+				
+				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
+				evento.setLuogo(l);
+				
+				eventi.add(evento);
+			}
+		
+		return eventi;
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
 	}
 
 	
