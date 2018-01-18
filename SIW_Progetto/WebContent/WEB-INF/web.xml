@@ -44,14 +44,7 @@
     <servlet-name>ModificaProfiloServlet</servlet-name>
     <url-pattern>/modificaprofilo</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AggiungiNuovoLuogoServlet</servlet-name>
-    <servlet-class>controller.AggiungiNuovoLuogo</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AggiungiNuovoLuogoServlet</servlet-name>
-    <url-pattern>/aggiunginuovoluogo</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <servlet-name>GestioneLuoghiServlet</servlet-name>
     <servlet-class>controller.GestioneLuoghi</servlet-class>

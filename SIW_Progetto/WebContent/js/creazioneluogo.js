@@ -1,4 +1,18 @@
 $(window).on('load', function() {
+	
+					
+					$.ajax({
+						type : "GET",
+						url : "gestioneluoghi",
+						success : function(result) {
+							result = Json.parse(result);
+							
+							$("#elenco").html(result);
+							
+							
+						}											
+					}); 
+	
 
 					$(".aggiungiLuogoButton").on('click', function() {
 						$("#nomeLuogo").val('');
@@ -8,12 +22,13 @@ $(window).on('load', function() {
 					});
 
 					$("#salvaLuogo").on('click',function() {
-
 										var nomeLuogo = $("#nomeLuogo").val();
 										var provincia = $("#provincia").val();
 										var comune = $("#comune").val();
 										var indirizzo = $("#indirizzo").val();
 
+										alert(nomeLuogo + ", " + provincia + ", " + comune + ", " + indirizzo);
+										
 										if (nomeLuogo.length == 0
 												|| provincia.length == 0
 												|| comune.length == 0
@@ -21,7 +36,9 @@ $(window).on('load', function() {
 
 											alert("Compilare tutti i campi richiesti!");
 										} else {
-
+											alert("saluti");
+											
+											$('#nuovoLuogo').modal('hide');
 											$.ajax({
 												type : "POST",
 												url : "gestioneluoghi",
@@ -31,8 +48,22 @@ $(window).on('load', function() {
 													comuneInput : comune,
 													indirizzoInput : indirizzo
 												},
-												success : function(data) {
-													    $('#nuovoLuogo').modal('hide');
+												success : function(risposta) {
+													risposta = Json.parse(risposta);
+													
+													var txt = "<tr>";
+														txt += "<td>" + risposta.nome + "</td>";
+														txt += "<td>" + risposta.provincia + "</td>";
+														txt += "<td>" + risposta.comune + "</td>";
+														txt += "<td>" + risposta.indirizzo + "</td>";
+														txt += "</tr>";
+													
+													
+													$("#elenco").html(txt);
+													
+													
+													
+													
 												}											
 											}); 
 										}
