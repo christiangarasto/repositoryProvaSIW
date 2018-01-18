@@ -1,23 +1,23 @@
 package model;
 
-import java.sql.Date;
-
 public class Evento 
 {
 	private String codice;
 	private String titolo;
 	private String descrizione;
-	private Date data;
+	private java.sql.Date data;
+	private java.sql.Time ora;
 
 	private Luogo luogo;
 	
 	public Evento() {}
 
-	public Evento(String titolo, String descrizione, Date data1, Luogo luogo) {
+	public Evento(String titolo, String descrizione, java.sql.Date data, java.sql.Time ora, Luogo luogo) {
 		super();
 		this.titolo = titolo;
 		this.descrizione = descrizione;
-		this.data = data1;
+		this.data = data;
+		this.ora = ora;
 		this.luogo = luogo;
 	}
 	
@@ -27,6 +27,7 @@ public class Evento
 				"\n	Titolo: " + titolo +
 				"\n	Descrizione: " + descrizione + 
 				"\n	Data: " + data +
+				"\n Ora: " + ora +
 				"\n	Luogo: " + luogo.getNome();
 		
 	}
@@ -55,12 +56,20 @@ public class Evento
 		this.descrizione = descrizione;
 	}
 
-	public Date getData() {
+	public java.sql.Date getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(java.sql.Date data) {
 		this.data = data;
+	}
+	
+	public java.sql.Time getOra() {
+		return ora;
+	}
+	
+	public void setOra(java.sql.Time ora) {
+		this.ora = ora;
 	}
 
 	public Luogo getLuogo() {

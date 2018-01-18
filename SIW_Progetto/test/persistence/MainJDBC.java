@@ -40,9 +40,9 @@ public class MainJDBC {
 		
 		
 		EventoDao eventoDao = factory.getEventoDAO();		
-			Evento rapinaDay = new Evento("Rapina a mano armata","Vi svaligiamo il portafogli", new java.sql.Date(2001,10,02), woodstock);
-			Evento rapinaDay2 = new Evento("Borseggio", "Vi svaligiamo il portafogli, per la seconda volta", new java.sql.Date(2018,10,02), woodstock);
-			Evento capodanno = new Evento("Capodanno 2018 Roma", "Festeggiamo il nuovo anno", new java.sql.Date(2017,12,31), colosseo);
+			Evento rapinaDay = new Evento("Rapina a mano armata","Vi svaligiamo il portafogli", new java.sql.Date(2001,10,02), new java.sql.Time(20,30,00), woodstock);
+			Evento rapinaDay2 = new Evento("Borseggio", "Vi svaligiamo il portafogli, per la seconda volta", new java.sql.Date(2018,10,02), new java.sql.Time(20,30,00), woodstock);
+			Evento capodanno = new Evento("Capodanno 2018 Roma", "Festeggiamo il nuovo anno", new java.sql.Date(2017,12,31), new java.sql.Time(23,00,00), colosseo);
 
 		//CREATE
 		

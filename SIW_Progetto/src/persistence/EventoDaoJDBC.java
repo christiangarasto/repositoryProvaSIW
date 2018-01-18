@@ -1,9 +1,11 @@
 package persistence;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,13 +27,14 @@ public class EventoDaoJDBC implements EventoDao {
 		try {
 			Long id = IDBroker.getId(connection);
 			evento.setCodice("ev" + Long.toString(id));
-		String insert = "insert into evento(titolo, descrizione, codice, data, luogo) values (?,?,?,?,?)";
+		String insert = "insert into evento(titolo, descrizione, codice, data, ora, luogo) values (?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, evento.getTitolo());
 			statement.setString(2, evento.getDescrizione());
 			statement.setString(3, evento.getCodice());
 			statement.setDate(4, evento.getData());
-			statement.setString(5, evento.getLuogo().getCodice());
+			statement.setTime(5, evento.getOra());
+			statement.setString(6, evento.getLuogo().getCodice());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -60,9 +63,10 @@ public class EventoDaoJDBC implements EventoDao {
 				evento.setDescrizione(result.getString("titolo"));
 				evento.setDescrizione(result.getString("descrizione"));				
 				evento.setCodice(result.getString("codice"));
-					long secs = result.getDate("data").getTime();
-					statement.setDate(4, new java.sql.Date(secs));
-				evento.setData(new java.sql.Date(secs));	
+				evento.setData(new java.sql.Date(result.getDate("data").getTime()));	
+				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
+				
+				
 				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
 				evento.setLuogo(l);
 			}
@@ -79,9 +83,9 @@ public class EventoDaoJDBC implements EventoDao {
 	}
 
 	@Override
-	public List<Evento> findAll() {
+	public LinkedList<Evento> findAll() {
 		Connection connection = this.dataSource.getConnection();
-		List<Evento> eventi = new LinkedList<>();
+		LinkedList<Evento> eventi = new LinkedList<>();
 		
 		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 		
@@ -96,9 +100,8 @@ public class EventoDaoJDBC implements EventoDao {
 				evento.setTitolo(result.getString("titolo"));
 				evento.setDescrizione(result.getString("descrizione"));				
 				evento.setCodice(result.getString("codice"));
-				
-				long secs = result.getDate("data").getTime();
-				evento.setData(new java.sql.Date(secs));	
+				evento.setData(new java.sql.Date(result.getDate("data").getTime()));
+				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
 				
 				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
 				evento.setLuogo(l);
@@ -121,13 +124,14 @@ public class EventoDaoJDBC implements EventoDao {
 	public void update(Evento evento) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update evento SET titolo = ?, descrizione = ?, data = ?, luogo = ? WHERE codice = ?";
+			String update = "update evento SET titolo = ?, descrizione = ?, data = ?, ora = ?, luogo = ? WHERE codice = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, evento.getTitolo());
 			statement.setString(2, evento.getDescrizione());
 			statement.setString(3, evento.getData().toString());
-			statement.setString(4, evento.getLuogo().getCodice());
-			statement.setString(5, evento.getCodice());
+			statement.setString(4, evento.getOra().toLocaleString());
+			statement.setString(5, evento.getLuogo().getCodice());
+			statement.setString(6, evento.getCodice());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -171,6 +175,72 @@ public class EventoDaoJDBC implements EventoDao {
 				statement.setString(1, evento.getCodice());
 				statement.executeUpdate();
 			} catch (SQLException e) {e.printStackTrace();}
+	}
+
+	@Override
+	public LinkedList<Evento> eventiDaMostrare(Date dataOdierna) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiOggi(Date dataOdierna) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiPerData(Date data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiPerOra(Time ora) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiPerComune(String comune) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiPerProvincia(String provincia) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiPassatiDaUnaSettimana(Date dataOdierna) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiGratuiti() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiAPagamento() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiPerGenere(String genere) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedList<Evento> eventiPerLuogo(String luogo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
