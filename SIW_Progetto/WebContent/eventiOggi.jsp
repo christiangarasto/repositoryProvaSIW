@@ -39,25 +39,14 @@
 						<div class="collapse navbar-collapse navHeaderCollapse">
 							<ul class="nav navbar-nav">
 								<li><a href="homepage.jsp">Home</a></li>
-								<li class="dropdown" class="active"><a href="#"
-									class="dropdown-toggle" data-toggle="dropdown">Eventi <b
-										class="caret"></b></a>
+								<li class="active dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Eventi oggi <b class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li class="active"><a href="eventiOggi.jsp">Eventi
-												oggi</a></li>
 										<li><a href="eventi.jsp">Tutti gli eventi</a></li>
 										<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
 									</ul></li>
-								<li><a href="#">Recensioni</a></li>
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown">Social Media <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><a href="#">Facebook</a></li>
-										<li><a href="#">Instagram</a></li>
-										<li><a href="#">Twitter</a></li>
-									</ul></li>
+<c:if test="${not loggato}">
 								<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
-								<li><a href="#">Contattaci</a></li>
+</c:if>
 							</ul>
 						</div>
 

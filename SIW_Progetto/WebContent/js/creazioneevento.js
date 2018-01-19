@@ -1,5 +1,19 @@
 $(window).on('load', function()
 {
+		$("#payment").change(function(){
+			
+			var tipo = $('#payment option:selected').attr("value");
+			if(tipo == "ticket")
+			{
+				var txt1 = "";
+				txt1 = "<label>Numero ticket:</label> <input class='number' type='text' class='form-control' /> ";
+				txt1 += "<label>Prezzo singolo ticket:</label> <input class='price' type='text' class='form-control' /> ";
+				
+				$("#hideticketparameters").html(txt1);
+				
+			}
+			
+		});
 		
 		$.ajax({
 			type : "GET",
@@ -10,9 +24,8 @@ $(window).on('load', function()
 		});
 
 		
-		
 		$("#expand_form").on('click', function()
-		{	
+		{
 		    var x = document.getElementById("eventForm");
 		    if(x.style.display === "block")
 		    {
@@ -26,11 +39,9 @@ $(window).on('load', function()
 		    $.ajax({
 		    	type : "GET",
 		    	url  : "gestioneluoghi",
-		    	
 		    	success : function(result)
 		    	{
 		    		result = JSON.parse(result);
-
 		    		var i = 0;
 		    		var txt = "";
 		    		txt += "<select id=\"location\" name=\"location\" class=\"selectpicker btn btn-default\"><option value = \"\">Luogo</option>";

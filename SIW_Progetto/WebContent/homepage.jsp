@@ -42,24 +42,19 @@
 					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 						<div class="collapse navbar-collapse navHeaderCollapse">
 							<ul class="nav navbar-nav">
-								<li class="active"><a href="#">Home</a></li>
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
+							
+								<li class="active"><a href="">Home</a></li>
+							
+								<li class="dropdown"><a href="" class="dropdown-toggle"
 									data-toggle="dropdown">Eventi <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 										<li><a href="eventiOggi.jsp">Eventi oggi</a></li>
 										<li><a href="eventi.jsp">Tutti gli eventi</a></li>
 										<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
 									</ul></li>
-								<li><a href="#">Recensioni</a></li>
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown">Social Media <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><a href="#">Facebook</a></li>
-										<li><a href="#">Instagram</a></li>
-										<li><a href="#">Twitter</a></li>
-									</ul></li>
+<c:if test="${not loggato}">							
 								<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
-								<li><a href="#">Contattaci</a></li>
+</c:if>
 							</ul>
 						</div>
 
@@ -182,7 +177,24 @@
 										<div class="form-group">
 											<label for="descrizione">Descrizione:</label> <input name="descrizione" id="idDescrizione" type="text" class="form-control" />
 										</div>
-											<label for="data">Data svolgimento:</label> <input name="data" type="datetime-local"/>
+										<div class="form-group">
+											<div id = "data" class = "pull-left">
+												<label for="data">Data svolgimento:</label> <input name="data" type="date"/>
+											</div>
+											<div id = "time">
+												<label for="orario">Ora:</label> <input name="orario" type="time"/>
+											</div>
+										</div><br>
+										<div class="form-group">										
+											<label for="pagamento">Tipo di partecipazione:</label>
+												<select id="payment" class="btn btn-default">
+													<option value = "free">Free</option>
+													<option value = "ticket">Pagamento</option>
+												</select>
+										</div>
+										<div id = "hideticketparameters">
+										<!-- funzione jQuery per contenuto dinamico -->
+										</div><br>
 										<div class="form-group">
 											<label for="fileupload">allega locandina</label> <input type="file" name="fileupload" id="fileupload">
 										</div><br>

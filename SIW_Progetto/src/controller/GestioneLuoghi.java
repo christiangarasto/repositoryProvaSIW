@@ -45,12 +45,11 @@ public class GestioneLuoghi extends HttpServlet {
 				 System.out.println("::::::::::::::::::::");
 
 				String jsonToReturn = new Gson().toJson(luoghi);
-				 System.out.println(jsonToReturn);
 				resp.getWriter().write(jsonToReturn);
-				
+
 				session.setAttribute("luoghi", luoghi);
 			}
-		}		
+		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher("gestioneLuoghi.jsp");
 		dispatcher.forward(req, resp);
 	}
