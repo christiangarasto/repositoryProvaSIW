@@ -9,7 +9,6 @@ public abstract class DAOFactory {
 
 	// --- List of supported DAO types ---
 
-	
 	/**
 	 * Numeric constant '1' corresponds to explicit Hsqldb choice
 	 */

@@ -92,7 +92,7 @@
 		</nav>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#">Gestione Profilo</a></li>
-			<li><a href="gestioneLuoghi.jsp">Gestione Luoghi</a></li>
+			<li><a href="gestioneluoghi">Gestione Luoghi</a></li>
 		</ul>
 
 		<div class="container">

@@ -7,8 +7,6 @@ class DataSource {
 	final private String userName;// = "postgres";
 	final private String password;// = "postgres";
 	
-	
-
 	public DataSource(String dbURI, String userName, String password) {
 		this.dbURI=dbURI;
 		this.userName=userName;

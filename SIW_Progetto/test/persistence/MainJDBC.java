@@ -1,14 +1,12 @@
 package persistence;
 
-
-import java.util.Calendar;
-import java.util.Date;
-
 import model.Evento;
 import model.Luogo;
+import model.Ticket;
 import model.Utente;
 import persistence.dao.EventoDao;
 import persistence.dao.LuogoDao;
+import persistence.dao.TicketDao;
 import persistence.dao.UtenteDao;
 
 public class MainJDBC {
@@ -46,6 +44,12 @@ public class MainJDBC {
 			Evento rapinaDay = new Evento("Rapina a mano armata","Vi svaligiamo il portafogli", "Culturale", new java.sql.Date(31,12,2018), new java.sql.Time(20,30,00), woodstock);
 			Evento rapinaDay2 = new Evento("Borseggio", "Vi svaligiamo il portafogli, per la seconda volta", "Culturale", new java.sql.Date(2018,10,02), new java.sql.Time(20,30,00), woodstock);
 			Evento capodanno = new Evento("Capodanno 2018 Roma", "Festeggiamo il nuovo anno", "Musicale", new java.sql.Date(2017,12,31), new java.sql.Time(23,00,00), colosseo);
+
+		TicketDao ticketDao = factory.getTicketDAO();		
+			Ticket ticket1 = new Ticket("20.00", "", rapinaDay);
+			Ticket ticket2 = new Ticket("10.00", "", rapinaDay2);
+			Ticket ticket3 = new Ticket("0", "", capodanno);
+
 		//CREATE
 		
 		luogoDao.save(woodstock);
@@ -55,6 +59,11 @@ public class MainJDBC {
 		eventoDao.save(rapinaDay);
 		eventoDao.save(rapinaDay2);
 		eventoDao.save(capodanno);
+
+		ticketDao.save(ticket1);
+		ticketDao.save(ticket2);
+		ticketDao.save(ticket3);
+
 		
 		//RETRIEVE		
 		System.out.println("---- Elenco utenti");
@@ -72,36 +81,9 @@ public class MainJDBC {
 			System.out.println(e.toString());
 		}	
 		
-/*		
-		System.out.println("\n\n\nEventi culturali:\n\n");
-		for(Evento e : eventoDao.eventiPerGenere("Culturale")) {
-			System.out.println(":: (" + e.getCodice() + ") - " + e.getTitolo());
+		System.out.println("\n\n---- Elenco Ticket");
+		for(Ticket t : ticketDao.findAll()) {
+			System.out.println(t.toString());
 		}
-		System.out.println("\n\n\nEventi gastronomici:\n\n");
-		for(Evento e : eventoDao.eventiPerGenere("Gastronomico")) {
-			System.out.println(":: (" + e.getCodice() + ") - " + e.getTitolo());
-		}
-		System.out.println("\n\n\nEventi musicali:\n\n");
-		for(Evento e : eventoDao.eventiPerGenere("musicale")) {
-			System.out.println(":: (" + e.getCodice() + ") - " + e.getTitolo());
-		}
-*/
-
-/*
-		System.out.println("\n\n\nEventi per luogo:\n\n");
-		for(Evento e : eventoDao.eventiPerLuogo("Colosseo")) {
-			System.out.println(":: (" + e.getCodice() + ") - " + e.getTitolo() + " - Luogo: " + e.getLuogo().getNome());
-		}
-*/
-		
-
-		System.out.println("\n\n\nEventi per provincia:\n\n");
-		for(Evento e : eventoDao.eventiPerProvincia("CS")) {
-			System.out.println(":: (" + e.getCodice() + ") - " + e.getTitolo() + " - Provincia: " + e.getLuogo().getProvincia());
-		}
-
-		
-		
-		
 	}
 }

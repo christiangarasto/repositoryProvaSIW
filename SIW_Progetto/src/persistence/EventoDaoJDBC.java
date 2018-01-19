@@ -37,7 +37,7 @@ public class EventoDaoJDBC implements EventoDao {
 			statement.setDate(5, evento.getData());
 			statement.setTime(6, evento.getOra());
 			statement.setString(7, evento.getLuogo().getCodice());
-
+			
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -161,6 +161,7 @@ public class EventoDaoJDBC implements EventoDao {
 			connection.setAutoCommit(false);
 			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
 			this.removeForeignKeyFromLuogo(evento, connection);
+			this.removeForeignKeyFromTicket(evento, connection);
 			
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -183,6 +184,15 @@ public class EventoDaoJDBC implements EventoDao {
 			} catch (SQLException e) {e.printStackTrace();}
 	}
 
+	private void removeForeignKeyFromTicket(Evento evento, Connection connection) {
+		String update = "update ticket SET evento = NULL WHERE codice = ?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, evento.getCodice());
+			statement.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}
+	}
+	
 	@Override
 	public LinkedList<Evento> eventiDaMostrare(Date dataOdierna) {
 		// TODO Auto-generated method stub

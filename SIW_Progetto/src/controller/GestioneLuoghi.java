@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,24 +37,22 @@ public class GestioneLuoghi extends HttpServlet {
 			luoghi = utentedao.findAllLocation(utente.getpIva());
 			if (luoghi != null) {
 
-				// System.out.println("::::::::::::::::::::");
-				// for(Luogo l : luoghi)
-				// {
-				// System.out.println("-" + l.getNome());
-				// }
-				// System.out.println("::::::::::::::::::::");
-				// session.setAttribute("luoghi", luoghi);
-				// session.setAttribute("locations", true);
-				// System.out.println("(boolean)locations = " +
-				// session.getAttribute("locations"));
+				 System.out.println("::::::::::::::::::::");
+				 for(Luogo l : luoghi)
+				 {
+				 System.out.println("-" + l.getNome());
+				 }
+				 System.out.println("::::::::::::::::::::");
 
 				String jsonToReturn = new Gson().toJson(luoghi);
-				// System.out.println(jsonToReturn);
+				 System.out.println(jsonToReturn);
 				resp.getWriter().write(jsonToReturn);
 				
 				session.setAttribute("luoghi", luoghi);
 			}
-		}
+		}		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("gestioneLuoghi.jsp");
+		dispatcher.forward(req, resp);
 	}
 
 	@Override
@@ -84,15 +83,15 @@ public class GestioneLuoghi extends HttpServlet {
 			req.setAttribute("luogoCreato", true);
 
 			String nuovoLuogo = new Gson().toJson(luogoN);
-			resp.getWriter().write(nuovoLuogo);
+//			LinkedList<Luogo> l = (LinkedList<Luogo>) session.getAttribute("luoghi");
+//			l.add(luogoN);
+//			session.setAttribute("luoghi", l);
+//			resp.getWriter().write(nuovoLuogo);
 
 		}else {
 
 			System.out.println("Luogo non nuovo quindi niente");
 		}
-		
-		resp.sendRedirect("gestioneLuoghi.jsp");
-		
-		
+		resp.sendRedirect("gestioneluoghi");	
 	}
 }

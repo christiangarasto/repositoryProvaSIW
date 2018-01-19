@@ -10,8 +10,7 @@ public class Ticket
 
 	public Ticket() {}
 	
-	public Ticket(String codice, String prezzo, String intestatario, Evento evento) {
-		this.codice = codice;
+	public Ticket(String prezzo, String intestatario, Evento evento) {
 		this.prezzo = prezzo;
 		this.intestatario = intestatario;
 		this.evento = evento;
@@ -51,9 +50,9 @@ public class Ticket
 	
 	public String toString(){
 		return  " codice : " + this.codice +
-				" prezzo : " + this.prezzo +
-				" intestatario : " + this.intestatario + 
-				" evento : " + evento.getTitolo();
+				", prezzo : " + this.prezzo +
+				", intestatario : " + this.intestatario + 
+				", evento : " + evento.getCodice();
 	}
 	
 }

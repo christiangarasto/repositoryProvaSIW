@@ -1,18 +1,4 @@
 $(window).on('load', function() {
-	
-					
-					$.ajax({
-						type : "GET",
-						url : "gestioneluoghi",
-						success : function(result) {
-							result = Json.parse(result);
-							
-							$("#elenco").html(result);
-							
-							
-						}											
-					}); 
-	
 
 					$(".aggiungiLuogoButton").on('click', function() {
 						$("#nomeLuogo").val('');

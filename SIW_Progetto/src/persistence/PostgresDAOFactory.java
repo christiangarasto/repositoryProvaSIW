@@ -9,11 +9,8 @@ import persistence.dao.UtenteDao;
 
 class PostgresDAOFactory extends DAOFactory {
 
-	
-	
 	private static  DataSource dataSource;
 	
-
 	// --------------------------------------------
 
 	static {
@@ -49,8 +46,7 @@ class PostgresDAOFactory extends DAOFactory {
 
 	@Override
 	public TicketDao getTicketDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TicketDaoJDBC(dataSource);
 	}
 
 	@Override
