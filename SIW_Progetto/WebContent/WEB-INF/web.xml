@@ -62,6 +62,14 @@
     <url-pattern>/gestioneeventi</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DammiLuoghiServlet</servlet-name>
+    <servlet-class>controller.DammiLuoghi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DammiLuoghiServlet</servlet-name>
+    <url-pattern>/dammiluoghi</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>BachecaVisitatoriServlet</servlet-name>
     <servlet-class>controller.BachecaVisitatori</servlet-class>
   </servlet>

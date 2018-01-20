@@ -157,9 +157,11 @@
 							<button id="expand_form" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button> crea evento<br>
 								<div class="jumbotron" id="eventForm">
 									<form method="post" action="gestioneeventi">
+									
 										<div class="form-group">
 											<label for="titolo">Titolo:</label><input name="titolo" id="idTitolo" type="text" class="form-control" />
 										</div>
+										
 										<div class="form-group" id = "chooselocation">
 									<!-- scelta dinamica dei luoghi in base all'utente -->
 										</div>						
@@ -175,24 +177,20 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="descrizione">Descrizione:</label> <input name="descrizione" id="idDescrizione" type="text" class="form-control" />
+											<textarea rows="3" name="descrizione" id="idDescrizione" class="form-control" placeholder="inserisci qui una breve descrizione..."></textarea>
 										</div>
-										<div class="form-group">
-											<div id = "data" class = "pull-left">
+										<div class="form-inline">
 												<label for="data">Data svolgimento:</label> <input name="data" type="date"/>
-											</div>
-											<div id = "time">
 												<label for="orario">Ora:</label> <input name="orario" type="time"/>
-											</div>
 										</div><br>
 										<div class="form-group">										
-											<label for="pagamento">Tipo di partecipazione:</label>
-												<select id="payment" class="btn btn-default">
+											<label for="payment">Tipo di partecipazione:</label>
+												<select id="ticket" class="btn btn-default">
 													<option value = "free">Free</option>
-													<option value = "ticket">Pagamento</option>
+													<option value = "pagamento">Pagamento</option>
 												</select>
 										</div>
-										<div id = "hideticketparameters">
+										<div id = "hideticketparameters" class = "form-inline">
 										<!-- funzione jQuery per contenuto dinamico -->
 										</div><br>
 										<div class="form-group">

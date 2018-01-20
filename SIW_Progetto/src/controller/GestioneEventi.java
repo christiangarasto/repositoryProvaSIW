@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +55,6 @@ public class GestioneEventi extends HttpServlet {
 				}
 			}
 		}
-
 		req.setAttribute("eventi", eventi);
 	}
 
@@ -66,18 +67,17 @@ public class GestioneEventi extends HttpServlet {
 		String descrizione = (String) req.getParameter("descrizione");
 
 		String data = (String) req.getParameter("data");
-		data = data.replace("T", " ");
-		data += ":00";
 		System.out.println(data);
-
-		java.sql.Date sqlDate = null;
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		try {
-			java.util.Date utilDate = format.parse(data);
-			sqlDate = new java.sql.Date(utilDate.getTime());
-			System.out.println("sqlDate: " + sqlDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
+		String ora = (String) req.getParameter("orario");
+		System.out.println(ora);
+		
+		String ticket = (String) req.getParameter("ticket");
+		String numero = (String) req.getParameter("numero");
+		System.out.println(numero);
+		String prezzo = "0";	//se il prezzo è 0 vuol dire che l'entrata è gratuita
+		if(ticket == "pagamento")
+		{
+			prezzo = req.getParameter("prezzo");
 		}
 
 		boolean evento_esistente = false;
@@ -115,6 +115,7 @@ public class GestioneEventi extends HttpServlet {
 			// eventoDao.save(nuovo);
 		}
 		System.out.println("FINE");
-		resp.sendRedirect("homepage.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+		dispatcher.forward(req, resp);
 	}
 }
