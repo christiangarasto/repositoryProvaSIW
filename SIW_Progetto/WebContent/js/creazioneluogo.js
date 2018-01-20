@@ -47,7 +47,10 @@ $(window).on('load', function() {
 													
 													$("#elenco").html(txt);
 													
-													
+													$("#nomeLuogo").val('');
+													$("#provincia").val('');
+													$("#comune").val('');
+													$("#indirizzo").val('');
 													
 													
 												}											

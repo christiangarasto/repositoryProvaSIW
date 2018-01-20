@@ -37,12 +37,12 @@ public class GestioneLuoghi extends HttpServlet {
 			luoghi = utentedao.findAllLocation(utente.getpIva());
 			if (luoghi != null) {
 
-				 System.out.println("::::::::::::::::::::");
-				 for(Luogo l : luoghi)
-				 {
-				 System.out.println("-" + l.getNome());
-				 }
-				 System.out.println("::::::::::::::::::::");
+//				 System.out.println("::::::::::::::::::::");
+//				 for(Luogo l : luoghi)
+//				 {
+//				 System.out.println("-" + l.getNome());
+//				 }
+//				 System.out.println("::::::::::::::::::::");
 
 				String jsonToReturn = new Gson().toJson(luoghi);
 				resp.getWriter().write(jsonToReturn);
@@ -57,6 +57,8 @@ public class GestioneLuoghi extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		System.out.println("POST LUOGHI");
+		
 		String nomeLuogo = req.getParameter("nomeLuogoInput");
 		String provincia = (String) req.getParameter("provinciaInput");
 		String comune = (String) req.getParameter("comuneInput");
@@ -82,6 +84,7 @@ public class GestioneLuoghi extends HttpServlet {
 			req.setAttribute("luogoCreato", true);
 
 			String nuovoLuogo = new Gson().toJson(luogoN);
+		
 //			LinkedList<Luogo> l = (LinkedList<Luogo>) session.getAttribute("luoghi");
 //			l.add(luogoN);
 //			session.setAttribute("luoghi", l);

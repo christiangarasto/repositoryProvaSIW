@@ -22,7 +22,6 @@
 
 <body>
 	<header>
-
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
 				<div class="row">
@@ -52,15 +51,15 @@
 										<li><a href="eventi.jsp">Tutti gli eventi</a></li>
 										<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
 									</ul></li>
-<c:if test="${not loggato}">
-								<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
-</c:if>
+								<c:if test="${not loggato}">
+									<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
+								</c:if>
 							</ul>
 						</div>
 
 					</div>
 
-<c:if test="${loggato}">
+					<c:if test="${loggato}">
 
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 							<figure>
@@ -80,7 +79,7 @@
 							</figure>
 						</div>
 
-</c:if>
+					</c:if>
 				</div>
 			</div>
 		</nav>
@@ -97,6 +96,7 @@
 			<button type="button" class="btn btn-info btn-md" data-toggle="modal"
 				data-target="#nuovoLuogo" data-backdrop="static">Aggiungi
 				nuovo luogo</button>
+			<button type="button" class="btn btn-danger" onclick="rimuoviLuoghi()">Rimuovi</button>
 			<div class="modal fade" id="nuovoLuogo" role="dialog">
 				<div class="modal-dialog">
 
@@ -149,9 +149,9 @@
 						</div>
 
 						<div class="modal-footer">
-
+							<!-- 
 							<div id="salvataggioLuogoRisposta"></div>
-
+ -->
 							<form>
 								<button type="button" class="btn btn-success" id="salvaLuogo">Salva</button>
 								<button type="button" class="btn btn-info aggiungiLuogoButton"
@@ -169,6 +169,7 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
+							<th></th>
 							<th>Nome</th>
 							<th>Provincia</th>
 							<th>Comune</th>
@@ -177,16 +178,23 @@
 					</thead>
 					<tbody id="elenco">
 						<c:forEach items="${luoghi}" var="luogo">
+
 							<tr>
+								<td><div class="checkbox">
+										<label><input class="luogoDaEliminare" type="checkbox" value="${luogo.codice}"></label>
+									</div>
+								</td>
 								<td>${luogo.nome}</td>
 								<td>${luogo.provincia}</td>
 								<td>${luogo.comune}</td>
 								<td>${luogo.indirizzo}</td>
 							</tr>
+
 						</c:forEach>
 					</tbody>
 					<tfoot>
 						<tr class="active">
+							<td></td>
 							<td><a href="#">Ordina per Nome</a></td>
 							<td><a href="#">Ordina per Provincia</a></td>
 							<td><a href="#">Ordina per Comune</a></td>
