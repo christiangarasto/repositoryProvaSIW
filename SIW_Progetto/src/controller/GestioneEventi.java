@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,17 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
 import model.Evento;
 import model.Luogo;
+import model.Ticket;
 import model.Utente;
 import persistence.DatabaseManager;
+import persistence.dao.EventoDao;
 import persistence.dao.LuogoDao;
+import persistence.dao.TicketDao;
 import persistence.dao.UtenteDao;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class GestioneEventi extends HttpServlet {
 
@@ -66,16 +67,32 @@ public class GestioneEventi extends HttpServlet {
 		String genere = (String) req.getParameter("genere");
 		String descrizione = (String) req.getParameter("descrizione");
 
-		String data = (String) req.getParameter("data");
-		System.out.println(data);
-		String ora = (String) req.getParameter("orario");
-		System.out.println(ora);
+		String _data = (String) req.getParameter("data");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyy-mm-dd");
+		java.util.Date data = null;
+		try {
+			data = formatter.parse(_data);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		java.sql.Date sqlData = new java.sql.Date(data.getTime());
+		    
+		String _ora = (String) req.getParameter("orario");
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		long ms = 0;
+		try {
+			ms = sdf.parse(_ora).getTime();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Time ora = new Time(ms);
 		
-		String ticket = (String) req.getParameter("ticket");
+		String biglietto = (String) req.getParameter("ticket");
 		String numero = (String) req.getParameter("numero");
-		System.out.println(numero);
 		String prezzo = "0";	//se il prezzo è 0 vuol dire che l'entrata è gratuita
-		if(ticket == "pagamento")
+		if(biglietto == "pagamento")
 		{
 			prezzo = req.getParameter("prezzo");
 		}
@@ -88,33 +105,41 @@ public class GestioneEventi extends HttpServlet {
 		System.out.print("il luogo con nome " + luogo.getNome() + " ha i seguenti eventi:");
 
 		LinkedList<Evento> eventi = luogo.getEventi();
-		if (eventi != null) {
-			for (Evento e : eventi) {
-				System.out.println(e.toString());
-				if ((e.getTitolo()).equals(titolo) && (e.getDescrizione()).equals(descrizione))// &&
-																								// e.getData().equals(data))?????????
+		if (eventi != null) 
+		{
+			for (Evento e : eventi) 
+			{
+				if( (e.getOra()).equals(ora) && (e.getData()).equals(sqlData) )
 				{
-					evento_esistente = true;
-					resp.sendRedirect("homepage.jsp");
+					System.out.println("attenzione! C'è già un evento in programma!");
+					if( (e.getTitolo()).equals(titolo) && (e.getDescrizione()).equals(descrizione) && (e.getGenere()).equals(genere) )
+					{
+						System.out.println("Evento già registrato!");
+						evento_esistente = true;
+						req.setAttribute("evento_esistente", true);
+					}
 				}
 			}
-		} else {
-			System.out.println("NESSUNO");
+			
+			if (!evento_esistente) 
+			{
+				System.out.println("Salvataggio dell'evento nel DB");
+				 Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
+				 EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+				 eventoDao.save(nuovoEvento);
+				if(biglietto == "pagamento")
+				{
+					int size = Integer.parseInt(numero);
+					for(int i = 0; i < size; i++)
+					{
+						Ticket ticket = new Ticket(prezzo, "", nuovoEvento);
+						TicketDao ticketdao = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
+						ticketdao.save(ticket);
+					}
+				}
+			}
 		}
 
-		System.out.println("::::::::::::::::::::::::::");
-
-		if (evento_esistente) {
-			System.out.println("L'evento esiste già nel DB");
-			req.setAttribute("evento_esistente", true);
-		} else {
-			System.out.println("Salvataggio dell'evento nel DB");
-			// Evento nuovo = new Evento(descrizione, sqlDate, luogo);
-			// EventoDao eventoDao =
-			// DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
-			// eventoDao.save(nuovo);
-		}
-		System.out.println("FINE");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 		dispatcher.forward(req, resp);
 	}
