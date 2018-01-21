@@ -71,13 +71,19 @@ public class GestioneEventi extends HttpServlet {
 		try {
 			data = formatter.parse(_data);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		java.sql.Date sqlData = new java.sql.Date(data.getTime());
-		    
-		String _ora = (String) req.getParameter("orario");
 
+		String _ora = (String) req.getParameter("orario");
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+		long ms = 0;
+		try {
+			ms = sdf.parse(_ora).getTime();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		java.sql.Time ora = new Time(ms);
 		
 		String biglietto = (String) req.getParameter("ticket");
 		String numero = (String) req.getParameter("numero");
@@ -111,21 +117,23 @@ public class GestioneEventi extends HttpServlet {
 				}
 			}
 			
-			if (!evento_esistente) 
+		}
+
+		if (!evento_esistente) 
+		{
+			System.out.println("Salvataggio dell'evento nel DB");
+			Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
+			EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+			eventoDao.save(nuovoEvento);
+			if(biglietto == "pagamento")
 			{
-				System.out.println("Salvataggio dell'evento nel DB");
-				 Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
-				 EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
-				 eventoDao.save(nuovoEvento);
-				if(biglietto == "pagamento")
+				int size = Integer.parseInt(numero);
+				System.out.println( size + " biglietti a pagamento ");
+				for(int i = 0; i < size; i++)
 				{
-					int size = Integer.parseInt(numero);
-					for(int i = 0; i < size; i++)
-					{
-						Ticket ticket = new Ticket(prezzo, "", nuovoEvento);
-						TicketDao ticketdao = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
-						ticketdao.save(ticket);
-					}
+					Ticket ticket = new Ticket(prezzo, "", nuovoEvento);
+					TicketDao ticketdao = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
+					ticketdao.save(ticket);
 				}
 			}
 		}

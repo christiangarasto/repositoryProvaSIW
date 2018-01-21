@@ -7,7 +7,7 @@
 <title>Calabria E20</title>
 <meta charset="utf-8">
 
-	<link href="css/common.css" rel="stylesheet">
+	<link href="css/common.css?011" rel="stylesheet">
 	<link href="css/background.css" rel="stylesheet">
 	<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 	<script src="jquery/jquery-3.2.1.min.js"></script>
@@ -81,14 +81,14 @@
 			</div>
 		</nav>
 	</header>
-		<div class = "container">
-			<div class = "jumbotron">
-				<h1 id = "title">Bacheca Calabria E20</h1>
-			</div>
-		</div>
-		<div class = "container">
-				<div id = "show_all_events" class = "col-sm-6">
-				</div>
-		</div>
+	
+	<div id = "tuttieventititle" class="jumbotron">
+		<div class="container text-center">
+    		<h1>Bacheca Calabria E20</h1>      
+    		<p>Tutti i nostri eventi</p>
+  		</div>
+	</div>	
+	<div id = "show_all_events" class = "container">
+	</div>			
 </body>
 </html>
