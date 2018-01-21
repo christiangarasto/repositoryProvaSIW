@@ -8,23 +8,26 @@ $(window).on('load', function()
     		eventi = JSON.parse(eventi);
     		var e = 0;
     		var txt = "";
-    		var cont = 0;
+    		var cont = 1;
+    		
+			txt += "<div class=\"row\">"
     		for( e in eventi )
     		{
-    			if(cont == 0)
-    			{
-    				txt += "<div class=\"row\">"
-    			}
     			txt += "<div class=\"col-xs-4 col-sm-4 col-md-4 col-lg-4\">";
     			txt += "<div class=\"panel\">";
     			txt += "<div id=\"eventoinbacheca\" class=\"panel-heading\"><big>"+ eventi[e].titolo + "</big></div>";
     			txt += "<div class=\"panel-footer\">" + eventi[e].descrizione + "</div>";
-    			txt += "<div class=\"panel-footer\"> <strong>Data :</strong> " + eventi[e].data + " <br><strong>Ora</strong> : " + eventi[e].ora + "</div>";
-    			txt += "</div></div>";
+    			txt += "<div class=\"panel-footer\"> " +
+							"<strong>Data :</strong> " + eventi[e].data + " <br>" +
+							"<strong>Ora</strong> : " + eventi[e].ora + 
+					   "</div>";
+    			txt += "</div>" +
+    				   "</div>";
     			if(cont == 3)
     			{
-    				txt += "</div>";
-    				cont = -1;
+    				txt += "</div><br>";
+    				txt += "<div class=\"row\">"
+    				cont = 0;
     			}
     			cont++;
     		}
