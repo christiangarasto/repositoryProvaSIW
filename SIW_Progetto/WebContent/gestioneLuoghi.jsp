@@ -12,11 +12,55 @@
 <link href="css/common.css" rel="stylesheet">
 
 <script src="js/utility.js"></script>
+<script src="js/gestioneluoghi.js"></script>
 
 <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 <script src="jquery/jquery-3.2.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="js/creazioneluogo.js"></script>
+
+
+<style>
+#map {
+	height: 400px;
+	width: 100%;
+}
+</style>
+<script>
+	function initMap() {
+
+		var rende = new google.maps.LatLng(39.333765, 16.184529);
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 15,
+			center : rende
+		});
+		var marker = new google.maps.Marker({
+			position : rende,
+			map : map,
+			draggable : true
+		});
+		var searchBox = new google.maps.places.SearchBox(document
+				.getElementById('mapsearch'));
+		google.maps.event.addListener(searchBox, 'places_changed', function() {
+			alert(searchBox.getPlaces());
+			var places = searchBox.getPlaces();
+
+			var bounds = new google.maps.LatLngBounds();
+			var i, place;
+			for (i = 0; place = places[i]; i++) {
+				bounds.extend(place.geometry.location);
+				marker.setPosition(place.geometry.location);
+			}
+
+			map.finBounds(bounds);
+			map.setZoom(15);
+		});
+	}
+</script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYs_o9DSjxlPRQ5v4BYq3gnZ-2UfIADu0&callback=initMap&libraries=places">
+	
+</script>
 
 </head>
 
@@ -96,7 +140,8 @@
 			<button type="button" class="btn btn-info btn-md" data-toggle="modal"
 				data-target="#nuovoLuogo" data-backdrop="static">Aggiungi
 				nuovo luogo</button>
-			<button type="button" class="btn btn-danger" onclick="rimuoviLuoghi()">Rimuovi</button>
+			<button type="button" class="btn btn-danger"
+				onclick="rimuoviLuoghi()">Rimuovi</button>
 			<div class="modal fade" id="nuovoLuogo" role="dialog">
 				<div class="modal-dialog">
 
@@ -121,6 +166,7 @@
 												name="input_nomeluogo" type="text">
 										</div>
 									</div>
+									<!-- 
 									<div class="form-group">
 										<label class="col-md-4 control-label">Provincia:</label>
 										<div class="col-md-8">
@@ -131,8 +177,8 @@
 									<div class="form-group">
 										<label class="col-md-4 control-label">Comune:</label>
 										<div class="col-md-8">
-											<input class="form-control" id="comune" name="input_comune"
-												type="text">
+											<input class="form-control" id="comune" size="50"
+												name="input_comune" type="text">
 										</div>
 									</div>
 									<div class="form-group">
@@ -142,6 +188,17 @@
 												name="input_indirizzo" type="text">
 										</div>
 									</div>
+-->
+									<div class="form-group">
+										<label class="col-md-4 control-label">Indirizzo:</label>
+										<div class="col-md-8">
+											<input type="text"
+												placeholder="Inserisci l'indirizzo del luogo.."
+												id="mapsearch" size="50">
+										</div>
+									</div>
+
+									<div id="map"></div>
 								</form>
 							</div>
 							<hr>
@@ -181,9 +238,9 @@
 
 							<tr>
 								<td><div class="checkbox">
-										<label><input class="luogoDaEliminare" type="checkbox" value="${luogo.codice}"></label>
-									</div>
-								</td>
+										<label><input class="luogoDaEliminare" type="checkbox"
+											value="${luogo.codice}"></label>
+									</div></td>
 								<td>${luogo.nome}</td>
 								<td>${luogo.provincia}</td>
 								<td>${luogo.comune}</td>

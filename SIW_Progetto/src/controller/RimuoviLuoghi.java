@@ -3,15 +3,15 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import model.Luogo;
+import persistence.DatabaseManager;
+import persistence.dao.LuogoDao;
 
 public class RimuoviLuoghi extends HttpServlet{
 
@@ -28,6 +28,7 @@ public class RimuoviLuoghi extends HttpServlet{
 			System.out.println("-- " + s);
 		}
 
+		System.out.println(jsonReceived.toString());
 		
 		/*		
 		for(String s : luoghiE)
@@ -51,5 +52,19 @@ public class RimuoviLuoghi extends HttpServlet{
 		}
 */	
 		//resp.sendRedirect("gestioneluoghi");
+		
+		
+		
+		
+		///Dopo aver filtrato tutti i codici dei luoghi da eliminare...
+		
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+		
+		for(String codiceLuogo : luoghiDaEliminare) {
+			Luogo luogo = ld.findByPrimaryKey(codiceLuogo);
+			ld.delete(luogo);
+		}
+		
+		//Chiamo la get della servlet gestione luoghi per visualizzare i luoghi aggiornati
 	}
 }
