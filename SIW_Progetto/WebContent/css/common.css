@@ -56,11 +56,8 @@ footer {
 	color: black;
 	display : none;
 }
-/*SEZIONE VISUALIZZAZIONE EVENTI*/
-#eventoinbacheca.jumbotron{
-	background: rgba(100, 150, 550, 0.3);
-}
 
-#title{
-	text-align: center;
+#tuttieventititle.jumbotron{
+	background: rgba(0, 50, 50, 0.3);
+	color: white;
 }

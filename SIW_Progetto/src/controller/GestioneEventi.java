@@ -71,28 +71,33 @@ public class GestioneEventi extends HttpServlet {
 		try {
 			data = formatter.parse(_data);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		java.sql.Date sqlData = new java.sql.Date(data.getTime());
-		    
-		String _ora = (String) req.getParameter("orario");
 
+		String _ora = (String) req.getParameter("orario");
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+		long ms = 0;
+		try {
+			ms = sdf.parse(_ora).getTime();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		java.sql.Time ora = new Time(ms);
 		
 		String biglietto = (String) req.getParameter("ticket");
 		String numero = (String) req.getParameter("numero");
 		String prezzo = "0";	//se il prezzo è 0 vuol dire che l'entrata è gratuita
-		if(biglietto == "pagamento")
+		if(biglietto.equals("pagamento"))
 		{
 			prezzo = req.getParameter("prezzo");
+			System.out.println("prezzo" + prezzo);
 		}
 
 		boolean evento_esistente = false;
 
 		LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 		Luogo luogo = luogodao.findByPrimaryKey(codice_luogo);
-
-		System.out.print("il luogo con nome " + luogo.getNome() + " ha i seguenti eventi:");
 
 		LinkedList<Evento> eventi = luogo.getEventi();
 		if (eventi != null) 
@@ -111,21 +116,23 @@ public class GestioneEventi extends HttpServlet {
 				}
 			}
 			
-			if (!evento_esistente) 
+		}
+
+		if (!evento_esistente) 
+		{
+			Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
+			EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+			eventoDao.save(nuovoEvento);
+			if(biglietto.equals("pagamento"))
 			{
-				System.out.println("Salvataggio dell'evento nel DB");
-				 Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
-				 EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
-				 eventoDao.save(nuovoEvento);
-				if(biglietto == "pagamento")
+				System.out.print("eventi a pagamento : ");
+				int size = Integer.parseInt(numero);
+				System.out.println(size);
+				for(int i = 0; i < size; i++)
 				{
-					int size = Integer.parseInt(numero);
-					for(int i = 0; i < size; i++)
-					{
-						Ticket ticket = new Ticket(prezzo, "", nuovoEvento);
-						TicketDao ticketdao = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
-						ticketdao.save(ticket);
-					}
+					Ticket ticket = new Ticket(prezzo, "", nuovoEvento);
+					TicketDao ticketdao = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
+					ticketdao.save(ticket);
 				}
 			}
 		}

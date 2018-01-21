@@ -54,7 +54,7 @@ $(window).on('load', function()
 		    			txt += "<option value = \"" + result[i].codice + "\">" + result[i].nome + "</option>";
 		    		}
 		    		txt += "<option class = \"divider\" disabled></option>";
-		    		txt += "<option id=\"addlocation\">Aggiungi...</option>";
+		    		txt += "<option value = \"\">Aggiungi...</option>";
 		    		txt += "</select>";
 		    		$("#chooselocation").html(txt);
 		    	}
