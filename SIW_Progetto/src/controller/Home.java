@@ -27,7 +27,7 @@ public class Home extends HttpServlet{
 		}
 	
 		req.setAttribute("messaggio", messaggio);
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 		dispatcher.forward(req, resp);
 	}

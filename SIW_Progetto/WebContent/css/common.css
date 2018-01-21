@@ -54,4 +54,5 @@ footer {
 #tuttieventititle.jumbotron{
 	background: rgba(0, 50, 50, 0.3);
 	color: white;
+	padding-top: 0px;
 }

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+
 import model.Evento;
 import model.Luogo;
 import model.Ticket;
@@ -28,33 +31,49 @@ public class GestioneEventi extends HttpServlet {
 		System.out.println("***Get Gestione Eventi***");
 
 		HttpSession session = req.getSession();
+		
 		String piva = (String) session.getAttribute("piva");
-
 		UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-
 		Utente utente = utentedao.findByPrimaryKey(piva);
 
 		LinkedList<Luogo> luoghi = null;
 		LinkedList<Evento> eventi = null;
 
-		if (utente != null) {
+		if (utente != null) 
+		{
+			System.out.println("utente valido");
 			luoghi = utentedao.findAllLocation(utente.getpIva());
-			if (luoghi != null) {
+			if (luoghi != null) 
+			{
+				System.out.println("l'utente è titolare di uno o più luoghi");
 				eventi = new LinkedList<>();
-				for (Luogo l : luoghi) {
-					LinkedList<Evento> tmp = l.getEventi();
-					if (tmp != null) {
-						for (Evento e : tmp) {
+				for (Luogo l : luoghi) 
+				{
+					System.out.println("luogo " + l);
+					LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+					LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
+					if (tmp != null) 
+					{
+						System.out.println("nel locale " + l.getNome() + " ci sono i seguenti eventi:");
+						for (Evento e : tmp) 
+						{
+							System.out.println(e);
 							eventi.add(e);
 						}
 					}
 				}
-				if (eventi != null) {
+				if (eventi != null) 
+				{
 					session.setAttribute("events", true);
 				}
 			}
 		}
-		req.setAttribute("eventi", eventi);
+		String jsonToReturn = new Gson().toJson(eventi);
+		System.out.println(jsonToReturn);
+		resp.getWriter().write(jsonToReturn);
+
+		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+		dispatcher.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -136,7 +155,6 @@ public class GestioneEventi extends HttpServlet {
 				}
 			}
 		}
-
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 		dispatcher.forward(req, resp);
 	}
