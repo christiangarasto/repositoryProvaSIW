@@ -88,17 +88,16 @@ public class GestioneEventi extends HttpServlet {
 		String biglietto = (String) req.getParameter("ticket");
 		String numero = (String) req.getParameter("numero");
 		String prezzo = "0";	//se il prezzo è 0 vuol dire che l'entrata è gratuita
-		if(biglietto == "pagamento")
+		if(biglietto.equals("pagamento"))
 		{
 			prezzo = req.getParameter("prezzo");
+			System.out.println("prezzo" + prezzo);
 		}
 
 		boolean evento_esistente = false;
 
 		LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 		Luogo luogo = luogodao.findByPrimaryKey(codice_luogo);
-
-		System.out.print("il luogo con nome " + luogo.getNome() + " ha i seguenti eventi:");
 
 		LinkedList<Evento> eventi = luogo.getEventi();
 		if (eventi != null) 
@@ -121,14 +120,14 @@ public class GestioneEventi extends HttpServlet {
 
 		if (!evento_esistente) 
 		{
-			System.out.println("Salvataggio dell'evento nel DB");
 			Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
 			EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 			eventoDao.save(nuovoEvento);
-			if(biglietto == "pagamento")
+			if(biglietto.equals("pagamento"))
 			{
+				System.out.print("eventi a pagamento : ");
 				int size = Integer.parseInt(numero);
-				System.out.println( size + " biglietti a pagamento ");
+				System.out.println(size);
 				for(int i = 0; i < size; i++)
 				{
 					Ticket ticket = new Ticket(prezzo, "", nuovoEvento);

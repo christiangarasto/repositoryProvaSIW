@@ -19,16 +19,14 @@ $(window).on('load', function()
     			txt += "<div class=\"panel\">";
     			txt += "<div id=\"eventoinbacheca\" class=\"panel-heading\"><big>"+ eventi[e].titolo + "</big></div>";
     			txt += "<div class=\"panel-footer\">" + eventi[e].descrizione + "</div>";
-    			txt += "<div class=\"panel-footer\"> <strong>Data :</strong> " + eventi[e].data + " <br><strong>Ora</strong> : " + eventi[e].ora + "</div></div></div>";
+    			txt += "<div class=\"panel-footer\"> <strong>Data :</strong> " + eventi[e].data + " <br><strong>Ora</strong> : " + eventi[e].ora + "</div>";
+    			txt += "</div></div>";
     			if(cont == 3)
     			{
-    				txt += "</div><br>";
-    				cont = 0;
+    				txt += "</div>";
+    				cont = -1;
     			}
-    			else
-    			{
-    				cont++;
-    			}
+    			cont++;
     		}
     		$("#show_all_events").html(txt);
     	}

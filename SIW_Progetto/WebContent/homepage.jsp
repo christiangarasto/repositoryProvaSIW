@@ -185,7 +185,7 @@
 										</div><br>
 										<div class="form-group">										
 											<label for="payment">Tipo di partecipazione:</label>
-												<select id="ticket" class="btn btn-default">
+												<select id="ticket" name = "ticket" class="btn btn-default">
 													<option value = "free">Free</option>
 													<option value = "pagamento">Pagamento</option>
 												</select>
