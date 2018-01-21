@@ -77,4 +77,23 @@
     <servlet-name>BachecaVisitatoriServlet</servlet-name>
     <url-pattern>/bachecavisitatori</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>RedirectHomeServlet</servlet-name>
+    <servlet-class>controller.RedirectHome</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RedirectHomeServlet</servlet-name>
+    <url-pattern>/redirecthome</url-pattern>
+  </servlet-mapping>
+      <servlet>
+    <servlet-name>RimuoviLuoghiServlet</servlet-name>
+    <servlet-class>controller.RimuoviLuoghi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RimuoviLuoghiServlet</servlet-name>
+    <url-pattern>/rimuoviluoghi</url-pattern>
+  </servlet-mapping>
+  
+  
+  
 </web-app>
