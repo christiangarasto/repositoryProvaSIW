@@ -48,7 +48,6 @@ public class MainJDBC {
 		TicketDao ticketDao = factory.getTicketDAO();		
 			Ticket ticket1 = new Ticket("20.00", "", rapinaDay);
 			Ticket ticket2 = new Ticket("10.00", "", rapinaDay2);
-			Ticket ticket3 = new Ticket("0", "", capodanno);
 
 		//CREATE
 		
@@ -62,7 +61,6 @@ public class MainJDBC {
 
 		ticketDao.save(ticket1);
 		ticketDao.save(ticket2);
-		ticketDao.save(ticket3);
 
 		
 		//RETRIEVE		

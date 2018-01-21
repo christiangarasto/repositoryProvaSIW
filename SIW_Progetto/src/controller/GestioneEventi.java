@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import model.Evento;
 import model.Luogo;
 import model.Ticket;
@@ -43,7 +42,7 @@ public class GestioneEventi extends HttpServlet {
 			if (luoghi != null) {
 				eventi = new LinkedList<>();
 				for (Luogo l : luoghi) {
-					List<Evento> tmp = l.getEventi();
+					LinkedList<Evento> tmp = l.getEventi();
 					if (tmp != null) {
 						for (Evento e : tmp) {
 							eventi.add(e);
@@ -78,15 +77,7 @@ public class GestioneEventi extends HttpServlet {
 		java.sql.Date sqlData = new java.sql.Date(data.getTime());
 		    
 		String _ora = (String) req.getParameter("orario");
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		long ms = 0;
-		try {
-			ms = sdf.parse(_ora).getTime();
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		Time ora = new Time(ms);
+
 		
 		String biglietto = (String) req.getParameter("ticket");
 		String numero = (String) req.getParameter("numero");
