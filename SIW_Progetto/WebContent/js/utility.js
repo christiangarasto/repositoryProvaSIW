@@ -1,16 +1,17 @@
 
 	function rimuoviLuoghi(){
 		
-		var luoghiDaEliminare = new Array();
+		var luoghiDaEliminare = ["l1", "l2", "l3"];
 
 			$(".luogoDaEliminare").each(function(){
 				if($(this).is(":checked")){
-					
+/*					
 					var luogo = new Object();
 					luogo.name = "CodiceLuogo";
 					luogo.value = $(this).val();
-					
-					luoghiDaEliminare.push(luogo);					
+*/
+					//var luogo = $(this).val();
+					//luoghiDaEliminare.push(luogo);					
 				}
 			});
 		
@@ -21,7 +22,13 @@
 			type: "POST",
 			url: "rimuoviluoghi",
 			datatype: "json",
-			data: JSON.parse(JSON.stringify(luoghiDaEliminare))
+			//data: JSON.parse(JSON.stringify(luoghiDaEliminare))
+			data: {
+				luoghiDaE : luoghiDaEliminare
+			},
+			success: function(data){
+				
+			}
 		});
 		
 	}
