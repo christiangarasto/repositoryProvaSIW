@@ -198,10 +198,11 @@ public class LuogoDaoJDBC implements LuogoDao{
 			
 				evento.setLuogo(luogo);
 				evento.setTitolo(result.getString("titolo"));
-				evento.setDescrizione(result.getString("descrizione"));	
+				evento.setDescrizione(result.getString("descrizione"));
+				evento.setGenere(result.getString("genere"));
 				evento.setCodice(result.getString("codice"));
-				long secs = result.getDate("data").getTime();
-				evento.setData( new java.sql.Date(secs));
+				evento.setData(new java.sql.Date(result.getDate("data").getDate()));
+				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
 
 				eventi.add(evento);
 			}

@@ -16,20 +16,18 @@ public class Home extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		String username = (String) session.getAttribute("nome");
-		String messaggio;
 		
-		if(username == null) {System.out.println("Username nullo");
-			messaggio = "Login";
+		if(username == null) {
+			
+			System.out.println("Username nullo");
 			req.setAttribute("loggato", false);
+			
 		}else {
-			messaggio = "Bentornato " + username;
+			
 			req.setAttribute("loggato", true);
 		}
-	
-		req.setAttribute("messaggio", messaggio);
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect("gestioneeventi");
 	}
-	
+
 }

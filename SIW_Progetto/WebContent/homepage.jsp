@@ -15,7 +15,7 @@
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 <script src="js/creazioneevento.js"></script>
-<script src="js/eventiutente.js"></script>
+<!-- <script src="js/eventiutente.js"></script>  -->
 
 </head>
 
@@ -126,7 +126,7 @@
 							<h3>${nome}</h3>
 						</div>
 					</div>
-					<div class="col-sm-10">
+					<div class="col-sm-8">
 						<div class="jumbotron" id="description">
 						
 							<button id="expand_form" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button> crea evento<br>
@@ -177,10 +177,31 @@
 									</form>
 							</div>
 							
-							<div id="loadbacheca">
+							<div id="loadbacheca" class="container">
 	<c:if test="${events}">
-								<h2>Eventi in Bacheca</h2>
+								<h2>I tuoi Eventi in Bacheca</h2><hr>
 								<div id = "mieieventi" class = "container">
+									<c:forEach var = "evento" items = "${eventi}">
+    									<div class="row">
+										<div class="container">
+										<div class="panel">
+										<div id="eventoinbacheca" class="panel-heading">
+											<big><strong>${evento.titolo}</strong></big>
+											<div class="btn-group pull-right">
+											<a href="#" class="btn btn-warning btn-sm"> Modifica</a>
+											<a href="#" class="btn btn-danger btn-sm"> Cancella</a>
+											</div>
+										</div>
+											<div class="panel-body">${evento.descrizione}</div>
+											<div class="panel-footer">
+											<strong>Data :</strong>${evento.data}<br>
+											<strong>Ora</strong>${evento.ora}<br>
+											${evento.luogo.comune} ( ${evento.luogo.provincia} )
+											</div>
+										</div>
+										</div>
+										</div><br>									
+									</c:forEach>
 								</div>
 	</c:if>
 	<c:if test="${not events}">
