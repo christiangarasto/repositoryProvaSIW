@@ -72,8 +72,8 @@ public class GestioneEventi extends HttpServlet {
 		System.out.println(jsonToReturn);
 		resp.getWriter().write(jsonToReturn);
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-		dispatcher.forward(req, resp);
+//		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+//		dispatcher.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

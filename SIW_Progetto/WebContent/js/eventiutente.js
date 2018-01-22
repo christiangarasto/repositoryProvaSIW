@@ -1,11 +1,16 @@
 $(window).on('load', function()
 {
+	alert("onload");
 	$.ajax({
     	type : "GET",
     	url  : "gestioneeventi",
     	success : function(eventi)
     	{
+    		alert("success");
     		eventi = JSON.parse(eventi);
+    		
+    		alert("Evento: " + eventi)
+    		
     		var txt = "";
     		var e = 0;
     		for(e in eventi)
@@ -25,6 +30,7 @@ $(window).on('load', function()
 					   "</div>";
 				txt += "</div><br>";
     		}
+    		alert("Txt: " + txt);
        		$("#mieieventi").html(txt);    		
     	}
     });

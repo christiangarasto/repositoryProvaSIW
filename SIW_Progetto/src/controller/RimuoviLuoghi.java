@@ -9,10 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Luogo;
-import persistence.DatabaseManager;
-import persistence.dao.LuogoDao;
-
 public class RimuoviLuoghi extends HttpServlet{
 
 	@Override

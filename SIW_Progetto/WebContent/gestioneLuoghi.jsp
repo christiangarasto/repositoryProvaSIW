@@ -41,6 +41,7 @@
 		});
 		var searchBox = new google.maps.places.SearchBox(document
 				.getElementById('mapsearch'));
+
 		google.maps.event.addListener(searchBox, 'places_changed', function() {
 			alert(searchBox.getPlaces());
 			var places = searchBox.getPlaces();
@@ -52,19 +53,23 @@
 				marker.setPosition(place.geometry.location);
 			}
 
+			google.maps.event.trigger(maCarte, 'resize');
 			map.finBounds(bounds);
 			map.setZoom(15);
 		});
 	}
 </script>
 <script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYs_o9DSjxlPRQ5v4BYq3gnZ-2UfIADu0&callback=initMap&libraries=places">
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYs_o9DSjxlPRQ5v4BYq3gnZ-2UfIADu0&callback=initMap&libraries=places,geometry">
 	
 </script>
 
 </head>
 
 <body>
+	<input type="text" placeholder="Inserisci l'indirizzo del luogo.."
+		id="mapsearch" size="50">
+	<div id="map"></div>
 	<header>
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
@@ -89,9 +94,9 @@
 							<ul class="nav navbar-nav">
 								<li><a href="homepage.jsp">Home</a></li>
 								<li><a href="eventi.jsp">Eventi </a></li>
-<c:if test="${not loggato}">
+								<c:if test="${not loggato}">
 									<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
-</c:if>
+								</c:if>
 							</ul>
 						</div>
 
@@ -182,7 +187,6 @@
 												name="input_indirizzo" type="text">
 										</div>
 									</div>
--->
 									<div class="form-group">
 										<label class="col-md-4 control-label">Indirizzo:</label>
 										<div class="col-md-8">
@@ -192,6 +196,17 @@
 										</div>
 									</div>
 
+									<div id="map"></div>
+									
+-->
+									<div class="form-group">
+										<label class="col-md-4 control-label">Indirizzo:</label>
+										<div class="col-md-8">
+											<input type="text"
+												placeholder="Inserisci l'indirizzo del luogo.."
+												id="mapsearch" size="50">
+										</div>
+									</div>
 									<div id="map"></div>
 								</form>
 							</div>
