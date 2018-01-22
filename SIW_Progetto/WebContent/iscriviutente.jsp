@@ -44,15 +44,8 @@
 						<div class="collapse navbar-collapse navHeaderCollapse">
 							<ul class="nav navbar-nav">
 								<li><a href="homepage.jsp">Home</a></li>
-								<li class="dropdown"><a href="" class="dropdown-toggle"
-									data-toggle="dropdown">Eventi <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><a href="eventiOggi.jsp">Eventi oggi</a></li>
-										<li><a href="eventi.jsp">Tutti gli eventi</a></li>
-										<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
-									</ul></li>
-								<li class="active"><a href="#">Diventa
-										uno di noi</a></li>
+								<li><a href="eventi.jsp">Eventi </a></li>
+								<li class="active"><a href="">Diventa uno di noi</a></li>
 							</ul>
 						</div>
 					</div>

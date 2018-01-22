@@ -15,6 +15,7 @@
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 <script src="js/creazioneevento.js"></script>
+<script src="js/eventiutente.js"></script>
 
 </head>
 
@@ -22,64 +23,38 @@
 	<header>
 
 		<nav class="navbar navbar-inverse navbar-static-top">
-			<div class="container">
-				<div class="row">
-
-					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-						<aside class="pull-left">
-							<img src="images/logo.png" height="30">
-						</aside>
-
-						<a id="brand" class="navbar-brand">Calabria E20</a>
-
-						<button class="navbar-toggle" data-toggle="collapse"
-							data-target=".navHeaderCollapse">
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-					</div>
-
-					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-						<div class="collapse navbar-collapse navHeaderCollapse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>                        
+			      </button>
+					<aside class="pull-left">
+						<img src="images/logo.png" height="30">
+					</aside>
+					<a id="brand" class="navbar-brand">Calabria E20</a>
+				</div>
+					<div class="collapse navbar-collapse" id = "myNavbar">
 							<ul class="nav navbar-nav">
-							
 								<li class="active"><a href="">Home</a></li>
-							
-								<li class="dropdown"><a href="" class="dropdown-toggle"
-									data-toggle="dropdown">Eventi <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><a href="eventiOggi.jsp">Eventi oggi</a></li>
-										<li><a href="eventi.jsp">Tutti gli eventi</a></li>
-										<li><a href="eventiZona.jsp">Eventi vicino a te</a></li>
-									</ul></li>
+								<li><a href="eventi.jsp">Eventi </a></li>
 <c:if test="${not loggato}">							
 								<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
 </c:if>
 							</ul>
-						</div>
-
-					</div>
-					
 <c:if test="${loggato}">
 
-						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-							<figure>
-								<li class="dropdown">
-									<aside class="pull-right">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-											<img src="images/profilo.png" class="img-circle" height="30"><b
-											class="caret"></b>
-										</a>
-										<ul class="dropdown-menu">
-											<li><p class="bg-primary">${username}</p></li>
-											<li><a href="gestioneProfilo.jsp">Profilo</a></li>
-											<li><a href="effettualogout">Logout</a></li>
-										</ul>
-									</aside>
-								</li>
-							</figure>
-						</div>
-
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-user"></span>	${nome} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><p class="bg-primary">${username}</p></li>
+								<li><a href="gestioneProfilo.jsp">Profilo</a></li>
+								<li><a href="effettualogout">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
 </c:if>
 				</div>
 			</div>
@@ -204,20 +179,19 @@
 							
 							<div id="loadbacheca">
 	<c:if test="${events}">
-									<h2>Eventi in Bacheca</h2>
-									<c:forEach var="evento" items="${eventi}">
-										<h3>${evento.titolo}</h3>
-									</c:forEach>
+								<h2>Eventi in Bacheca</h2>
+								<div id = "mieieventi" class = "container">
+								</div>
 	</c:if>
 	<c:if test="${not events}">
-									<h2>Nessun evento da visualizzare</h2>
+								<h2>Nessun evento da visualizzare</h2>
 	</c:if>
 							</div>
 						</div>
 					</div>
+</c:if>
 			</div>
 		</div>
-</c:if>
 	</header>
 
 	<footer> Sito web sviluppato dagli studenti Garasto Christian

@@ -1,30 +1,21 @@
 $(window).on('load', function()
-{
-		$("#ticket").change(function(){
-			
+{	
+		$("#ticket").change(function()
+		{
 			var tipo = $('#ticket option:selected').attr("value");
 			if(tipo == "pagamento")
 			{
 				var txt1 = "";
 				txt1 = "<label>Numero ticket:</label> <input name = \"numero\" type=\"text\" class=\"form-control\" /> ";
 				txt1 += "<label>Prezzo singolo ticket:</label> <input name = \"prezzo\" type='text' class='form-control' /> ";
-				
+
 				$("#hideticketparameters").html(txt1);
-				
 			}
 			else
 			{
 				$("#hideticketparameters").empty();
 			}
-			
-		});
-		
-		$.ajax({
-			type : "GET",
-			url  : "gestioneeventi",
-			success : function(){
-				$("#evento").html();
-			}
+
 		});
 
 		
@@ -59,6 +50,5 @@ $(window).on('load', function()
 		    		$("#chooselocation").html(txt);
 		    	}
 		    });
-		    
 		});
 });

@@ -179,7 +179,7 @@ public class LuogoDaoJDBC implements LuogoDao{
 }
 
 	@Override
-	public LinkedList<Evento> findAllEvents() 
+	public LinkedList<Evento> findAllEvents(String codice_luogo) 
 	{
 		Connection connection = this.dataSource.getConnection();
 		EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
@@ -187,8 +187,9 @@ public class LuogoDaoJDBC implements LuogoDao{
 		try {
 			Evento evento;
 			PreparedStatement statement;
-			String query = "select * from evento";
+			String query = "select * from evento where luogo = ?";
 			statement = connection.prepareStatement(query);
+			statement.setString(1, codice_luogo);
 			ResultSet result = statement.executeQuery();
 
 			while (result.next()) {
