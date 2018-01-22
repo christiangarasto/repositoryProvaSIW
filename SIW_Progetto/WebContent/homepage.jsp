@@ -186,7 +186,7 @@
 										<div class="container">
 										<div class="panel">
 										<div id="eventoinbacheca" class="panel-heading">
-											<big><strong>${evento.titolo}</strong></big>
+											<strong>${evento.titolo}</strong>
 											<div class="btn-group pull-right">
 											<a href="#" class="btn btn-warning btn-sm"> Modifica</a>
 											<a href="#" class="btn btn-danger btn-sm"> Cancella</a>
@@ -214,9 +214,9 @@
 			</div>
 		</div>
 	</header>
-
 	<footer> Sito web sviluppato dagli studenti Garasto Christian
-		e Ventura Paolo </footer>
+		e Ventura Paolo 
+	</footer>
 
 </body>
 </html>
