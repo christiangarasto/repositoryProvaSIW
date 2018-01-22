@@ -41,6 +41,7 @@
 		});
 		var searchBox = new google.maps.places.SearchBox(document
 				.getElementById('mapsearch'));
+
 		google.maps.event.addListener(searchBox, 'places_changed', function() {
 			alert(searchBox.getPlaces());
 			var places = searchBox.getPlaces();
@@ -52,55 +53,62 @@
 				marker.setPosition(place.geometry.location);
 			}
 
+			google.maps.event.trigger(maCarte, 'resize');
 			map.finBounds(bounds);
 			map.setZoom(15);
 		});
 	}
 </script>
 <script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYs_o9DSjxlPRQ5v4BYq3gnZ-2UfIADu0&callback=initMap&libraries=places">
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYs_o9DSjxlPRQ5v4BYq3gnZ-2UfIADu0&callback=initMap&libraries=places,geometry">
 	
 </script>
 
 </head>
 
 <body>
+	<input type="text" placeholder="Inserisci l'indirizzo del luogo.."
+		id="mapsearch" size="50">
+	<div id="map"></div>
 	<header>
 
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
-			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>                        
-			      </button>
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#myNavbar">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
 					<aside class="pull-left">
 						<img src="images/logo.png" height="30">
 					</aside>
 					<a id="brand" class="navbar-brand">Calabria E20</a>
 				</div>
-					<div class="collapse navbar-collapse" id = "myNavbar">
-							<ul class="nav navbar-nav">
-								<li><a href="homepage.jsp">Home</a></li>
-								<li><a href="eventi.jsp">Eventi </a></li>
-<c:if test="${not loggato}">							
-								<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
-</c:if>
-							</ul>
-<c:if test="${loggato}">
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><a href="homepage.jsp">Home</a></li>
+						<li><a href="eventi.jsp">Eventi </a></li>
 
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span>	${nome} <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><p class="bg-primary">${username}</p></li>
-								<li><a href="gestioneProfilo.jsp">Profilo</a></li>
-								<li><a href="effettualogout">Logout</a></li>
-							</ul>
-						</li>
+						<c:if test="${not loggato}">
+							<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
+						</c:if>
+
 					</ul>
-</c:if>
+					<c:if test="${loggato}">
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a href="" class="dropdown-toggle"
+								data-toggle="dropdown"> <span
+									class="glyphicon glyphicon-user"></span> ${nome} <b
+									class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><p class="bg-primary">${username}</p></li>
+									<li><a href="gestioneProfilo.jsp">Profilo</a></li>
+									<li><a href="effettualogout">Logout</a></li>
+								</ul></li>
+						</ul>
+					</c:if>
 				</div>
 			</div>
 		</nav>
@@ -166,7 +174,6 @@
 												name="input_indirizzo" type="text">
 										</div>
 									</div>
--->
 									<div class="form-group">
 										<label class="col-md-4 control-label">Indirizzo:</label>
 										<div class="col-md-8">
@@ -176,6 +183,17 @@
 										</div>
 									</div>
 
+									<div id="map"></div>
+									
+-->
+									<div class="form-group">
+										<label class="col-md-4 control-label">Indirizzo:</label>
+										<div class="col-md-8">
+											<input type="text"
+												placeholder="Inserisci l'indirizzo del luogo.."
+												id="mapsearch" size="50">
+										</div>
+									</div>
 									<div id="map"></div>
 								</form>
 							</div>
