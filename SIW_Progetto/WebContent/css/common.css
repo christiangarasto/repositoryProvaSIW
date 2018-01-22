@@ -1,3 +1,24 @@
+#newspanel{
+	font-size: 13px;
+	font-style:italic;
+	background: white;
+}
+#newspanel h4{
+	font-style: normal;
+	font-size: 15px;
+}
+.panel-heading h4{
+	font-size: 15px;
+	background: gold;
+	color: black;	
+}
+#panelh{
+	background: gold;
+}
+#panelnews{
+	border-radius: 0;
+    border: 1px solid gold; 
+}
 
 #map {
 	height: 600px;

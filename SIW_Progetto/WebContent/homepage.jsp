@@ -66,7 +66,15 @@
 
 <c:if test="${not loggato}">
 
-					<div class="col-sm-3"></div>
+					<article id = "news" class="col-sm-4 col-md-3">
+					<div class="panel panel-default" id = "panelnews">
+						<div class="panel-heading text-center" id="panelh">
+							<h4><strong>Notizie ed Eventi in tutta Italia</strong></h4>
+						</div><div class="panel-body" id = "newspanel">
+						<script src="//rss.bloople.net/?url=http%3A%2F%2Fstatic.video.corriereobjects.it%2Fwidget%2Fcontent%2Fplaylist%2Fxml%2Fplaylist_e4984304-7de1-11df-a575-00144f02aabe_dateDesc.xml&limit=3&showtitle=false&type=js"></script>
+						</div>
+					</div>
+					</article>
 
 					<div class="col-sm-6">
 						<div class="jumbotron" id="description">
@@ -194,7 +202,7 @@
 											<div class="panel-body">${evento.descrizione}</div>
 											<div class="panel-footer">
 											<strong>Data :</strong>${evento.data}<br>
-											<strong>Ora</strong>${evento.ora}<br>
+											<strong>Ora : </strong>${evento.ora}<br>
 											${evento.luogo.comune} ( ${evento.luogo.provincia} )
 											</div>
 										</div>
