@@ -57,14 +57,14 @@ public class RimuoviLuoghi extends HttpServlet{
 		
 		
 		///Dopo aver filtrato tutti i codici dei luoghi da eliminare...
-		
-		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
-		
-		for(String codiceLuogo : luoghiDaEliminare) {
-			Luogo luogo = ld.findByPrimaryKey(codiceLuogo);
-			ld.delete(luogo);
-		}
-		
+//		
+//		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+//		
+//		for(String codiceLuogo : luoghiDaEliminare) {
+//			Luogo luogo = ld.findByPrimaryKey(codiceLuogo);
+//			ld.delete(luogo);
+//		}
+//		
 		//Chiamo la get della servlet gestione luoghi per visualizzare i luoghi aggiornati
 	}
 }
