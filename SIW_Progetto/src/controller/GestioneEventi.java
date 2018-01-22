@@ -68,10 +68,9 @@ public class GestioneEventi extends HttpServlet {
 				}
 			}
 		}
-		String jsonToReturn = new Gson().toJson(eventi);
-		System.out.println(jsonToReturn);
-		resp.getWriter().write(jsonToReturn);
-
+		
+		req.setAttribute("eventi", eventi);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 		dispatcher.forward(req, resp);
 	}

@@ -17,14 +17,14 @@ public class EffettuaLogin extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		
+
 		UtenteDao ut = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-		
+
 		String piva = ut.findByCredenziali(email, password);
 		HttpSession session = req.getSession();
-		
+
 		if(piva != null) {
-			
+
 			Utente utente = ut.findByPrimaryKey(piva);
 			
 			session.setAttribute("utente", utente);
@@ -32,10 +32,12 @@ public class EffettuaLogin extends HttpServlet{
 			session.setAttribute("piva", utente.getpIva());
 			session.setAttribute("email", email);
 			session.setAttribute("password", password);
+
 			session.setAttribute("loggato", true);
-			
 			session.setAttribute("credenzialiErrate", false);
+			
 			resp.sendRedirect("Home");
+			
 		}else {
 			
 			session.setAttribute("credenzialiErrate", true);
