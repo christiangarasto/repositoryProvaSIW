@@ -14,7 +14,19 @@ public class RimuoviLuoghi extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("POST RIMUOVI LUOGHI");
+
 		
+		String luogo = req.getParameter("luogo");
+		System.out.println("................" + luogo);
+		
+		
+		
+		
+		
+		
+		
+		
+		/*		
 		StringBuffer jsonReceived = new StringBuffer();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()));
 
@@ -26,7 +38,6 @@ public class RimuoviLuoghi extends HttpServlet{
 
 		System.out.println(jsonReceived.toString());
 		
-		/*		
 		for(String s : luoghiE)
 		{
 			System.out.println("- " + s);
