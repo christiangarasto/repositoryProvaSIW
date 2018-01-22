@@ -22,11 +22,11 @@ public class Home extends HttpServlet{
 			System.out.println("Username nullo");
 			req.setAttribute("loggato", false);
 			
-		}else {
-			
+		}
+		else 
+		{
 			req.setAttribute("loggato", true);
 		}
-
 		resp.sendRedirect("gestioneeventi");
 	}
 

@@ -214,9 +214,9 @@
 			</div>
 		</div>
 	</header>
-
 	<footer> Sito web sviluppato dagli studenti Garasto Christian
-		e Ventura Paolo </footer>
+		e Ventura Paolo 
+	</footer>
 
 </body>
 </html>
