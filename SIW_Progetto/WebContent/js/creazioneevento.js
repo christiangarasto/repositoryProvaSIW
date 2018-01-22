@@ -3,13 +3,17 @@ $(window).on('load', function()
 		$("#ticket").change(function()
 		{
 			var tipo = $('#ticket option:selected').attr("value");
+			var txt = "";
 			if(tipo == "pagamento")
 			{
-				var txt1 = "";
-				txt1 = "<label>Numero ticket:</label> <input name = \"numero\" type=\"text\" class=\"form-control\" /> ";
-				txt1 += "<label>Prezzo singolo ticket:</label> <input name = \"prezzo\" type='text' class='form-control' /> ";
-
-				$("#hideticketparameters").html(txt1);
+				txt += "<div class=\"form-inline\">";
+				txt += "<label>Numero ticket:</label> <input name = \"numero\" type=\"text\" class=\"form-control\" /> ";
+				txt += "</div><br>";
+				txt += "<div class=\"form-inline\">";
+				txt += "<label>Prezzo singolo ticket:</label> <input name = \"prezzo\" type='text' class='form-control' /> ";
+				txt += "</div>";
+				
+				$("#hideticketparameters").html(txt);
 			}
 			else
 			{

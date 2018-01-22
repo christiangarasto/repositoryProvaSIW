@@ -68,7 +68,7 @@ public class GestioneEventi extends HttpServlet {
 				}
 			}
 		}
-req.setAttribute("eventi", eventi);
+		req.setAttribute("eventi", eventi);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 		dispatcher.forward(req, resp);

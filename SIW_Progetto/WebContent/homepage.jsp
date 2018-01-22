@@ -101,10 +101,9 @@
 											placeholder="Email">
 									</div>
 									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="glyphicon glyphicon-lock"></i></span> <input id="password"
-											type="password" class="form-control" name="password"
-											placeholder="Password">
+										<span class="input-group-addon">
+										<i class="glyphicon glyphicon-lock"></i></span> 
+										<input id="password" type="password" class="form-control" name="password" placeholder="Password">
 									</div>
 									<br>
 					<c:if test="${credenzialiErrate}">
@@ -165,7 +164,7 @@
 													<option value = "pagamento">Pagamento</option>
 												</select>
 										</div>
-										<div id = "hideticketparameters" class = "form-inline">
+										<div id = "hideticketparameters">
 										<!-- funzione jQuery per contenuto dinamico -->
 										</div><br>
 										<div class="form-group">
