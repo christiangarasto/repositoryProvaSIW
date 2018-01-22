@@ -5,39 +5,10 @@
 
 			$(".luogoDaEliminare").each(function(){
 				if($(this).is(":checked")){
-//COME AGGIORNO I LUOGHI SENZA DOVER RICARICARE LA PAGINA?					
-					$.ajax({
-						type: "POST",
-						url: "rimuoviluoghi",
-						data: {
-							luogo:$(this).val()
-						},
-						success: function(){
-							alert("Richiesta post");
-						}
-					});
-					
-					
-					
-/*					
-					var luogo = new Object();
-					luogo.name = "CodiceLuogo";
-					luogo.value = $(this).val();
-*/
-					//var luogo = $(this).val();
-					//luoghiDaEliminare.push(luogo);					
+					var luogo = $(this).val();
+					luoghiDaEliminare.push(luogo);					
 				}
 			});
-			
-			$.ajax({
-				type: "GET",
-				url: "rimuoviLuoghi",
-				success: function(){
-					alert("Richiesta get");
-				}
-			});
-
-			/*
 		alert(luoghiDaEliminare);
 		
 		
@@ -45,15 +16,14 @@
 			type: "POST",
 			url: "rimuoviluoghi",
 			datatype: "json",
-			//data: JSON.stringify(luoghiDaEliminare)
-			data: {
+			data: JSON.stringify(luoghiDaEliminare)
+			/*data: {
 				luoghiDaE : luoghiDaEliminare
-			},
+			}*/,
 			success: function(data){
-				
+				alert("successo");
 			}
 		});
-		*/
 		
 	}
 	

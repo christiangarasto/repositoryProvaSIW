@@ -90,9 +90,6 @@ public class GestioneLuoghi extends HttpServlet {
 //			session.setAttribute("luoghi", l);
 //			resp.getWriter().write(nuovoLuogo);
 
-		}else {
-
-			System.out.println("Luogo non nuovo quindi niente");
 		}
 		resp.sendRedirect("gestioneluoghi");	
 	}

@@ -67,9 +67,6 @@
 </head>
 
 <body>
-	<input type="text" placeholder="Inserisci l'indirizzo del luogo.."
-		id="mapsearch" size="50">
-	<div id="map"></div>
 	<header>
 
 		<nav class="navbar navbar-inverse navbar-static-top">
@@ -122,99 +119,24 @@
 		<div class="container">
 			<h1>Gestione Luoghi</h1>
 			<hr>
-
-			<button type="button" class="btn btn-info btn-md" data-toggle="modal"
-				data-target="#nuovoLuogo" data-backdrop="static">Aggiungi
-				nuovo luogo</button>
-			<button type="button" class="btn btn-danger"
-				onclick="rimuoviLuoghi()">Rimuovi</button>
-			<div class="modal fade" id="nuovoLuogo" role="dialog">
-				<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close aggiungiLuogoButton"
-								data-dismiss="modal">×</button>
-							<h4 class="modal-title">Aggiungi nuovo luogo</h4>
-						</div>
-						<div class="modal-body">
-							<p>Aggiungi le informazioni per aggiungere un nuovo luogo.</p>
-						</div>
-						<div class="modal-footer">
-							<div class="col-md-9 personal-info">
-								<form class="form-horizontal">
-									<br>
-									<div class="form-group">
-										<label class="col-lg-4 control-label">Nome luogo:</label>
-										<div class="col-lg-8">
-											<input class="form-control" id="nomeLuogo"
-												name="input_nomeluogo" type="text">
-										</div>
-									</div>
-									<!-- 
-									<div class="form-group">
-										<label class="col-md-4 control-label">Provincia:</label>
-										<div class="col-md-8">
-											<input class="form-control" id="provincia"
-												name="input_provincia" type="text">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-4 control-label">Comune:</label>
-										<div class="col-md-8">
-											<input class="form-control" id="comune" size="50"
-												name="input_comune" type="text">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-4 control-label">Indirizzo:</label>
-										<div class="col-md-8">
-											<input class="form-control" id="indirizzo"
-												name="input_indirizzo" type="text">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-4 control-label">Indirizzo:</label>
-										<div class="col-md-8">
-											<input type="text"
-												placeholder="Inserisci l'indirizzo del luogo.."
-												id="mapsearch" size="50">
-										</div>
-									</div>
-
-									<div id="map"></div>
-									
--->
-									<div class="form-group">
-										<label class="col-md-4 control-label">Indirizzo:</label>
-										<div class="col-md-8">
-											<input type="text"
-												placeholder="Inserisci l'indirizzo del luogo.."
-												id="mapsearch" size="50">
-										</div>
-									</div>
-									<div id="map"></div>
-								</form>
-							</div>
-							<hr>
-
-						</div>
-
-						<div class="modal-footer">
-							<!-- 
-							<div id="salvataggioLuogoRisposta"></div>
- -->
-							<form>
-								<button type="button" class="btn btn-success" id="salvaLuogo">Salva</button>
-								<button type="button" class="btn btn-info aggiungiLuogoButton"
-									data-dismiss="modal">Annulla</button>
-							</form>
-						</div>
-					</div>
-
-				</div>
+			<label class="col-lg-4 control-label">Nome luogo:</label>
+			<div class="col-lg-8">
+				<input class="form-control" id="nomeLuogo" name="input_nomeluogo"
+					type="text">
 			</div>
+			<label class="col-lg-4 control-label">Indirizzo:</label>
+			<div class="col-lg-8">
+				<input type="text" placeholder="Inserisci l'indirizzo del luogo.."
+					id="mapsearch" class="form-control">
+			</div>
+
+
+			<div id="map"></div>
+
+			<br>
+
+			<button type="button" class="btn btn-info btn-md" id="nuovoLuogo">Aggiungi
+				nuovo luogo</button>
 
 			<hr>
 			<br>
@@ -227,6 +149,10 @@
 							<th>Provincia</th>
 							<th>Comune</th>
 							<th>Indirizzo</th>
+							<th>
+								<button type="button" class="btn btn-danger"
+									onclick="rimuoviLuoghi()">Rimuovi</button>
+							</th>
 						</tr>
 					</thead>
 					<tbody id="elenco">

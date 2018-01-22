@@ -154,14 +154,15 @@ public class EventoDaoJDBC implements EventoDao {
 	public void delete(Evento evento) {
 		Connection connection = this.dataSource.getConnection();
 		try {
+			this.removeForeignKeyFromLuogo(evento, connection);
+			this.removeForeignKeyFromTicket(evento, connection);
+
 			String delete = "delete FROM evento WHERE codice = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, evento.getCodice());
 
 			connection.setAutoCommit(false);
 			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
-			this.removeForeignKeyFromLuogo(evento, connection);
-			this.removeForeignKeyFromTicket(evento, connection);
 			
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -176,20 +177,22 @@ public class EventoDaoJDBC implements EventoDao {
 	}
 
 	private void removeForeignKeyFromLuogo(Evento evento, Connection connection) {
-			String update = "update luogo SET luogo = NULL WHERE codice = ?";
 			try {
+				String update = "update evento SET luogo = NULL WHERE codice = ?";
 				PreparedStatement statement = connection.prepareStatement(update);
 				statement.setString(1, evento.getCodice());
 				statement.executeUpdate();
+				System.out.println("Evento: Remove fk from luogo");
 			} catch (SQLException e) {e.printStackTrace();}
 	}
 
 	private void removeForeignKeyFromTicket(Evento evento, Connection connection) {
-		String update = "update ticket SET evento = NULL WHERE codice = ?";
 		try {
+			String update = "update ticket SET evento = NULL WHERE codice = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, evento.getCodice());
 			statement.executeUpdate();
+			System.out.println("Evento: Remove fk from ticket");
 		} catch (SQLException e) {e.printStackTrace();}
 	}
 	
@@ -320,19 +323,19 @@ public class EventoDaoJDBC implements EventoDao {
 			}
 		}
 	}
-
+	
 	@Override
-	public LinkedList<Evento> eventiPerLuogo(String nomeLuogo) {
+	public LinkedList<Evento> eventiPerLuogo(String codluogo) {
 		Connection connection = this.dataSource.getConnection();
 		LinkedList<Evento> eventi = new LinkedList<Evento>();
 		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 		
-		Luogo luogo = ld.findByName(nomeLuogo);
+		//Luogo luogo = ld.findByName(nomeLuogo);
 		
 		try {
 			String query = "select * FROM evento WHERE luogo = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, luogo.getCodice());
+			statement.setString(1, codluogo);
 			
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
@@ -361,6 +364,47 @@ public class EventoDaoJDBC implements EventoDao {
 			}
 		}
 	}
+
+//	@Override
+//	public LinkedList<Evento> eventiPerLuogo(String nomeLuogo) {
+//		Connection connection = this.dataSource.getConnection();
+//		LinkedList<Evento> eventi = new LinkedList<Evento>();
+//		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+//		
+//		Luogo luogo = ld.findByName(nomeLuogo);
+//		
+//		try {
+//			String query = "select * FROM evento WHERE luogo = ?";
+//			PreparedStatement statement = connection.prepareStatement(query);
+//			statement.setString(1, luogo.getCodice());
+//			
+//			ResultSet result = statement.executeQuery();
+//			while (result.next()) {
+//				Evento evento = new Evento();
+//				evento.setTitolo(result.getString("titolo"));
+//				evento.setDescrizione(result.getString("descrizione"));
+//				evento.setGenere(result.getString("genere"));
+//				evento.setCodice(result.getString("codice"));
+//				evento.setData(new java.sql.Date(result.getDate("data").getDate()));
+//				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
+//				
+//				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
+//				evento.setLuogo(l);
+//				
+//				eventi.add(evento);
+//			}
+//		
+//		return eventi;
+//		} catch (SQLException e) {
+//			throw new PersistenceException(e.getMessage());
+//		} finally {
+//			try {
+//				connection.close();
+//			} catch (SQLException e) {
+//				throw new PersistenceException(e.getMessage());
+//			}
+//		}
+//	}
 
 	
 

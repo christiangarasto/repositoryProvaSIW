@@ -1,5 +1,5 @@
 $(window).on('load', function() {
-
+	
 					$(".aggiungiLuogoButton").on('click', function() {
 						$("#nomeLuogo").val('');
 						$("#provincia").val('');

@@ -149,15 +149,21 @@ public class LuogoDaoJDBC implements LuogoDao{
 	public void delete(Luogo luogo) {
 		Connection connection = this.dataSource.getConnection();
 		try {
+			this.removeForeignKeyFromUtente(luogo, connection);	
+			this.removeForeignKeyFromEvento(luogo, connection);
+
 			String delete = "delete FROM luogo WHERE codice = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, luogo.getCodice());
 			
 			connection.setAutoCommit(false);
 			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
-			this.removeForeignKeyFromUtente(luogo, connection);
 			//devo eliminare la foreignKey da un evento se faccio la delete di un luogo? cos'è il comando drop cascade?
+			
+			System.out.println("Ho eliminato tutte le fk");
+			
 			statement.executeUpdate();
+			System.out.println("Eseguo l'update");
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -169,14 +175,24 @@ public class LuogoDaoJDBC implements LuogoDao{
 		}
 	}
 
-	private void removeForeignKeyFromUtente(Luogo luogo, Connection connection) {
-		String update = "update luogo_titolare_fkey SET titolare = NULL WHERE codice = ?";
+	private void removeForeignKeyFromUtente(Luogo luogo, Connection connection) {System.out.println("Luogo: Remove fk from Utente");
+		String update = "update luogo SET titolare = NULL WHERE codice = ?";
 		try {
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, luogo.getCodice());
 			statement.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();}
-}
+	}
+	
+	private void removeForeignKeyFromEvento(Luogo luogo, Connection connection) {System.out.println("Luogo: Remove fk from Evento");
+			EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+			LinkedList<Evento> eventi = ed.eventiPerLuogo(luogo.getCodice());
+			
+			for(Evento e : eventi) {
+				ed.delete(e);
+			}
+			
+	}
 
 	@Override
 	public LinkedList<Evento> findAllEvents(String codice_luogo) 
