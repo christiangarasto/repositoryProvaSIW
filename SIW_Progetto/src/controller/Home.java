@@ -17,17 +17,18 @@ public class Home extends HttpServlet{
 		HttpSession session = req.getSession();
 		String username = (String) session.getAttribute("nome");
 		
-		if(username == null) {
-			
+		if(username == null) 
+		{	
 			System.out.println("Username nullo");
 			req.setAttribute("loggato", false);
-			
+			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+			dispatcher.forward(req, resp);
 		}
 		else 
 		{
 			req.setAttribute("loggato", true);
+			resp.sendRedirect("gestioneeventi");
 		}
-		resp.sendRedirect("gestioneeventi");
 	}
 
 }

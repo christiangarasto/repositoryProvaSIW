@@ -22,8 +22,39 @@ public class BachecaVisitatori extends HttpServlet
 		EventoDao eventodao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 		LinkedList<Evento> eventi = eventodao.findAll();
 		
-		String jsonToReturn = new Gson().toJson(eventi);
-		resp.getWriter().write(jsonToReturn);
+		String txt = "";
+		
+		if(eventi != null)
+		{
+			int cont = 1;
+			txt += "<div class=\"row\">";
+			for (Evento evento : eventi) 
+			{
+			    txt += "<div class=\"col-sm-4\">";
+				txt += "<div class=\"panel\">";
+				txt += 		"<div id=\"eventoinbacheca\" class=\"panel-heading\">" +
+							"<big><strong>" + evento.getTitolo() + "</strong></big></div>";
+				txt += 			"<div class=\"panel-body\">"  + evento.getDescrizione() + "</div>";
+				txt += 		"<div class=\"panel-footer\"> " +
+							"<strong>Data :</strong> "+ evento.getData() + " <br>" +
+							"<strong>Ora</strong> : " + evento.getOra() + " <br>" +
+							 							evento.getLuogo().getComune() +
+							 							" (" + evento.getLuogo().getProvincia() + ")" +
+							"</div>";
+				txt += "</div>";
+				txt += "</div>";
+				if(cont == 3)
+				{
+					txt += "</div><br>";
+					txt += "<div class=\"row\">";
+					cont = 0;
+				}
+				cont++;
+			}
+			txt += "</div>";
+		}
+
+		resp.getWriter().write(txt);
 	}
 	
 	@Override
