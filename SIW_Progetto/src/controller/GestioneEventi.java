@@ -43,7 +43,7 @@ public class GestioneEventi extends HttpServlet {
 		{
 			System.out.println("utente valido");
 			luoghi = utentedao.findAllLocation(utente.getpIva());
-			if (luoghi != null) 
+			if (luoghi.size() > 0) 
 			{
 				System.out.println("l'utente è titolare di uno o più luoghi");
 				eventi = new LinkedList<>();
