@@ -1,6 +1,9 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
@@ -58,39 +64,66 @@ public class GestioneLuoghi extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		System.out.println("POST LUOGHI");
-		
-		String nomeLuogo = req.getParameter("nomeLuogoInput");
-		String provincia = (String) req.getParameter("provinciaInput");
-		String comune = (String) req.getParameter("comuneInput");
-		String indirizzo = (String) req.getParameter("indirizzoInput");
 
 		HttpSession session = req.getSession();
+		String piva = (String) session.getAttribute("piva");
 
-		LuogoDao luogoDao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
-		UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+		UtenteDao ud = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+		Utente titolare = ud.findByPrimaryKey(piva);
 
-		String pivaTitolare = (String) session.getAttribute("piva");
+		if (titolare != null) {
 
-		LinkedList<Luogo> luoghi = utenteDao.findAllLocation(pivaTitolare);
+			StringBuffer jsonReceived = new StringBuffer();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()));
 
-		Luogo luogoN = new Luogo(utenteDao.findByPrimaryKey(pivaTitolare), nomeLuogo, provincia, comune, indirizzo);
-		
-		System.out.println(nomeLuogo + ", " + provincia + ", " + comune + ", " + indirizzo);
-		
-		if (!luoghi.contains(luogoN)) {
-			System.out.println("Luogo nuovo quindi aggiungo");
-			luogoDao.save(luogoN);
+			String line = reader.readLine();
+			while (line != null) {
+				jsonReceived.append(line);
+				line = reader.readLine();
+			}
 
-			req.setAttribute("luogoCreato", true);
+			System.out.println("jsonReceived: " + jsonReceived.toString());
+			Luogo luogo;
 
-			String nuovoLuogo = new Gson().toJson(luogoN);
-		
-//			LinkedList<Luogo> l = (LinkedList<Luogo>) session.getAttribute("luoghi");
-//			l.add(luogoN);
-//			session.setAttribute("luoghi", l);
-//			resp.getWriter().write(nuovoLuogo);
+			try {
+				JSONObject json = new JSONObject(jsonReceived.toString());
 
+				luogo = new Luogo();
+				luogo.setNome(json.getString("nomeLuogoInput"));
+				luogo.setProvincia(json.getString("provinciaInput"));
+				luogo.setComune(json.getString("comuneInput"));
+				luogo.setIndirizzo(json.getString("indirizzoInput"));
+				luogo.setTitolare(titolare);
+
+				LuogoDao luogoDao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+				UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+
+				String pivaTitolare = (String) session.getAttribute("piva");
+
+				LinkedList<Luogo> luoghi = utenteDao.findAllLocation(pivaTitolare);
+
+				Luogo luogoN = new Luogo(utenteDao.findByPrimaryKey(pivaTitolare), luogo.getNome(),
+						luogo.getProvincia(), luogo.getComune(), luogo.getIndirizzo());
+
+				boolean luogoNuovo = true;
+
+				for (Luogo l : luoghi) {
+					if (l.getNome().equals(luogoN.getNome()) && l.getProvincia().equals(luogoN.getProvincia())
+							&& l.getComune().equals(luogoN.getComune())
+							&& l.getIndirizzo().equals(luogoN.getIndirizzo())) {
+
+						luogoNuovo = false;
+					}
+				}
+
+				if (luogoNuovo) {
+					luogoDao.save(luogoN);
+					String jsonLuogoN = new Gson().toJson(luogoN);
+						resp.getWriter().write(jsonLuogoN);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
-		resp.sendRedirect("gestioneluoghi");	
 	}
 }

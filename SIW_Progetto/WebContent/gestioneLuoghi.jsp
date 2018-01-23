@@ -43,7 +43,6 @@
 				.getElementById('mapsearch'));
 
 		google.maps.event.addListener(searchBox, 'places_changed', function() {
-			alert(searchBox.getPlaces());
 			var places = searchBox.getPlaces();
 
 			var bounds = new google.maps.LatLngBounds();
@@ -53,8 +52,7 @@
 				marker.setPosition(place.geometry.location);
 			}
 
-			google.maps.event.trigger(maCarte, 'resize');
-			map.finBounds(bounds);
+			map.fitBounds(bounds);
 			map.setZoom(15);
 		});
 	}
@@ -126,17 +124,21 @@
 			</div>
 			<label class="col-lg-4 control-label">Indirizzo:</label>
 			<div class="col-lg-8">
-				<input type="text" placeholder="Inserisci l'indirizzo del luogo.."
+				<input type="text"
+					placeholder="Inserisci nell'ordine: Indirizzo,Città,Provincia.."
 					id="mapsearch" class="form-control">
 			</div>
 
+			<div class="col-lg-8">
+				<button type="button" class="btn btn-info btn-md" id="nuovoLuogo">Aggiungi
+					nuovo luogo</button>
+			</div>
 
 			<div id="map"></div>
 
 			<br>
 
-			<button type="button" class="btn btn-info btn-md" id="nuovoLuogo">Aggiungi
-				nuovo luogo</button>
+
 
 			<hr>
 			<br>
@@ -157,7 +159,6 @@
 					</thead>
 					<tbody id="elenco">
 						<c:forEach items="${luoghi}" var="luogo">
-
 							<tr>
 								<td><div class="checkbox">
 										<label><input class="luogoDaEliminare" type="checkbox"
@@ -168,8 +169,8 @@
 								<td>${luogo.comune}</td>
 								<td>${luogo.indirizzo}</td>
 							</tr>
-
 						</c:forEach>
+
 					</tbody>
 					<tfoot>
 						<tr class="active">

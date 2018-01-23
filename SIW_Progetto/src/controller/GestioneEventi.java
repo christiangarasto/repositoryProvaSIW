@@ -45,16 +45,16 @@ public class GestioneEventi extends HttpServlet {
 			luoghi = utentedao.findAllLocation(utente.getpIva());
 			if (luoghi.size() > 0) 
 			{
-				System.out.println("l'utente è titolare di uno o più luoghi");
+//				System.out.println("l'utente è titolare di uno o più luoghi");
 				eventi = new LinkedList<>();
 				for (Luogo l : luoghi) 
 				{
-					System.out.println("luogo " + l);
+//					System.out.println("luogo " + l);
 					LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 					LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
 					if (tmp != null) 
 					{
-						System.out.println("nel locale " + l.getNome() + " ci sono i seguenti eventi:");
+//						System.out.println("nel locale " + l.getNome() + " ci sono i seguenti eventi:");
 						for (Evento e : tmp) 
 						{
 							System.out.println(e);
