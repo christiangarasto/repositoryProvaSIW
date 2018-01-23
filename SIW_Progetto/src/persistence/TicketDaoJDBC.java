@@ -146,8 +146,9 @@ class TicketDaoJDBC implements TicketDao {
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, ticket.getCodice());
 
-			connection.setAutoCommit(false);
-			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+			//this.removeForeignKeyFromEvento(ticket, connection);
+//			connection.setAutoCommit(false);
+//			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 			
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -159,5 +160,14 @@ class TicketDaoJDBC implements TicketDao {
 				throw new PersistenceException(e.getMessage());
 			}
 		}		
+	}
+
+	private void removeForeignKeyFromEvento(Ticket ticket, Connection connection) {
+		String update = "update ticket SET evento = NULL WHERE codice = ?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, ticket.getCodice());
+			statement.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}
 	}
 }

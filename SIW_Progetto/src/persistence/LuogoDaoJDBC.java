@@ -149,20 +149,23 @@ public class LuogoDaoJDBC implements LuogoDao{
 	public void delete(Luogo luogo) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			this.removeForeignKeyFromUtente(luogo, connection);	
-			this.removeForeignKeyFromEvento(luogo, connection);
 
 			String delete = "delete FROM luogo WHERE codice = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, luogo.getCodice());
 			
-			connection.setAutoCommit(false);
-			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
+			//connection.setAutoCommit(false);
+			//connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
 			//devo eliminare la foreignKey da un evento se faccio la delete di un luogo? cos'è il comando drop cascade?
 			
+			
+			this.removeForeignKeyFromEvento(luogo, connection);
+
+			statement.executeUpdate();
+			
+			//this.removeForeignKeyFromUtente(luogo, connection);	
 			System.out.println("Ho eliminato tutte le fk");
 			
-			statement.executeUpdate();
 			System.out.println("Eseguo l'update");
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
