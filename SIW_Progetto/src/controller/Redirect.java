@@ -12,9 +12,11 @@ public class Redirect extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		String reindirizza = req.getParameter("r");
 		RequestDispatcher dispatcher = req.getRequestDispatcher(reindirizza + ".jsp");
 		dispatcher.forward(req, resp);		
+
 	}
 	
 }
