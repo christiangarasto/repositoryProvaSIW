@@ -16,7 +16,6 @@
 
 <script src="js/creazioneevento.js"></script>
 <script src="js/redirect.js"></script>
-<!-- <script src="js/eventiutente.js"></script>  -->
 
 </head>
 

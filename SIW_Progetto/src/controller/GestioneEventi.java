@@ -32,44 +32,53 @@ public class GestioneEventi extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		if (session.getAttribute("loggato") == null) {
+		if (session.getAttribute("loggato") == null) 
+		{
 			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 			dispatcher.forward(req, resp);
-		} else {
+		} 
+		else 
+		{
 			String piva = (String) session.getAttribute("piva");
 			UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			Utente utente = utentedao.findByPrimaryKey(piva);
 
 			LinkedList<Luogo> luoghi = null;
 			LinkedList<Evento> eventi = null;
-
-			if (utente != null) {
-				luoghi = utentedao.findAllLocation(utente.getpIva());
-				if (luoghi != null) {
-					// System.out.println("l'utente è titolare di uno o più luoghi");
-					eventi = new LinkedList<>();
-					for (Luogo l : luoghi) {
-						// System.out.println("luogo " + l);
-						LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
-						LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
-						if (tmp != null) {
-							// System.out.println("nel locale " + l.getNome() + " ci sono i seguenti
-							// eventi:");
-							for (Evento e : tmp) {
-								System.out.println(e);
-								eventi.add(e);
-							}
+			
+		if (utente != null) 
+		{
+//			System.out.println("utente valido");
+			luoghi = utentedao.findAllLocation(utente.getpIva());
+			if (luoghi.size() > 0) 
+			{
+//				System.out.println("l'utente è titolare di uno o più luoghi");
+				eventi = new LinkedList<>();
+				for (Luogo l : luoghi) 
+				{
+//					System.out.println("luogo " + l);
+					LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+					LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
+					if (tmp != null) 
+					{
+//						System.out.println("nel locale " + l.getNome() + " ci sono i seguenti eventi:");
+						for (Evento e : tmp) 
+						{
+							System.out.println(e);
+							eventi.add(e);
 						}
 					}
-					if (eventi != null) {
+					if (eventi != null) 
+					{
 						session.setAttribute("events", true);
 					}
 				}
 			}
-			req.setAttribute("eventi", eventi);
+		}
+		req.setAttribute("eventi", eventi);
 
-			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-			dispatcher.forward(req, resp);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+		dispatcher.forward(req, resp);
 		}
 	}
 

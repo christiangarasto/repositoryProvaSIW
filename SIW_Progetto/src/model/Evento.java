@@ -1,7 +1,5 @@
 package model;
 
-import java.util.LinkedList;
-
 public class Evento 
 {
 	private String codice;
@@ -12,7 +10,6 @@ public class Evento
 	private java.sql.Time ora;
 
 	private Luogo luogo;
-	private LinkedList<Ticket> tickets;
 	
 	public Evento() {}
 
@@ -80,14 +77,6 @@ public class Evento
 
 	public void setGenere(String genere) {
 		this.genere = genere;
-	}
-
-	public LinkedList<Ticket> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(LinkedList<Ticket> tickets) {
-		this.tickets = tickets;
 	}
 
 	@Override

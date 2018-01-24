@@ -157,6 +157,8 @@ public class LuogoDaoJDBC implements LuogoDao{
 			//connection.setAutoCommit(false);
 			//connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
 			//devo eliminare la foreignKey da un evento se faccio la delete di un luogo? cos'è il comando drop cascade?
+			this.removeForeignKeyFromUtente(luogo, connection);	
+			this.removeForeignKeyFromEvento(luogo, connection);
 			
 			
 			this.removeForeignKeyFromEvento(luogo, connection);
