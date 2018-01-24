@@ -70,9 +70,11 @@ public class GestioneEventi extends HttpServlet {
 					}
 					if (eventi != null) 
 					{
-						session.setAttribute("events", true);
+						req.setAttribute("events", true);
 					}
 				}
+			}else {
+				//req.setAttribute("events", false);
 			}
 		}
 		req.setAttribute("eventi", eventi);

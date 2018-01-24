@@ -152,23 +152,9 @@ public class LuogoDaoJDBC implements LuogoDao{
 
 			String delete = "delete FROM luogo WHERE codice = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setString(1, luogo.getCodice());
-			
-			//connection.setAutoCommit(false);
-			//connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);			
-			//devo eliminare la foreignKey da un evento se faccio la delete di un luogo? cos'è il comando drop cascade?
-			this.removeForeignKeyFromUtente(luogo, connection);	
+			statement.setString(1, luogo.getCodice());			
 			this.removeForeignKeyFromEvento(luogo, connection);
-			
-			
-			this.removeForeignKeyFromEvento(luogo, connection);
-
 			statement.executeUpdate();
-			
-			//this.removeForeignKeyFromUtente(luogo, connection);	
-			System.out.println("Ho eliminato tutte le fk");
-			
-			System.out.println("Eseguo l'update");
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -180,7 +166,7 @@ public class LuogoDaoJDBC implements LuogoDao{
 		}
 	}
 
-	private void removeForeignKeyFromUtente(Luogo luogo, Connection connection) {System.out.println("Luogo: Remove fk from Utente");
+	private void removeForeignKeyFromUtente(Luogo luogo, Connection connection) {
 		String update = "update luogo SET titolare = NULL WHERE codice = ?";
 		try {
 			PreparedStatement statement = connection.prepareStatement(update);
@@ -189,7 +175,7 @@ public class LuogoDaoJDBC implements LuogoDao{
 		} catch (SQLException e) {e.printStackTrace();}
 	}
 	
-	private void removeForeignKeyFromEvento(Luogo luogo, Connection connection) {System.out.println("Luogo: Remove fk from Evento");
+	private void removeForeignKeyFromEvento(Luogo luogo, Connection connection) {
 			EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 			LinkedList<Evento> eventi = ed.eventiPerLuogo(luogo.getCodice());
 			

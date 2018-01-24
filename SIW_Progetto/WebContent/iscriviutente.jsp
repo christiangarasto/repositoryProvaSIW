@@ -41,8 +41,8 @@
 					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 						<div class="collapse navbar-collapse navHeaderCollapse">
 							<ul class="nav navbar-nav">
-								<li><a href="homepage.jsp">Home</a></li>
-								<li><a href="eventi.jsp">Eventi </a></li>
+								<li><a href="redirect?r=homepage">Home</a></li>
+								<li><a href="redirect?r=eventi">Eventi </a></li>
 								<li class="active"><a href="">Diventa uno di noi</a></li>
 							</ul>
 						</div>

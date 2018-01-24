@@ -38,9 +38,9 @@
 					<div class="collapse navbar-collapse" id = "myNavbar">
 							<ul class="nav navbar-nav">
 								<li class="active"><a href="">Home</a></li>
-								<li><a href="" onclick="redirectTo('eventi.jsp')">Eventi </a></li>
+								<li><a href="redirect?r=eventi">Eventi </a></li>
 <c:if test="${not loggato}">							
-								<li><a href="" onclick="redirectTo('iscriviutente.jsp')">Diventa uno di noi</a></li>
+								<li><a href="redirect?r=iscriviutente">Diventa uno di noi</a></li>
 </c:if>
 							</ul>
 <c:if test="${loggato}">
@@ -50,7 +50,7 @@
 						<span class="glyphicon glyphicon-user"></span>	${nome} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><p class="bg-primary">${username}</p></li>
-								<li><a href="gestioneProfilo.jsp">Profilo</a></li>
+								<li><a href="redirect?r=gestioneProfilo">Profilo</a></li>
 								<li><a href="effettualogout">Logout</a></li>
 							</ul>
 						</li>
@@ -195,8 +195,8 @@
 										<div id="eventoinbacheca" class="panel-heading">
 											<strong>${evento.titolo}</strong>
 											<div class="btn-group pull-right">
-											<a href="#" class="btn btn-warning btn-sm"> Modifica</a>
-											<a href="#" class="btn btn-danger btn-sm"> Cancella</a>
+											<a href="servletDaCreare!" class="btn btn-warning btn-sm"> Modifica</a>
+											<a href="servletDaCreare!" class="btn btn-danger btn-sm"> Cancella</a>
 											</div>
 										</div>
 											<div class="panel-body">${evento.descrizione}</div>
