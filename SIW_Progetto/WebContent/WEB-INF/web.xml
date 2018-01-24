@@ -78,12 +78,12 @@
     <url-pattern>/bachecavisitatori</url-pattern>
   </servlet-mapping>
     <servlet>
-    <servlet-name>RedirectHomeServlet</servlet-name>
-    <servlet-class>controller.RedirectHome</servlet-class>
+    <servlet-name>RedirectServlet</servlet-name>
+    <servlet-class>controller.Redirect</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RedirectHomeServlet</servlet-name>
-    <url-pattern>/redirecthome</url-pattern>
+    <servlet-name>RedirectServlet</servlet-name>
+    <url-pattern>/redirect</url-pattern>
   </servlet-mapping>
       <servlet>
     <servlet-name>RimuoviLuoghiServlet</servlet-name>

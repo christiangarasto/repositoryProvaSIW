@@ -15,6 +15,7 @@
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 <script src="js/creazioneevento.js"></script>
+<script src="js/redirect.js"></script>
 <!-- <script src="js/eventiutente.js"></script>  -->
 
 </head>
@@ -38,9 +39,9 @@
 					<div class="collapse navbar-collapse" id = "myNavbar">
 							<ul class="nav navbar-nav">
 								<li class="active"><a href="">Home</a></li>
-								<li><a href="eventi.jsp">Eventi </a></li>
+								<li><a href="" onclick="redirectTo('/eventi.jsp')">Eventi </a></li>
 <c:if test="${not loggato}">							
-								<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
+								<li><a href="" onclick="redirectTo('iscriviutente.jsp')">Diventa uno di noi</a></li>
 </c:if>
 							</ul>
 <c:if test="${loggato}">

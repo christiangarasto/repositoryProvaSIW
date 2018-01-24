@@ -31,47 +31,46 @@ public class GestioneEventi extends HttpServlet {
 		System.out.println("***Get Gestione Eventi***");
 
 		HttpSession session = req.getSession();
-		
-		String piva = (String) session.getAttribute("piva");
-		UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-		Utente utente = utentedao.findByPrimaryKey(piva);
 
-		LinkedList<Luogo> luoghi = null;
-		LinkedList<Evento> eventi = null;
+		if (session.getAttribute("loggato") == null) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+			dispatcher.forward(req, resp);
+		} else {
+			String piva = (String) session.getAttribute("piva");
+			UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+			Utente utente = utentedao.findByPrimaryKey(piva);
 
-		if (utente != null) 
-		{
-			System.out.println("utente valido");
-			luoghi = utentedao.findAllLocation(utente.getpIva());
-			if (luoghi != null) 
-			{
-//				System.out.println("l'utente è titolare di uno o più luoghi");
-				eventi = new LinkedList<>();
-				for (Luogo l : luoghi) 
-				{
-//					System.out.println("luogo " + l);
-					LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
-					LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
-					if (tmp != null) 
-					{
-//						System.out.println("nel locale " + l.getNome() + " ci sono i seguenti eventi:");
-						for (Evento e : tmp) 
-						{
-							System.out.println(e);
-							eventi.add(e);
+			LinkedList<Luogo> luoghi = null;
+			LinkedList<Evento> eventi = null;
+
+			if (utente != null) {
+				luoghi = utentedao.findAllLocation(utente.getpIva());
+				if (luoghi != null) {
+					// System.out.println("l'utente è titolare di uno o più luoghi");
+					eventi = new LinkedList<>();
+					for (Luogo l : luoghi) {
+						// System.out.println("luogo " + l);
+						LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+						LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
+						if (tmp != null) {
+							// System.out.println("nel locale " + l.getNome() + " ci sono i seguenti
+							// eventi:");
+							for (Evento e : tmp) {
+								System.out.println(e);
+								eventi.add(e);
+							}
 						}
 					}
-				}
-				if (eventi != null) 
-				{
-					session.setAttribute("events", true);
+					if (eventi != null) {
+						session.setAttribute("events", true);
+					}
 				}
 			}
+			req.setAttribute("eventi", eventi);
+
+			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+			dispatcher.forward(req, resp);
 		}
-		req.setAttribute("eventi", eventi);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-		dispatcher.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -101,12 +100,11 @@ public class GestioneEventi extends HttpServlet {
 			e1.printStackTrace();
 		}
 		java.sql.Time ora = new Time(ms);
-		
+
 		String biglietto = (String) req.getParameter("ticket");
 		String numero = (String) req.getParameter("numero");
-		String prezzo = "0";	//se il prezzo è 0 vuol dire che l'entrata è gratuita
-		if(biglietto.equals("pagamento"))
-		{
+		String prezzo = "0"; // se il prezzo è 0 vuol dire che l'entrata è gratuita
+		if (biglietto.equals("pagamento")) {
 			prezzo = req.getParameter("prezzo");
 			System.out.println("prezzo" + prezzo);
 		}
@@ -117,36 +115,30 @@ public class GestioneEventi extends HttpServlet {
 		Luogo luogo = luogodao.findByPrimaryKey(codice_luogo);
 
 		LinkedList<Evento> eventi = luogo.getEventi();
-		if (eventi != null) 
-		{
-			for (Evento e : eventi) 
-			{
-				if( (e.getOra()).equals(ora) && (e.getData()).equals(sqlData) )
-				{
+		if (eventi != null) {
+			for (Evento e : eventi) {
+				if ((e.getOra()).equals(ora) && (e.getData()).equals(sqlData)) {
 					System.out.println("attenzione! C'è già un evento in programma!");
-					if( (e.getTitolo()).equals(titolo) && (e.getDescrizione()).equals(descrizione) && (e.getGenere()).equals(genere) )
-					{
+					if ((e.getTitolo()).equals(titolo) && (e.getDescrizione()).equals(descrizione)
+							&& (e.getGenere()).equals(genere)) {
 						System.out.println("Evento già registrato!");
 						evento_esistente = true;
 						req.setAttribute("evento_esistente", true);
 					}
 				}
 			}
-			
+
 		}
 
-		if (!evento_esistente) 
-		{
+		if (!evento_esistente) {
 			Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
 			EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 			eventoDao.save(nuovoEvento);
-			if(biglietto.equals("pagamento"))
-			{
+			if (biglietto.equals("pagamento")) {
 				System.out.print("eventi a pagamento : ");
 				int size = Integer.parseInt(numero);
 				System.out.println(size);
-				for(int i = 0; i < size; i++)
-				{
+				for (int i = 0; i < size; i++) {
 					Ticket ticket = new Ticket(prezzo, "", nuovoEvento);
 					TicketDao ticketdao = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
 					ticketdao.save(ticket);

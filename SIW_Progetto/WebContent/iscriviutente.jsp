@@ -1,8 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:useBean id="u" class="model.Utente" scope="request" />
-
 <!DOCTYPE html>
 <html>
 <head lang="it">
@@ -89,7 +87,7 @@
 				<div class="form-group">
 					<input name="validaDati" type="button" value="Valida Dati" class="btn btn-warning" onclick="valida()" /> 
 					<input name="resetDati" type="reset" value="Reset Dati" class="btn btn-danger" /> 
-					<input id="inviaDati" type="submit" value="Invia Dati" class="btn btn-success" onclick="registraUtente(event);" />
+					<input id="inviaDati" type="submit" value="Invia Dati" class="btn btn-success" onclick="registraUtente();" />
 				</div>
 			</form>
 		</div>
