@@ -34,15 +34,12 @@ public class EffettuaLogin extends HttpServlet{
 			session.setAttribute("password", password);
 
 			session.setAttribute("loggato", true);
-			session.setAttribute("credenzialiErrate", false);
-			
-			resp.sendRedirect("Home");	
-		}
-		else 
-		{
+			session.setAttribute("credenzialiErrate", false);			
+		}else{
 			session.setAttribute("credenzialiErrate", true);
-			resp.sendRedirect("Home");
 		}
+
+		resp.sendRedirect("Home");
 	}
 	
 }

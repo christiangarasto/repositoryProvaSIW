@@ -62,8 +62,10 @@ public class LuogoDaoJDBC implements LuogoDao{
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				luogo = new Luogo();	
-					Utente titolare = new Utente();
-						titolare.create(result.getString("titolare"));
+				UtenteDao ud = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+					Utente titolare = ud.findByPrimaryKey(result.getString("titolare"));
+						System.out.println("Titolare in findByPK:: " + titolare);
+			
 				
 				luogo.setTitolare(titolare);				
 				luogo.setNome(result.getString("nome"));	
@@ -237,8 +239,9 @@ public class LuogoDaoJDBC implements LuogoDao{
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				luogo = new Luogo();	
-					Utente titolare = new Utente();
-						titolare.create(result.getString("titolare"));
+				UtenteDao ud = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+				Utente titolare = ud.findByPrimaryKey(result.getString("titolare"));
+					System.out.println("Titolare in findByName:: " + titolare);
 				
 				luogo.setTitolare(titolare);				
 				luogo.setNome(result.getString("nome"));	
