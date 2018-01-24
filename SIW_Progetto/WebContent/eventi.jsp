@@ -35,10 +35,10 @@
 				</div>
 					<div class="collapse navbar-collapse" id = "myNavbar">
 							<ul class="nav navbar-nav">
-								<li><a href="homepage.jsp">Home</a></li>
+								<li><a href="redirect?r=homepage">Home</a></li>
 								<li class="active"><a href="">Eventi </a></li>
 <c:if test="${not loggato}">							
-								<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
+								<li><a href="redirect?r=iscriviutente">Diventa uno di noi</a></li>
 </c:if>
 							</ul>
 <c:if test="${loggato}">
@@ -48,7 +48,7 @@
 						<span class="glyphicon glyphicon-user"></span>	${nome} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><p class="bg-primary">${username}</p></li>
-								<li><a href="gestioneProfilo.jsp">Profilo</a></li>
+								<li><a href="redirect?r=gestioneProfilo">Profilo</a></li>
 								<li><a href="effettualogout">Logout</a></li>
 							</ul>
 						</li>

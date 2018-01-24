@@ -8,9 +8,6 @@ function redirectTo(dove){
 		url: "redirect",
 		data: {
 			reindirizzaA:reindirizzaA
-		},
-		success: function(){
-			alert("success");
 		}
 	});
 	

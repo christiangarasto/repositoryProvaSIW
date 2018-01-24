@@ -71,7 +71,7 @@
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
+						data-target="myNavbar">
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
@@ -82,11 +82,11 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li><a href="homepage.jsp">Home</a></li>
-						<li><a href="eventi.jsp">Eventi </a></li>
+						<li><a href="redirect?r=homepage">Home</a></li>
+						<li><a href="redirect?r=eventi">Eventi </a></li>
 
 						<c:if test="${not loggato}">
-							<li><a href="iscriviutente.jsp">Diventa uno di noi</a></li>
+							<li><a href="redirect?r=iscriviutente">Diventa uno di noi</a></li>
 						</c:if>
 
 					</ul>
@@ -99,7 +99,7 @@
 									class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><p class="bg-primary">${username}</p></li>
-									<li><a href="gestioneProfilo.jsp">Profilo</a></li>
+									<li><a href="redirect?r=gestioneProfilo">Profilo</a></li>
 									<li><a href="effettualogout">Logout</a></li>
 								</ul></li>
 						</ul>
@@ -110,7 +110,7 @@
 
 
 		<ul class="nav nav-tabs">
-			<li><a href="gestioneProfilo.jsp">Gestione Profilo</a></li>
+			<li><a href="redirect?r=gestioneProfilo">Gestione Profilo</a></li>
 			<li class="active"><a href="#">Gestione Luoghi</a></li>
 		</ul>
 
