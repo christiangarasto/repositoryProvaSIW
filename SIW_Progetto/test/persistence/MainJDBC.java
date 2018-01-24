@@ -50,7 +50,7 @@ public class MainJDBC {
 			Ticket ticket2 = new Ticket("10.00", "", rapinaDay2);
 
 		//CREATE
-		
+
 		luogoDao.save(woodstock);
 		luogoDao.save(colosseo);
 		luogoDao.save(plaza);
