@@ -85,7 +85,7 @@
     <servlet-name>RedirectServlet</servlet-name>
     <url-pattern>/redirect</url-pattern>
   </servlet-mapping>
-      <servlet>
+  <servlet>
     <servlet-name>RimuoviLuoghiServlet</servlet-name>
     <servlet-class>controller.RimuoviLuoghi</servlet-class>
   </servlet>
@@ -93,7 +93,12 @@
     <servlet-name>RimuoviLuoghiServlet</servlet-name>
     <url-pattern>/rimuoviluoghi</url-pattern>
   </servlet-mapping>
-  
-  
-  
+  <servlet>
+    <servlet-name>EliminaEventiServlet</servlet-name>
+    <servlet-class>controller.EliminaEventi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EliminaEventiServlet</servlet-name>
+    <url-pattern>/eliminaeventi</url-pattern>
+  </servlet-mapping>
 </web-app>
