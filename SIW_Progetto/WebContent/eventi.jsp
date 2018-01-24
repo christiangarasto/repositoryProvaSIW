@@ -78,9 +78,9 @@
 					<option value="">Filtra per...</option>
 					<option value="luogo">Eventi per luogo</option>
 					<option value="genere">Eventi per genere</option>
-					<option value="data">Eventi in data</option>
-					<option value="oggi">Eventi oggi</option>
-					<option value="ora">Eventi per le ore</option>
+					<option value="data" disabled>Eventi in data</option>
+					<option value="oggi" disabled>Eventi oggi</option>
+					<option value="ora" disabled>Eventi per le ore</option>
 					<option value="comune">Eventi per comune</option>
 					<option value="provincia">Eventi per provincia</option>
 					<option value="gratuiti">Eventi gratuiti</option>

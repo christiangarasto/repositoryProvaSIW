@@ -175,10 +175,10 @@
 					<tfoot>
 						<tr class="active">
 							<td></td>
-							<td><a href="#">Ordina per Nome</a></td>
-							<td><a href="#">Ordina per Provincia</a></td>
-							<td><a href="#">Ordina per Comune</a></td>
-							<td><a href="#">Ordina per Indirizzo</a></td>
+							<td><!--  <a href="#"> -->Ordina per Nome<!-- </a>  --></td>
+							<td><!--  <a href="#"> -->Ordina per Provincia<!-- </a>  --></td>
+							<td><!--  <a href="#"> -->Ordina per Comune<!-- </a>  --></td>
+							<td><!--  <a href="#"> -->Ordina per Indirizzo<!-- </a>  --></td>
 						</tr>
 					</tfoot>
 				</table>
