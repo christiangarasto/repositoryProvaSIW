@@ -14,6 +14,7 @@
 <script src="jquery/jquery-3.2.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
+<script src="js/gestiscituoieventi.js"></script>
 <script src="js/creazioneevento.js"></script>
 <script src="js/eventiutente.js"></script>
 <script src="js/redirect.js"></script>

@@ -47,55 +47,14 @@
 		<servlet-name>ModificaProfiloServlet</servlet-name>
 		<url-pattern>/modificaprofilo</url-pattern>
 	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>GestioneLuoghiServlet</servlet-name>
-		<servlet-class>controller.GestioneLuoghi</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GestioneLuoghiServlet</servlet-name>
-		<url-pattern>/gestioneluoghi</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>GestioneEventiServlet</servlet-name>
-		<servlet-class>controller.GestioneEventi</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GestioneEventiServlet</servlet-name>
-		<url-pattern>/gestioneeventi</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>DammiLuoghiServlet</servlet-name>
-		<servlet-class>controller.DammiLuoghi</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DammiLuoghiServlet</servlet-name>
-		<url-pattern>/dammiluoghi</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>BachecaVisitatoriServlet</servlet-name>
-		<servlet-class>controller.BachecaVisitatori</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>BachecaVisitatoriServlet</servlet-name>
-		<url-pattern>/bachecavisitatori</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>RedirectServlet</servlet-name>
-		<servlet-class>controller.Redirect</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RedirectServlet</servlet-name>
-		<url-pattern>/redirect</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>RimuoviLuoghiServlet</servlet-name>
-		<servlet-class>controller.RimuoviLuoghi</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RimuoviLuoghiServlet</servlet-name>
-		<url-pattern>/rimuoviluoghi</url-pattern>
-	</servlet-mapping>
+  <servlet>
+    <servlet-name>EliminaEventiServlet</servlet-name>
+    <servlet-class>controller.EliminaEventi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EliminaEventiServlet</servlet-name>
+    <url-pattern>/eliminaeventi</url-pattern>
+  </servlet-mapping>
 	<servlet>
 		<servlet-name>RimuoviProfiloServlet</servlet-name>
 		<servlet-class>controller.RimuoviProfilo</servlet-class>
@@ -104,7 +63,5 @@
 		<servlet-name>RimuoviProfiloServlet</servlet-name>
 		<url-pattern>/rimuoviprofilo</url-pattern>
 	</servlet-mapping>
-
-
 
 </web-app>
