@@ -8,7 +8,6 @@ function rimuoviLuoghi() {
 			luoghiDaEliminare.push(luogo);
 		}
 	});
-	alert(luoghiDaEliminare);
 
 	$
 			.ajax({
@@ -17,7 +16,6 @@ function rimuoviLuoghi() {
 				datatype : "json",
 				data : JSON.stringify(luoghiDaEliminare),
 				success : function(r) {
-					alert("successo eliminazione");
 					var luoghi = JSON.parse(r);
 
 					var txt = "";

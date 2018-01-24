@@ -1,7 +1,5 @@
-
 function redirectTo(dove){
 	var reindirizzaA = dove;
-	alert("reindirizzaA: " + reindirizzaA);
 	
 	$.ajax({
 		type: "GET",
