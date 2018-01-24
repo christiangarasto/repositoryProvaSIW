@@ -16,15 +16,16 @@ public interface EventoDao {
 	/*****************************************************/
 	
 	public LinkedList<Evento> eventiDaMostrare(java.sql.Date dataOdierna);	// [mostra gli eventi a partire da una settimana fino al futuro]
-	public LinkedList<Evento> eventiOggi(java.sql.Date dataOdierna);
-	public LinkedList<Evento> eventiPerData(java.sql.Date data);
-	public LinkedList<Evento> eventiPerOra(java.sql.Time ora);
+	public LinkedList<Evento> eventiOggi(String valoreFiltro);
+	public LinkedList<Evento> eventiPerData(String valoreFiltro);
+	public LinkedList<Evento> eventiPerOra(String valoreFiltro);
 	public LinkedList<Evento> eventiPerComune(String comune);
 	public LinkedList<Evento> eventiPerProvincia(String provincia);
 	public LinkedList<Evento> eventiPassatiDaUnaSettimana(java.sql.Date dataOdierna);
 	public LinkedList<Evento> eventiGratuiti();
 	public LinkedList<Evento> eventiAPagamento();
 	public LinkedList<Evento> eventiPerGenere(String genere);
+	public LinkedList<Evento> eventiPerLuogo(String luogo, boolean b);
 	public LinkedList<Evento> eventiPerLuogo(String luogo);
 	
 	/*****************************************************/

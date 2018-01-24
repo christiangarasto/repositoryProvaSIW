@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.LinkedList;
 
 import model.Evento;
@@ -191,99 +190,112 @@ public class EventoDaoJDBC implements EventoDao {
 	private void removeForeignKeyFromTicket(Evento evento, Connection connection) {
 		TicketDao td = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
 		LinkedList<Ticket> ticket = td.findAll();
-		
 
 		for (Ticket t : ticket) {
-			if(t.getEvento().getCodice().equals(evento.getCodice()))
+			if (t.getEvento().getCodice().equals(evento.getCodice()))
 				td.delete(t);
 		}
 	}
 
+	/**********************************************************************************************************/
 	@Override
-	public LinkedList<Evento> eventiDaMostrare(Date dataOdierna) {
+	public LinkedList<Evento> eventiDaMostrare(Date dataOdierna) { // fino a sette giorni prima e futuri
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LinkedList<Evento> eventiOggi(Date dataOdierna) {
+	public LinkedList<Evento> eventiOggi(String dataOdierna) {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LinkedList<Evento> eventiPerData(Date data) {
+	public LinkedList<Evento> eventiPerData(String data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LinkedList<Evento> eventiPerOra(Time ora) {
+	public LinkedList<Evento> eventiPerOra(String ora) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public LinkedList<Evento> eventiPerComune(String comune) {
-		// TODO Auto-generated method stub
-		return null;
+		EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+
+		LinkedList<Evento> eventiPerComune = new LinkedList<Evento>();
+		for (Evento e : ed.findAll()) {
+			if (e.getLuogo().getComune().toLowerCase().equals(comune.toLowerCase())) {
+				eventiPerComune.add(e);
+			}
+		}
+
+		return eventiPerComune;
 	}
 
 	@Override
 	public LinkedList<Evento> eventiPerProvincia(String provincia) {
-		Connection connection = this.dataSource.getConnection();
-		LinkedList<Evento> eventi = new LinkedList<Evento>();
-		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+		EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 
-		try {
-			String query = "select * " + "FROM evento JOIN luogo " + "WHERE luogo = codice and provincia = ?";
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, provincia);
-
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				Evento evento = new Evento();
-				evento.setTitolo(result.getString("titolo"));
-				evento.setDescrizione(result.getString("descrizione"));
-				evento.setGenere(result.getString("genere"));
-				evento.setCodice(result.getString("codice"));
-				evento.setData(new java.sql.Date(result.getDate("data").getDate()));
-				evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
-
-				Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
-				evento.setLuogo(l);
-
-				eventi.add(evento);
-			}
-
-			return eventi;
-		} catch (SQLException e) {
-			throw new PersistenceException(e.getMessage());
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
+		LinkedList<Evento> eventiPerProvincia = new LinkedList<Evento>();
+		for (Evento e : ed.findAll()) {
+			if (e.getLuogo().getProvincia().toLowerCase().equals(provincia.toLowerCase())) {
+				eventiPerProvincia.add(e);
 			}
 		}
+
+		return eventiPerProvincia;
 	}
 
 	@Override
-	public LinkedList<Evento> eventiPassatiDaUnaSettimana(Date dataOdierna) {
+	public LinkedList<Evento> eventiPassatiDaUnaSettimana(Date dataOdierna) { ///////////////////////////////////////////////// ?
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public LinkedList<Evento> eventiGratuiti() {
-		// TODO Auto-generated method stub
-		return null;
+		EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+		LinkedList<Evento> eventiGratuiti = new LinkedList<Evento>();
+
+		TicketDao td = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
+
+		for (Evento e : ed.findAll()) {
+			boolean gratuito = true;
+			for (Ticket t : td.findAll()) {
+				if (t.getEvento().getCodice().equals(e.getCodice())) {
+					gratuito = false;
+				}
+			}
+			if (gratuito) {
+				eventiGratuiti.add(e);
+			}
+		}
+
+		return eventiGratuiti;
 	}
 
 	@Override
 	public LinkedList<Evento> eventiAPagamento() {
-		// TODO Auto-generated method stub
-		return null;
+		EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
+		LinkedList<Evento> eventiPagamento = new LinkedList<Evento>();
+
+		TicketDao td = DatabaseManager.getInstance().getDaoFactory().getTicketDAO();
+
+		for (Evento e : ed.findAll()) {
+			for (Ticket t : td.findAll()) {
+				if (t.getEvento().getCodice().equals(e.getCodice())) {
+					if (!eventiPagamento.contains(e))
+						eventiPagamento.add(e);
+				}
+			}
+		}
+
+		return eventiPagamento;
 	}
 
 	@Override
@@ -366,45 +378,51 @@ public class EventoDaoJDBC implements EventoDao {
 		}
 	}
 
-	// @Override
-	// public LinkedList<Evento> eventiPerLuogo(String nomeLuogo) {
-	// Connection connection = this.dataSource.getConnection();
-	// LinkedList<Evento> eventi = new LinkedList<Evento>();
-	// LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
-	//
-	// Luogo luogo = ld.findByName(nomeLuogo);
-	//
-	// try {
-	// String query = "select * FROM evento WHERE luogo = ?";
-	// PreparedStatement statement = connection.prepareStatement(query);
-	// statement.setString(1, luogo.getCodice());
-	//
-	// ResultSet result = statement.executeQuery();
-	// while (result.next()) {
-	// Evento evento = new Evento();
-	// evento.setTitolo(result.getString("titolo"));
-	// evento.setDescrizione(result.getString("descrizione"));
-	// evento.setGenere(result.getString("genere"));
-	// evento.setCodice(result.getString("codice"));
-	// evento.setData(new java.sql.Date(result.getDate("data").getDate()));
-	// evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
-	//
-	// Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
-	// evento.setLuogo(l);
-	//
-	// eventi.add(evento);
-	// }
-	//
-	// return eventi;
-	// } catch (SQLException e) {
-	// throw new PersistenceException(e.getMessage());
-	// } finally {
-	// try {
-	// connection.close();
-	// } catch (SQLException e) {
-	// throw new PersistenceException(e.getMessage());
-	// }
-	// }
-	// }
+	@Override
+	public LinkedList<Evento> eventiPerLuogo(String nomeLuogo, boolean b) {
+		Connection connection = this.dataSource.getConnection();
+		LinkedList<Evento> eventi = new LinkedList<Evento>();
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+
+		Luogo luogo = ld.findByName(nomeLuogo);
+
+		if (luogo != null) {
+
+			try {
+				String query = "select * FROM evento WHERE luogo = ?";
+				PreparedStatement statement = connection.prepareStatement(query);
+				statement.setString(1, luogo.getCodice());
+
+				ResultSet result = statement.executeQuery();
+				while (result.next()) {
+					Evento evento = new Evento();
+					evento.setTitolo(result.getString("titolo"));
+					evento.setDescrizione(result.getString("descrizione"));
+					evento.setGenere(result.getString("genere"));
+					evento.setCodice(result.getString("codice"));
+					evento.setData(new java.sql.Date(result.getDate("data").getDate()));
+					evento.setOra(new java.sql.Time(result.getTime("ora").getTime()));
+
+					Luogo l = ld.findByPrimaryKey(result.getString("luogo"));
+					evento.setLuogo(l);
+
+					eventi.add(evento);
+				}
+
+				return eventi;
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			} finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					throw new PersistenceException(e.getMessage());
+				}
+			}
+		}
+		return null;
+	}
+
+	/**********************************************************************************************************/
 
 }

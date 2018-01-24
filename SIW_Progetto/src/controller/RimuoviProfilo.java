@@ -32,7 +32,6 @@ public class RimuoviProfilo extends HttpServlet{
 			if(utente != null) {
 				ud.delete(utente);
 				session.invalidate();
-				
 				RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 				dispatcher.forward(req, resp);
 			}

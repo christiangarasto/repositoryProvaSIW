@@ -111,4 +111,12 @@
 		<servlet-name>EliminaEventiServlet</servlet-name>
 		<url-pattern>/eliminaeventi</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>EventiFiltratiServlet</servlet-name>
+		<servlet-class>controller.EventiFiltrati</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EventiFiltratiServlet</servlet-name>
+		<url-pattern>/eventifiltrati</url-pattern>
+	</servlet-mapping>
 </web-app>
