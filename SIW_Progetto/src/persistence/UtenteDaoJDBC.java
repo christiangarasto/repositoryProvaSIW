@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+
 import model.Luogo;
 import model.Utente;
+import persistence.dao.LuogoDao;
 import persistence.dao.UtenteDao;
 
 public class UtenteDaoJDBC implements UtenteDao{
@@ -121,6 +123,9 @@ public class UtenteDaoJDBC implements UtenteDao{
 			String delete = "delete FROM utente WHERE pIva = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, utente.getpIva());
+			
+			this.removeForeignKeyFromLuogo(utente, connection);
+			
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -129,6 +134,16 @@ public class UtenteDaoJDBC implements UtenteDao{
 				connection.close();
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
+
+	private void removeForeignKeyFromLuogo(Utente utente, Connection connection) {
+		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+		LinkedList<Luogo> luoghi = ld.findAll();
+		for(Luogo l : luoghi) {
+			if(l.getTitolare().getpIva().equals(utente.getpIva())) {
+				ld.delete(l);
 			}
 		}
 	}

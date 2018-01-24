@@ -16,7 +16,7 @@ class PostgresDAOFactory extends DAOFactory {
 	static {
 		try {
 			Class.forName("org.postgresql.Driver");
-			dataSource = new DataSource("jdbc:postgresql://horton.elephantsql.com:5432/jfyogywv", "jfyogywv", "5HIlwqZWFZwnQjyYyziZtyJjRN4Z4kYE");
+			dataSource = new DataSource("jdbc:postgresql://horton.elephantsql.com:5432/tsxhkqbp", "tsxhkqbp", "WWR8HJy1QXCXMqgaPS2NRQwo9LJ0Fmy0");
 		
 		} 
 		catch (Exception e) {

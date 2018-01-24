@@ -12,6 +12,7 @@
 <link href="css/common.css" rel="stylesheet">
 
 <script src="js/utility.js"></script>
+<script src="js/gestioneprofilo.js"></script>
 
 <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 <script src="jquery/jquery-3.2.1.min.js"></script>
@@ -25,37 +26,39 @@
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
-			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>                        
-			      </button>
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#myNavbar">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
 					<aside class="pull-left">
 						<img src="images/logo.png" height="30">
 					</aside>
 					<a id="brand" class="navbar-brand">Calabria E20</a>
 				</div>
-					<div class="collapse navbar-collapse" id = "myNavbar">
-							<ul class="nav navbar-nav">
-								<li><a href="redirect?r=homepage">Home</a></li>
-								<li><a href="redirect?r=eventi">Eventi </a></li>
-<c:if test="${not loggato}">							
-								<li><a href="redirect?r=iscriviutente">Diventa uno di noi</a></li>
-</c:if>
-							</ul>
-<c:if test="${loggato}">
-
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span>	${nome} <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><p class="bg-primary">${username}</p></li>
-								<li><a href="redirect?r=gestioneProfilo">Profilo</a></li>
-								<li><a href="effettualogout">Logout</a></li>
-							</ul>
-						</li>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><a href="redirect?r=homepage">Home</a></li>
+						<li><a href="redirect?r=eventi">Eventi </a></li>
+						<c:if test="${not loggato}">
+							<li><a href="redirect?r=iscriviutente">Diventa uno di
+									noi</a></li>
+						</c:if>
 					</ul>
-</c:if>
+					<c:if test="${loggato}">
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a href="" class="dropdown-toggle"
+								data-toggle="dropdown"> <span
+									class="glyphicon glyphicon-user"></span> ${nome} <b
+									class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><p class="bg-primary">${username}</p></li>
+									<li><a href="redirect?r=gestioneProfilo">Profilo</a></li>
+									<li><a href="effettualogout">Logout</a></li>
+								</ul></li>
+						</ul>
+					</c:if>
 				</div>
 			</div>
 		</nav>
@@ -67,6 +70,8 @@
 
 		<div class="container">
 			<h1>Gestione Profilo</h1>
+			<button class="btn btn-danger" id="rimuoviProfilo" onclick="rimuoviProfilo()">Elimina
+				profilo</button>
 			<hr>
 			<div class="row">
 				<div class="col-md-9 personal-info">
@@ -132,6 +137,7 @@
 			</div>
 		</div>
 		<hr>
+
 	</header>
 </body>
 </html>
