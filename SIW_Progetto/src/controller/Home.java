@@ -21,14 +21,14 @@ public class Home extends HttpServlet{
 		{	
 			System.out.println("Username nullo");
 			req.setAttribute("loggato", false);
-			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-			dispatcher.forward(req, resp);
+
 		}
 		else 
 		{
 			req.setAttribute("loggato", true);
-			resp.sendRedirect("gestioneeventi");
 		}
+		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+		dispatcher.forward(req, resp);
 	}
 
 }

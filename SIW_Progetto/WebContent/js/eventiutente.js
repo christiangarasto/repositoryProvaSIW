@@ -4,44 +4,36 @@ $(window).on('load', function(){
 		type: "GET",
 		url: "gestioneeventi",
 		datatype: "json",
-		success: function(eventi){alert("successo");
+		success: function(eventi){
 			var ev = JSON.parse(eventi);
-			
-	alert("ev: " + ev[0].titolo);
-			var i = 0;
-	
-			var eventiUtente = "";
-			//for(i; i < eventi.length; i++){				
-			for(i in eventi){	
-				
-				eventiUtente += "<p>" + ev[i].titolo + "</p>";
-				alert("eventiUtente:: " + eventiUtente);
-				
-				
-//				eventiUtente += "<div class=\"row\">";
-//					eventiUtente += "<div class=\"container\">";
-//						eventiUtente += "<div class=\"panel\">";
-//							eventiUtente += "<div id=\"eventoinbacheca\" class=\"panel-heading\"><strong>";
-//											eventiUtente += eventi[i].titolo;
-//											eventiUtente += "</strong><div class=\"btn-group pull-right\">";
-//											eventiUtente += "<a href=\"servletDaCreare!\" class=\"btn btn-warning btn-sm\"> Modifica</a>";
-//											eventiUtente += "<a href=\"servletDaCreare!\" class=\"btn btn-danger btn-sm\"> Cancella</a>";
-//											eventiUtente += "</div></div>";
-//				eventiUtente += "<div class=\"panel-body\">";
-//				eventiUtente += eventi[i].descrizione;
-//				eventiUtente += "</div><div class=\"panel-footer\">";
-//				eventiUtente += "<strong>Data :</strong>";
-//				eventiUtente += eventi[i].data;
-//				eventiUtente += "<br><strong>Ora : </strong>";
-//				eventiUtente += eventi[i].ora;
-//				eventiUtente += "<br>";
-//				eventiUtente += eventi[i].luogo.comune;
-//				eventiUtente += ("( " + eventi[i].luogo.provincia + " )");
-//				eventiUtente += "</div></div></div></div><br>\n";							
+			var cont = 0;
+
+			var txt = "";
+			txt += "<div class=\"row\">";
+			for(var i = 0; i < ev.length; i++){				
+				    txt += "<div class=\"col-sm-4\">";
+					txt += "<div class=\"panel\">";
+					txt += 		"<div id=\"eventoinbacheca\" class=\"panel-heading\">" +
+								"<big><strong>" + ev[i].titolo + "</strong></big></div>";
+					txt += 			"<div class=\"panel-body\">"  + ev[i].descrizione + "</div>";
+					txt += 		"<div class=\"panel-footer\"> " +
+								"<strong>Data :</strong> "+ ev[i].data + " <br>" +
+								"<strong>Ora</strong> : " + ev[i].ora + " <br>" +
+															ev[i].luogo.comune +
+								 							" (" + ev[i].luogo.provincia + ")" +
+								"</div>";
+					txt += "</div>";
+					txt += "</div>";
+					if(cont == 3)
+					{
+						txt += "</div><br>";
+						txt += "<div class=\"row\">";
+						cont = 0;
+					}
+					cont++;
 			}
-			
-			alert("bashtard::" + eventiUtente);
-			$("#mieieventi").html(eventiUtente);			
+			txt += "</div>";				
+			$("#mieieventi").html(txt);			
 		}
 	});
 	
