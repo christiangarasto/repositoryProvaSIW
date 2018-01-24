@@ -20,10 +20,7 @@ function rimuoviProfilo(){
 	
 }
 
-$(window).on('load', function(){
-
 	function valida() {
-		alert("valida");
 		var controllo = true;
 		
 		var nome = $("#idNome").val();
@@ -57,22 +54,22 @@ $(window).on('load', function(){
 			// ///////////////////////////////////////////////////////////////////////Per
 			// l'inserimento di partite ive ci limitiamo a controllare che sia
 			// composta da 11 caratteri
-// var s = 0;
-// for( i = 0; i <= 9; i += 2 )
-// s += piva.charCodeAt(i) - '0'.charCodeAt(0);
-//					
-// for(var i = 1; i <= 9; i += 2 ){
-// var c = 2*( piva.charCodeAt(i) - '0'.charCodeAt(0) );
-// if( c > 9 ) c = c - 9;
-// s += c;
-// }
-//					
-// var atteso = ( 10 - s%10 )%10;
-// if( atteso != piva.charCodeAt(10) - '0'.charCodeAt(0) ){
-// alert("La partita IVA non è valida:\nil codice di controllo non
-// corrisponde.\n");
-// controllo = false;
-// }
+			// var s = 0;
+			// for( i = 0; i <= 9; i += 2 )
+			// s += piva.charCodeAt(i) - '0'.charCodeAt(0);
+			//					
+			// for(var i = 1; i <= 9; i += 2 ){
+			// var c = 2*( piva.charCodeAt(i) - '0'.charCodeAt(0) );
+			// if( c > 9 ) c = c - 9;
+			// s += c;
+			// }
+			//					
+			// var atteso = ( 10 - s%10 )%10;
+			// if( atteso != piva.charCodeAt(10) - '0'.charCodeAt(0) ){
+			// alert("La partita IVA non è valida:\nil codice di controllo non
+			// corrisponde.\n");
+			// controllo = false;
+			// }
 			// ///////////////////////////////////////////////////////////////////////
 			/** ************************** */
 			
@@ -90,10 +87,8 @@ $(window).on('load', function(){
 		
 	}
 
-	function registraUtente(event) {alert("registraUtente");
-		this.valida();
+	function registraUtente(event) {
 		if (!valida()){
 			event.preventDefault();
 		}
 	}
-});

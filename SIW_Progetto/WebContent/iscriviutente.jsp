@@ -15,6 +15,7 @@
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 <script src="js/utility.js"></script>
+<script src="js/gestioneprofilo.js"></script>
 
 </head>
 
