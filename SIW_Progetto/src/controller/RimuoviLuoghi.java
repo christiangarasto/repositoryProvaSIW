@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Luogo;
 import persistence.DatabaseManager;
@@ -20,53 +21,54 @@ public class RimuoviLuoghi extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("POST RIMUOVI LUOGHI");
 
-		StringBuffer jsonReceived = new StringBuffer();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()));
+		HttpSession session = req.getSession();
 
-		String line = reader.readLine();
-		while (line != null) {
-			jsonReceived.append(line);
-			line = reader.readLine();
-		}
+		if (session.getAttribute("loggato") == null) {
+			System.out.println("Utente non loggato, non è possibile rimuovere il luogo.");
+		} else {
 
-		LinkedList<String> luoghiDaEliminare = new LinkedList<String>();
+			StringBuffer jsonReceived = new StringBuffer();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()));
 
-		String[] codici = jsonReceived.toString().split(",");
+			String line = reader.readLine();
+			while (line != null) {
+				jsonReceived.append(line);
+				line = reader.readLine();
+			}
+			
+			if (jsonReceived.length() > 2) {
+				LinkedList<String> luoghiDaEliminare = new LinkedList<String>();
 
-		for (int i = 0; i < codici.length; i++) {
-			if (i == 0) {
-				if (codici.length == 1) {
-					codici[i] = (String) codici[i].subSequence(2, codici[i].length() - 2);
-				} else {
-					codici[i] = (String) codici[i].subSequence(2, codici[i].length() - 1);
+				String[] codici = jsonReceived.toString().split(",");
+
+				for (int i = 0; i < codici.length; i++) {
+					if (i == 0) {
+						if (codici.length == 1) {
+							codici[i] = (String) codici[i].subSequence(2, codici[i].length() - 2);
+						} else {
+							codici[i] = (String) codici[i].subSequence(2, codici[i].length() - 1);
+						}
+					} else if (i == codici.length - 1) {
+						codici[i] = (String) codici[i].subSequence(1, codici[i].length() - 2);
+					} else {
+						codici[i] = (String) codici[i].subSequence(1, codici[i].length() - 1);
+					}
+
+					System.out.println("aggiungo codice: (" + codici[i] + ")");
+					luoghiDaEliminare.add(codici[i]);
 				}
-			} else if (i == codici.length - 1) {
-				codici[i] = (String) codici[i].subSequence(1, codici[i].length() - 2);
-			} else {
-				codici[i] = (String) codici[i].subSequence(1, codici[i].length() - 1);
-			}
+				LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 
-			System.out.println("aggiungo codice: (" + codici[i] + ")");
-			luoghiDaEliminare.add(codici[i]);
-		}
-
-		/// Dopo aver filtrato tutti i codici dei luoghi da eliminare...
-
-		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
-
-		for (String codiceLuogo : luoghiDaEliminare) {
-			System.out.println("Luogo con codice: (" + codiceLuogo + ")");
-			Luogo luogo = ld.findByPrimaryKey(codiceLuogo);
-			if (luogo != null) {
-				ld.delete(luogo);
-			} else {
-				System.out.println("Luogo null, non posso rimuovere");
+				for (String codiceLuogo : luoghiDaEliminare) {
+					System.out.println("Luogo con codice: (" + codiceLuogo + ")");
+					Luogo luogo = ld.findByPrimaryKey(codiceLuogo);
+					if (luogo != null) {
+						ld.delete(luogo);
+					} else {
+						System.out.println("Luogo null, non posso rimuovere");
+					}
+				}
 			}
 		}
-
-		resp.sendRedirect("gestioneluoghi");
-
-		// Chiamo la get della servlet gestione luoghi per visualizzare i luoghi
-		// aggiornati
 	}
 }
