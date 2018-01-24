@@ -33,10 +33,10 @@ public class Redirect extends HttpServlet{
 		
 		System.out.println("Richiesta redirect: " + reindirizza);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/eventi.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("eventi.jsp");
 		dispatcher.forward(req, resp);	
 		
-//		resp.sendRedirect(reindirizza);
+//		resp.sendRedirect("eventi.jsp");
 		
 		
 		
