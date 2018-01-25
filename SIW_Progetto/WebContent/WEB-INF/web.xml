@@ -119,4 +119,12 @@
 		<servlet-name>EventiFiltratiServlet</servlet-name>
 		<url-pattern>/eventifiltrati</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ModificaEventiServlet</servlet-name>
+		<servlet-class>controller.ModificaEventi</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModificaEventiServlet</servlet-name>
+		<url-pattern>/modificaeventi</url-pattern>
+	</servlet-mapping>
 </web-app>
