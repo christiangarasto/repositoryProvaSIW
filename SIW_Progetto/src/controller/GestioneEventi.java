@@ -150,6 +150,7 @@ public class GestioneEventi extends HttpServlet {
 		}
 
 		if (!evento_esistente) {
+			System.out.println("TITOLO " + titolo);
 			Evento nuovoEvento = new Evento(titolo, descrizione, genere, sqlData, ora, luogo);
 			EventoDao eventoDao = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 			eventoDao.save(nuovoEvento);

@@ -63,7 +63,7 @@ public class EventoDaoJDBC implements EventoDao {
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				evento = new Evento();
-				evento.setDescrizione(result.getString("titolo"));
+				evento.setTitolo(result.getString("titolo"));
 				evento.setDescrizione(result.getString("descrizione"));
 				evento.setGenere(result.getString("genere"));
 				evento.setCodice(result.getString("codice"));
