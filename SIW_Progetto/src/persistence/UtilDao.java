@@ -49,10 +49,10 @@ public void createDatabase(){
 	try {
 		
 		String delete = "create SEQUENCE sequenza_id;"
-				+ "create table utente(\"piva\" varchar(255) primary key, \"nome\" varchar(255), \"email\" varchar(255), \"password\" varchar(50));"
+				+ "create table utente(\"piva\" varchar(255) primary key, \"nome\" varchar(255), \"email\" varchar(255), \"password\" varchar(50)) ON UPDATE CASCADE;"
 				+ "create table luogo(\"titolare\" varchar(255) REFERENCES utente(\"piva\"), \"nome\" varchar(255), \"codice\" varchar(255) primary key, \"provincia\" varchar(255), \"comune\" varchar(255), \"indirizzo\" varchar(255));"
 				+ "create table evento(\"titolo\" varchar(255),\"descrizione\" varchar(255),\"genere\" varchar(255), \"codice\" varchar(255) primary key, \"data\" DATE, \"ora\" TIME, \"luogo\" varchar(255) REFERENCES luogo(\"codice\"));"
-				+ "create table ticket(\"codice\" varchar(255),\"prezzo\" varchar(255),\"intestatario\" varchar(255), \"evento\" varchar(255) REFERENCES evento(\"codice\"));"
+				+ "create table ticket(\"codice\" varchar(255),\"prezzo\" varchar(255),\"intestatario\" varchar(255), \"evento\" varchar(255) REFERENCES evento(\"codice\")) ON UPDATE CASCADE;"
 				;
 		
 		PreparedStatement statement = connection.prepareStatement(delete);

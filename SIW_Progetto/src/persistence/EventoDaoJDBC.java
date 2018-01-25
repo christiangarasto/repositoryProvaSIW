@@ -126,6 +126,7 @@ public class EventoDaoJDBC implements EventoDao {
 
 	@Override
 	public void update(Evento evento) {
+		System.out.println("Update" + evento.getCodice() + " - " + evento.getTitolo());
 		Connection connection = this.dataSource.getConnection();
 		try {
 			String update = "update evento SET titolo = ?, descrizione = ?, genere = ?, data = ?, ora = ?, luogo = ? WHERE codice = ?";
@@ -133,8 +134,8 @@ public class EventoDaoJDBC implements EventoDao {
 			statement.setString(1, evento.getTitolo());
 			statement.setString(2, evento.getDescrizione());
 			statement.setString(3, evento.getGenere());
-			statement.setString(4, evento.getData().toLocaleString());
-			statement.setString(5, evento.getOra().toLocaleString());
+			statement.setDate(4, evento.getData());
+			statement.setTime(5, evento.getOra());
 			statement.setString(6, evento.getLuogo().getCodice());
 			statement.setString(7, evento.getCodice());
 			statement.executeUpdate();

@@ -21,6 +21,7 @@ class TicketDaoJDBC implements TicketDao {
 	}
 	
 	public void save(Ticket ticket){
+		System.out.println("save ticket");
 		Connection connection = this.dataSource.getConnection();
 		try {
 			Long id = IDBroker.getId(connection);
