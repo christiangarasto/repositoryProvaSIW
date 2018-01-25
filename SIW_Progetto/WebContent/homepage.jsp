@@ -22,7 +22,7 @@
 
 <body>
 	<header>
-
+<!-- NAVBAR MENU' -->
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -45,7 +45,7 @@
 									noi</a></li>
 						</c:if>
 					</ul>
-					<c:if test="${loggato}">
+<c:if test="${loggato}"><!-- ICONA ACCOUNT -->
 
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a href="" class="dropdown-toggle"
@@ -58,17 +58,16 @@
 									<li><a href="effettualogout">Logout</a></li>
 								</ul></li>
 						</ul>
-					</c:if>
+</c:if><!-- //ICONA ACCOUNT -->
 				</div>
 			</div>
 		</nav>
-
+<!-- //NAVBAR MENU' -->
 
 		<div class="container" id="info">
 			<div class="row">
-
-				<c:if test="${not loggato}">
-
+<!-- RSS -->
+<c:if test="${not loggato}">
 					<article id="news" class="col-sm-4 col-md-3">
 						<div class="panel panel-default" id="panelnews">
 							<div class="panel-heading text-center" id="panelh">
@@ -82,7 +81,8 @@
 							</div>
 						</div>
 					</article>
-
+<!-- //RSS -->
+<!-- HOMEPAGE VISITATORE -->
 					<div class="col-sm-6">
 						<div class="jumbotron" id="description">
 							<h2>Benvenuti sul sito</h2>
@@ -99,7 +99,7 @@
 							</p>
 						</div>
 					</div>
-
+<!-- MODULO LOGIN -->
 					<div class="col-sm-3">
 						<div class="jumbotron" id="log">
 							<h4>
@@ -133,9 +133,11 @@
 							</form>
 						</div>
 					</div>
-				</c:if>
-
-				<c:if test="${loggato}">
+</c:if>
+<!-- //MODULO LOGIN -->
+<!-- //HOMEPAGE VISITATORE -->
+<!-- HOMEPAGE UTENTE -->
+<c:if test="${loggato}">
 					<div class="col-sm-2">
 						<div class="jumbotron" id="log">
 							<img src="images/profilo.png" class="img-circle"
@@ -145,7 +147,7 @@
 					</div>
 					<div class="col-sm-8">
 						<div class="jumbotron" id="description">
-
+<!-- MODULO CREAZIONE EVENTO -->
 							<button id="expand_form" type="button"
 								class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-plus"></span>
@@ -160,7 +162,7 @@
 									</div>
 
 									<div class="form-group" id="chooselocation">
-										<!-- scelta dinamica dei luoghi in base all'utente -->
+									<!-- scelta dinamica dei luoghi in base all'utente -->
 									</div>
 
 									<div class="form-group">
@@ -192,7 +194,7 @@
 										</select>
 									</div>
 									<div id="hideticketparameters">
-										<!-- funzione jQuery per contenuto dinamico -->
+									<!-- funzione jQuery per visualizzazione dinamica dei parametri per i ticket -->
 									</div>
 									<br>
 									<div class="form-group">
@@ -206,17 +208,40 @@
 									</div>
 								</form>
 							</div>
-
+<!-- //MODULO CREAZIONE EVENTO -->
 							<div id="loadbacheca" class="container">
 
 								<h2>I tuoi Eventi in Bacheca</h2>
 								<hr>
 								<div id="mieieventi" class="container"></div>
 
+								<div class="container">								
+								<div class="modal fade" id="myModal" role="dialog">
+								    <div class="modal-dialog modal-sm">
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">Modifica Evento</h4>
+								        </div>
+								        <div class="modal-body" id="xxx">
+								        	<div id="eventodamodificare" class="container">
+											<form id="mod" method="post" action="modificaeventi">
+											</form>
+									        </div>
+									        <div class="modal-footer">
+										        <button type="submit" class="btn btn-success" form="mod">Aggiorna</button>
+											</div>
+								        </div>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+
 							</div>
 						</div>
 					</div>
-				</c:if>
+</c:if>
+<!-- //HOMEPAGE UTENTE -->
 			</div>
 		</div>
 	</header>

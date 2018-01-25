@@ -94,7 +94,7 @@ public class GestioneEventi extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("***Post Gestione Eventi***");
-
+		
 		String titolo = (String) req.getParameter("titolo");
 		String codice_luogo = (String) req.getParameter("location");
 		String genere = (String) req.getParameter("genere");

@@ -39,7 +39,7 @@ public class DammiLuoghi extends HttpServlet {
 			List<Luogo> luoghi = null;
 			if (utente != null) {
 				luoghi = utentedao.findAllLocation(utente.getpIva());
-				if (luoghi != null) {
+				if (luoghi.size() > 0) {
 
 					System.out.println("::::::::::::::::::::");
 					for (Luogo l : luoghi) {
@@ -50,6 +50,7 @@ public class DammiLuoghi extends HttpServlet {
 					String jsonToReturn = new Gson().toJson(luoghi);
 					resp.getWriter().write(jsonToReturn);
 				}
+				
 			}
 		}
 	}

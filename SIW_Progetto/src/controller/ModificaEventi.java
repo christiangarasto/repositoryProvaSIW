@@ -32,19 +32,12 @@ public class ModificaEventi extends HttpServlet
 		Evento evento = eventodao.findByPrimaryKey(eventToModify);
 		
 		String txt = "";
-		txt += "<div class=\"row\">";				
-		txt += "<div class=\"panel panel-danger\">";
-		txt += "<div class=\"panel-heading panel-danger\">" +
-					"<big><strong> Stai modificando questo evento </strong></big>" +
-			   "</div>";
-		txt += "<div class=\"panel-body\">" +
-				"<div class=\"container\">" +
-				"<form id=\"mod\" method=\"post\" action=\"modificaeventi\">" +
-					"<div class=\"form-group\" align=\"center\">" +
+		
+		txt	+=		"<div class=\"form-group\" align=\"center\">" +
 						"<label for=\"titolo\">Titolo: </label>" +
 						"<input type=\"text\" name=\"titolo\" value=\""+evento.getTitolo()+"\"><br></div>" +
 					"</div>" +
-					"<div class=\"form-group\">" + 
+					"<div class=\"form-group\"  align=\"center\">" + 
 						"<select id=\"genere\" name=\"genere\" class=\"btn btn-default\">" + 
 							"<option value=\"\">Genere</option>" + 
 							"<option value=\"arte\">Arte</option>" + 
@@ -54,43 +47,34 @@ public class ModificaEventi extends HttpServlet
 							"<option value=\"sport\">Sport</option>" + 
 						"</select>" + 
 					"</div>" +
-					"<div class=\"form-group\" id=\"locationmodify\">" +
+					"<div class=\"form-group\" id=\"locationmodify\"  align=\"center\">" +
 					"</div>" +
 					"<div class=\"form-group\" align=\"center\">" +
 						"<textarea rows=\"3\" type=\"text\" name=\"descrizione\">"+evento.getDescrizione()+"</textarea>" +
 					"</div>" +
 					"<div class=\"form-inline\">" +
-					"<div class=\"form-group\">" +
+					"<div class=\"form-group\"  align=\"center\">" +
 						"<label for=\"data\">Data svolgimento:</label> <input name=\"data\" type=\"date\" value=\""+evento.getData()+"\"/>" +
 					"</div>" +
-					"<div class=\"form-group\">" +
+					"<div class=\"form-group\"  align=\"center\">" +
 						"<label for=\"orario\">Ora:</label> <input name=\"orario\" type=\"time\" value=\""+evento.getOra()+"\"/>" +
 					"</div>" +
 					"</div>" +
-					"<div class=\"form-check form-inline\">" + 
+					"<div class=\"form-check form-inline\"  align=\"center\">" + 
 						"<input type=\"checkbox\" class=\"form-check-input\" id=\"pagamento\">" + 
 						"<label class=\"form-check-label\" for=\"pagamento\">Pagamento</label>" +
 						"<input type=\"checkbox\" class=\"form-check-input\" id=\"free\">" + 
 						"<label class=\"form-check-label\" for=\"free\">Gratis</label>" +
 					"</div>"  +
-					"<div class=\"form-group\">" +
+					"<div class=\"form-group\"  align=\"center\">" +
 						"<label for=\"ticket\">Numero Ticket: </label>" +
 						"<input type=\"text\" name=\"numero\"><br>" +
 					"</div>" +
-					"<div class=\"form-group\">" +
+					"<div class=\"form-group\"  align=\"center\">" +
 						"<label for=\"prezzo\">Prezzo Singolo Ticket: </label>" +
 						"<input type=\"text\" name=\"prezzo\"><br>" +
-					"</div>" +
-					"<div id=\"buttons\" class=\"form-group pull-right\">" +
-
-					"</div>" +
-				"</form>";
-		txt +=  "</div>";
-		txt +=  "</div>";
-		txt +=  "</div>";		
-		txt +=  "</div><br>";				
+					"</div>";
 		
-//		String eventomod = new Gson().toJson(evento);
 		resp.getWriter().write(txt);
 	}
 	
@@ -102,6 +86,7 @@ public class ModificaEventi extends HttpServlet
 		String descrizione = (String) req.getParameter("descrizione");
 		String genere = (String) req.getParameter("genere");
 		String luogo = (String) req.getParameter("luogo");
+		
 		System.out.println(titolo + "," + descrizione+ "," + genere+ "," + luogo);
 
 	}

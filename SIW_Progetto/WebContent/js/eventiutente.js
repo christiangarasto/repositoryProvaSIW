@@ -15,7 +15,7 @@ $(window).on('load', function(){
 				txt += 		"<div id=\"eventoinbacheca\" class=\"panel-heading\">" +
 							"<big><strong>" + ev[i].titolo + "</strong></big>" +
 								"<div class=\"btn-group pull-right\">" +
-								"<button id=\"btnmdf\" value=\""+ ev[i].codice +"\" onclick=\"modifica();luoghimodifica();\" type=\"button\" class=\"btn btn-warning btn-sm\">MODIFICA</button>" +
+								"<button id=\"btnmdf\" value=\""+ ev[i].codice +"\"onclick=\"modifica();luoghimodifica();\"  data-toggle=\"modal\" data-target=\"#myModal\" class=\"btn btn-warning btn-sm\">MODIFICA</button>" +
 								"<button id=\"btnrmv\" value=\""+ ev[i].codice +"\" onclick=\"rimuovi()\" type=\"button\" class=\"btn btn-danger btn-sm\">RIMUOVI</button>" +
 								"</div>"+
 							"</div>";
@@ -55,7 +55,7 @@ function rimuovi(){
 				txt += 		"<div id=\"eventoinbacheca\" class=\"panel-heading\">" +
 							"<big><strong>" + ev[i].titolo + "</strong></big>" +
 								"<div class=\"btn-group pull-right\">" +
-								"<button id=\"btnmdf\" value=\""+ ev[i].codice +"\" onclick=\"modifica();luoghimodifica();\" type=\"button\" class=\"btn btn-warning btn-sm\">MODIFICA</button>" +
+								"<button id=\"btnmdf\" value=\""+ ev[i].codice +"\" onclick=\"modifica();luoghimodifica();\" data-toggle=\"modal\" data-target=\"#myModal\" class=\"btn btn-warning btn-sm\">MODIFICA</button>" +
 								"<button id=\"btnrmv\" value=\""+ ev[i].codice +"\" onclick=\"rimuovi()\" type=\"button\" class=\"btn btn-danger btn-sm\">RIMUOVI</button>" +
 								"</div>"+
 							"</div>";
@@ -77,9 +77,7 @@ function rimuovi(){
 
 function modifica()
 {
-	var evento = $("#btnmdf").attr("value");
-
-	alert('evento ' + evento);		
+	var evento = $("#btnmdf").attr("value");		
 	
 	$.ajax({
 		type: "GET",
@@ -87,15 +85,13 @@ function modifica()
 		data: {cod_evento : evento},
 		success: function(eventi)
 		{
-			alert(eventi);
-			$("#mieieventi").html(eventi);
+			$("#mod").html(eventi);
 		}
 	});
 }
 
 function luoghimodifica()
 {
-	alert("luogo");
 	$.ajax({
 		type : "GET",
 		url  : "dammiluoghi",
@@ -109,19 +105,13 @@ function luoghimodifica()
 			{
 				txt += "<option value = \"" + result[i].codice + "\">" + result[i].nome + "</option>";
 			}
-			txt += "<option class = \"divider\" disabled></option>";
-			txt += "<option value = \"\">Aggiungi...</option>";
 			txt += "</select>";
 			$("#locationmodify").html(txt);
-			var btn = "<button class=\"btn btn-danger btn-sm\" onclick=\"window.location.reload()\">Annulla</button>" +
-//					  "<button class=\"btn btn-success btn-sm\" type=\"submit\" form=\"mod\" value=\"aggiorna\">Aggiorna</button>";
-			  "<button class=\"btn btn-success btn-sm\" onclick=\"funzionemodificaevento()\">Aggiorna</button>";
-			$("#buttons").html(btn);
 		}
 	});
 }
 
 function funzionemodificaevento()
 {
-//	var
+	alert("evento modificato");
 }
