@@ -181,9 +181,8 @@ public class ModificaEventi extends HttpServlet
 							}
 							cont++;
 						}
+						
 					}
-//					RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-//					dispatcher.forward(req, resp);
 				}
 				else if(ticket_gratis != "null")
 				{
