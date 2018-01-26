@@ -29,72 +29,63 @@ public class GestioneEventi extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("***Get Gestione Eventi***");
-		
+
 		HttpSession session = req.getSession();
 
-		if (session.getAttribute("loggato") == null) 
-		{
+		if (session.getAttribute("loggato") == null) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 			dispatcher.forward(req, resp);
-		} 
-		else 
-		{
+		} else {
 			String piva = (String) session.getAttribute("piva");
 			UtenteDao utentedao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			Utente utente = utentedao.findByPrimaryKey(piva);
-			
 
 			LinkedList<Luogo> luoghi = null;
 			LinkedList<Evento> eventi = null;
-			
-		if (utente != null) 
-		{
-			System.out.println("UtenteTrovato: " + utente);
-//			System.out.println("utente valido");
-			luoghi = utentedao.findAllLocation(utente.getpIva());
-			if (luoghi.size() > 0) 
-			{
-//				System.out.println("l'utente è titolare di uno o più luoghi");
-				eventi = new LinkedList<>();
-				for (Luogo l : luoghi) 
-				{
-//					System.out.println("luogo " + l);
-					LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
-					LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
-					if (tmp != null) 
-					{
-//						System.out.println("nel locale " + l.getNome() + " ci sono i seguenti eventi:");
-						for (Evento e : tmp) 
-						{
-							System.out.println(e);
-							eventi.add(e);
+
+			if (utente != null) {
+				System.out.println("UtenteTrovato: " + utente);
+				// System.out.println("utente valido");
+				luoghi = utentedao.findAllLocation(utente.getpIva());
+				if (luoghi.size() > 0) {
+					// System.out.println("l'utente è titolare di uno o più luoghi");
+					eventi = new LinkedList<>();
+					for (Luogo l : luoghi) {
+						// System.out.println("luogo " + l);
+						LuogoDao luogodao = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
+						LinkedList<Evento> tmp = luogodao.findAllEvents(l.getCodice());
+						if (tmp != null) {
+							// System.out.println("nel locale " + l.getNome() + " ci sono i seguenti
+							// eventi:");
+							for (Evento e : tmp) {
+								System.out.println(e);
+								eventi.add(e);
+							}
+						}
+						if (eventi != null) {
+							System.out.println("Eventi != null");
+							req.setAttribute("events", true);
+
+							String eventiUtente = new Gson().toJson(eventi);
+
+							System.out.println("EventiUtente:::: \n" + eventiUtente);
+							resp.getWriter().write(eventiUtente);
 						}
 					}
-					if (eventi != null) 
-					{
-						System.out.println("Eventi != null");
-						req.setAttribute("events", true);
-											
-						String eventiUtente = new Gson().toJson(eventi);
-						
-						System.out.println("EventiUtente:::: \n" + eventiUtente);
-						resp.getWriter().write(eventiUtente);
-					}
+				} else {
+					req.setAttribute("events", false);
 				}
-			}else {
-				req.setAttribute("events", false);
 			}
-		}
-		//req.setAttribute("eventi", eventi);
-//		
-//		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-//		dispatcher.forward(req, resp);
+			// req.setAttribute("eventi", eventi);
+			//
+			// RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+			// dispatcher.forward(req, resp);
 		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("***Post Gestione Eventi***");
-		
+
 		String titolo = (String) req.getParameter("titolo");
 		String codice_luogo = (String) req.getParameter("location");
 		String genere = (String) req.getParameter("genere");

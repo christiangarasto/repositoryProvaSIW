@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IDBroker {
-	
+
 	private static final String query = "SELECT nextval('sequenza_id') AS id";
 
 	public static Long getId(Connection connection) {
@@ -16,9 +16,9 @@ public class IDBroker {
 			ResultSet result = statement.executeQuery();
 			result.next();
 			id = result.getLong("id");
-			
+
 			System.out.println("ID: " + id);
-			
+
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		}

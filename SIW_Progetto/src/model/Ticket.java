@@ -1,21 +1,21 @@
 package model;
 
-public class Ticket 
-{
+public class Ticket {
 	private String codice;
 	private String prezzo;
 	private String intestatario;
-	
+
 	private Evento evento;
 
-	public Ticket() {}
-	
+	public Ticket() {
+	}
+
 	public Ticket(String prezzo, String intestatario, Evento evento) {
 		this.prezzo = prezzo;
 		this.intestatario = intestatario;
 		this.evento = evento;
 	}
-	
+
 	public String getCodice() {
 		return codice;
 	}
@@ -47,12 +47,10 @@ public class Ticket
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
-	
-	public String toString(){
-		return  " codice : " + this.codice +
-				", prezzo : " + this.prezzo +
-				", intestatario : " + this.intestatario + 
-				", evento : " + evento.getCodice();
+
+	public String toString() {
+		return " codice : " + this.codice + ", prezzo : " + this.prezzo + ", intestatario : " + this.intestatario
+				+ ", evento : " + evento.getCodice();
 	}
-	
+
 }

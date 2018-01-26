@@ -9,22 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Home extends HttpServlet{
+public class Home extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		HttpSession session = req.getSession();
 		String username = (String) session.getAttribute("nome");
-		
-		if(username == null) 
-		{	
+
+		if (username == null) {
 			System.out.println("Username nullo");
 			req.setAttribute("loggato", false);
 
-		}
-		else 
-		{
+		} else {
 			req.setAttribute("loggato", true);
 		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");

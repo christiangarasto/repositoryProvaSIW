@@ -12,19 +12,19 @@ import model.Utente;
 import persistence.dao.LuogoDao;
 import persistence.dao.UtenteDao;
 
-public class UtenteDaoJDBC implements UtenteDao{
-	
+public class UtenteDaoJDBC implements UtenteDao {
+
 	private DataSource dataSource;
 
 	public UtenteDaoJDBC(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
-	
+
 	@Override
 	public void save(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-		String insert = "insert into utente(piva, nome) values (?,?)";
+			String insert = "insert into utente(piva, nome) values (?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, utente.getpIva());
 			statement.setString(2, utente.getNome());
@@ -33,7 +33,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			try {
-				if(connection != null)
+				if (connection != null)
 					connection.close();
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
@@ -53,7 +53,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				utente = new Utente();
-				utente.setpIva(result.getString("pIva"));				
+				utente.setpIva(result.getString("pIva"));
 				utente.setNome(result.getString("nome"));
 			}
 		} catch (SQLException e) {
@@ -64,7 +64,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}
-		}	
+		}
 		return utente;
 	}
 
@@ -80,13 +80,13 @@ public class UtenteDaoJDBC implements UtenteDao{
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				utente = new Utente();
-				utente.setpIva(result.getString("pIva"));				
+				utente.setpIva(result.getString("pIva"));
 				utente.setNome(result.getString("nome"));
 				utenti.add(utente);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
-		}	 finally {
+		} finally {
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -123,9 +123,9 @@ public class UtenteDaoJDBC implements UtenteDao{
 			String delete = "delete FROM utente WHERE pIva = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, utente.getpIva());
-			
+
 			this.removeForeignKeyFromLuogo(utente, connection);
-			
+
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -141,8 +141,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 	private void removeForeignKeyFromLuogo(Utente utente, Connection connection) {
 		LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 		LinkedList<Luogo> luoghi = ld.findAll();
-		for(Luogo l : luoghi) {
-			if(l.getTitolare().getpIva().equals(utente.getpIva())) {
+		for (Luogo l : luoghi) {
+			if (l.getTitolare().getpIva().equals(utente.getpIva())) {
 				ld.delete(l);
 			}
 		}
@@ -158,7 +158,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			statement.setString(2, piva);
 			statement.executeUpdate();
 		} catch (SQLException e) {
- 
+
 		} finally {
 			try {
 				connection.close();
@@ -197,11 +197,11 @@ public class UtenteDaoJDBC implements UtenteDao{
 			statement = connection.prepareStatement(query);
 			statement.setString(1, email);
 			ResultSet result = statement.executeQuery();
-			
+
 			if (result.next()) {
-				if(result.getString("password").equals(password)) {
+				if (result.getString("password").equals(password)) {
 					return result.getString("piva");
-					
+
 				}
 			}
 		} catch (SQLException e) {
@@ -212,7 +212,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}
-		}	
+		}
 		return null;
 	}
 
@@ -225,12 +225,12 @@ public class UtenteDaoJDBC implements UtenteDao{
 			statement = connection.prepareStatement(query);
 			statement.setString(1, piva);
 			ResultSet result = statement.executeQuery();
-			
+
 			if (result.next()) {
-				if(result.getString("password").equals(passwordNuovo)) {
+				if (result.getString("password").equals(passwordNuovo)) {
 					System.out.println("Password invariata");
-					return false;					
-				}else {
+					return false;
+				} else {
 					return true;
 				}
 			}
@@ -243,7 +243,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}
-		}	
+		}
 	}
 
 	@Override
@@ -255,15 +255,15 @@ public class UtenteDaoJDBC implements UtenteDao{
 			statement = connection.prepareStatement(query);
 			statement.setString(1, piva);
 			ResultSet result = statement.executeQuery();
-			
+
 			if (result.next()) {
-				if(result.getString("email").equals(emailNuovo)) {
-					return false;					
-				}else {
+				if (result.getString("email").equals(emailNuovo)) {
+					return false;
+				} else {
 					return true;
 				}
 			}
-		return false;
+			return false;
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -272,14 +272,13 @@ public class UtenteDaoJDBC implements UtenteDao{
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}
-		}	
+		}
 	}
 
 	@Override
-	public LinkedList<Luogo> findAllLocation(String pIva) 
-	{
-		//System.out.println("findAllLocation() is working...");
-		
+	public LinkedList<Luogo> findAllLocation(String pIva) {
+		// System.out.println("findAllLocation() is working...");
+
 		Connection connection = this.dataSource.getConnection();
 		LinkedList<Luogo> luoghi = null;
 		try {
@@ -289,15 +288,13 @@ public class UtenteDaoJDBC implements UtenteDao{
 			statement = connection.prepareStatement(query);
 			statement.setString(1, pIva);
 			ResultSet result = statement.executeQuery();
-			
+
 			UtenteDao ut = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			Utente utente = ut.findByPrimaryKey(pIva);
-			
-			if(utente != null)
-			{
+
+			if (utente != null) {
 				luoghi = new LinkedList<>();
-				while (result.next()) 
-				{
+				while (result.next()) {
 					luogo = new Luogo();
 					luogo.setTitolare(utente);
 					luogo.setNome(result.getString("nome"));
@@ -309,13 +306,16 @@ public class UtenteDaoJDBC implements UtenteDao{
 				}
 			}
 			return luoghi;
-			
-		}catch (SQLException e) { throw new PersistenceException(e.getMessage()); }	 
-		finally 
-		{
-			try { connection.close(); } 
-			catch (SQLException e) { throw new PersistenceException(e.getMessage()); }
+
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
 		}
-	}	
+	}
 
 }

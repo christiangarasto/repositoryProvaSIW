@@ -23,16 +23,16 @@ public class EventiFiltrati extends HttpServlet {
 
 		String sceltaFiltro = req.getParameter("sceltaFiltro");
 		String valoreFiltro = req.getParameter("valoreFiltro");
-		
+
 		EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 		LinkedList<Evento> eventiFiltrati = null;
 
 		switch (sceltaFiltro) {
 		case "luogo":
-			eventiFiltrati = ed.eventiPerLuogo(valoreFiltro, false);		//OK
+			eventiFiltrati = ed.eventiPerLuogo(valoreFiltro, false); // OK
 			break;
 		case "genere":
-			eventiFiltrati = ed.eventiPerGenere(valoreFiltro);		//OK
+			eventiFiltrati = ed.eventiPerGenere(valoreFiltro); // OK
 			break;
 		case "data":
 			eventiFiltrati = ed.eventiPerData(valoreFiltro);
@@ -41,29 +41,29 @@ public class EventiFiltrati extends HttpServlet {
 			eventiFiltrati = ed.eventiOggi(valoreFiltro);
 			break;
 		case "ora":
-			eventiFiltrati = ed.eventiPerOra(valoreFiltro);		
+			eventiFiltrati = ed.eventiPerOra(valoreFiltro);
 			break;
 		case "comune":
-			eventiFiltrati = ed.eventiPerComune(valoreFiltro);		//OK
+			eventiFiltrati = ed.eventiPerComune(valoreFiltro); // OK
 			break;
 		case "provincia":
-			eventiFiltrati = ed.eventiPerProvincia(valoreFiltro);		//OK
+			eventiFiltrati = ed.eventiPerProvincia(valoreFiltro); // OK
 			break;
 		case "gratuiti":
-			eventiFiltrati = ed.eventiGratuiti();		//OK
+			eventiFiltrati = ed.eventiGratuiti(); // OK
 			break;
 		case "pagamento":
-			eventiFiltrati = ed.eventiAPagamento();		//OK
+			eventiFiltrati = ed.eventiAPagamento(); // OK
 			break;
 		}
-		
-		if(eventiFiltrati.size() > 0) {
+
+		if (eventiFiltrati.size() > 0) {
 			System.out.println("Eventi inseriti, totali inseriti: " + eventiFiltrati.size());
 
 			String eventiF = new Gson().toJson(eventiFiltrati);
 			resp.getWriter().write(eventiF);
-			
-		}else {
+
+		} else {
 			System.out.println("Nessun evento trovato");
 		}
 

@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Redirect extends HttpServlet{
+public class Redirect extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String reindirizza = req.getParameter("r");
 		RequestDispatcher dispatcher = req.getRequestDispatcher(reindirizza + ".jsp");
-		dispatcher.forward(req, resp);		
+		dispatcher.forward(req, resp);
 
 	}
-	
+
 }

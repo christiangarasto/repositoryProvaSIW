@@ -13,41 +13,39 @@ import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.UtenteDao;
 
-public class IscriviUtente extends HttpServlet{
+public class IscriviUtente extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("iscriviutente.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nome = req.getParameter("nome");
 		String cognome = req.getParameter("cognome");
 		String piva = req.getParameter("piva");
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		
-		Utente u = new Utente(piva, nome+" "+cognome);		
+
+		Utente u = new Utente(piva, nome + " " + cognome);
 		UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-		
+
 		Utente find = utenteDao.findByPrimaryKey(piva);
-		
-		if(find == null) {
+
+		if (find == null) {
 			utenteDao.save(u);
 			utenteDao.setPassword(piva, password);
 			utenteDao.setEmail(piva, email);
-			
+
 			req.setAttribute("utente", u);
 			resp.sendRedirect("homepage.jsp");
-			
-		}else {
+
+		} else {
 			resp.sendRedirect("iscriviutente.jsp");
 		}
-			
-	
-	
+
 	}
-	
+
 }

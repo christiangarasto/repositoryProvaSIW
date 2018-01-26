@@ -37,7 +37,7 @@ public class RimuoviLuoghi extends HttpServlet {
 				jsonReceived.append(line);
 				line = reader.readLine();
 			}
-			
+
 			if (jsonReceived.length() > 2) {
 				LinkedList<String> luoghiDaEliminare = new LinkedList<String>();
 
@@ -62,7 +62,7 @@ public class RimuoviLuoghi extends HttpServlet {
 				LuogoDao ld = DatabaseManager.getInstance().getDaoFactory().getLuogoDAO();
 
 				boolean sendBack = false;
-				
+
 				for (String codiceLuogo : luoghiDaEliminare) {
 					System.out.println("Luogo con codice: (" + codiceLuogo + ")");
 					Luogo luogo = ld.findByPrimaryKey(codiceLuogo);
@@ -73,22 +73,21 @@ public class RimuoviLuoghi extends HttpServlet {
 						System.out.println("Luogo null, non posso rimuovere");
 					}
 				}
-				
-				if(sendBack) {
+
+				if (sendBack) {
 					String pivaTitolare = (String) session.getAttribute("piva");
 					LinkedList<Luogo> luoghiAggiornati = new LinkedList<Luogo>();
-					for(Luogo l : ld.findAll()) {
-						if(l.getTitolare().getpIva().equals(pivaTitolare)) {
+					for (Luogo l : ld.findAll()) {
+						if (l.getTitolare().getpIva().equals(pivaTitolare)) {
 							luoghiAggiornati.add(l);
 						}
 					}
-					
+
 					String jsonToSend = new Gson().toJson(luoghiAggiornati);
 					System.out.println("Restituisco i luoghiAggiornati: " + jsonToSend);
 					resp.getWriter().write(jsonToSend);
 				}
-				
-				
+
 			}
 		}
 	}

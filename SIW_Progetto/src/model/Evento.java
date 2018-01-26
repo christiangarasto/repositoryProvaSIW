@@ -1,7 +1,6 @@
 package model;
 
-public class Evento 
-{
+public class Evento {
 	private String codice;
 	private String titolo;
 	private String genere;
@@ -10,10 +9,12 @@ public class Evento
 	private java.sql.Time ora;
 
 	private Luogo luogo;
-	
-	public Evento() {}
 
-	public Evento(String titolo, String descrizione, String genere, java.sql.Date data, java.sql.Time ora, Luogo luogo) {
+	public Evento() {
+	}
+
+	public Evento(String titolo, String descrizione, String genere, java.sql.Date data, java.sql.Time ora,
+			Luogo luogo) {
 		super();
 		this.titolo = titolo;
 		this.descrizione = descrizione;
@@ -22,7 +23,7 @@ public class Evento
 		this.ora = ora;
 		this.luogo = luogo;
 	}
-	
+
 	public String getCodice() {
 		return codice;
 	}
@@ -34,7 +35,7 @@ public class Evento
 	public String getTitolo() {
 		return titolo;
 	}
-	
+
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
@@ -42,7 +43,7 @@ public class Evento
 	public String getDescrizione() {
 		return descrizione;
 	}
-	
+
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
@@ -54,11 +55,11 @@ public class Evento
 	public void setData(java.sql.Date data) {
 		this.data = data;
 	}
-	
+
 	public java.sql.Time getOra() {
 		return ora;
 	}
-	
+
 	public void setOra(java.sql.Time ora) {
 		this.ora = ora;
 	}
@@ -70,7 +71,7 @@ public class Evento
 	public void setLuogo(Luogo luogo) {
 		this.luogo = luogo;
 	}
-	
+
 	public String getGenere() {
 		return genere;
 	}
@@ -81,13 +82,8 @@ public class Evento
 
 	@Override
 	public String toString() {
-		return "Evento: " + codice +
-				"\n	Titolo: " + titolo +
-				"\n	Descrizione: " + descrizione +
-				"\n	Genere: " + genere +
-				"\n	Data: " + data +
-				"\n	Ora: " + ora +
-				"\n	Luogo: " + luogo.getNome();
+		return "Evento: " + codice + "\n	Titolo: " + titolo + "\n	Descrizione: " + descrizione + "\n	Genere: "
+				+ genere + "\n	Data: " + data + "\n	Ora: " + ora + "\n	Luogo: " + luogo.getNome();
 	}
 
 }

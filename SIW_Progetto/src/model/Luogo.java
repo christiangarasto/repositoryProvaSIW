@@ -2,18 +2,18 @@ package model;
 
 import java.util.LinkedList;
 
-public class Luogo 
-{
+public class Luogo {
 	private Utente titolare;
 	private String nome;
 	private String codice;
 	private String provincia;
 	private String comune;
 	private String indirizzo;
-	
+
 	private LinkedList<Evento> eventi;
-	
-	public Luogo() {}
+
+	public Luogo() {
+	}
 
 	public Luogo(Utente titolare, String nome, String provincia, String comune, String indirizzo) {
 		this.titolare = titolare;
@@ -23,19 +23,16 @@ public class Luogo
 		this.indirizzo = indirizzo;
 	}
 
-
 	public String getParsedLuogo() {
 		return titolare + ":" + nome + ":" + codice + ":" + provincia + ":" + comune + ":" + indirizzo;
 	}
 
 	@Override
 	public String toString() {
-		return "Luogo: " + nome + 
-				"\n	Titolare: " + titolare.toString() + 
-				"\n	Codice: " + codice + 
-				"\n	Indirizzo: " + indirizzo + " [Provincia: " + provincia + ", Comune: " + comune + "]";
+		return "Luogo: " + nome + "\n	Titolare: " + titolare.toString() + "\n	Codice: " + codice + "\n	Indirizzo: "
+				+ indirizzo + " [Provincia: " + provincia + ", Comune: " + comune + "]";
 	}
-	
+
 	public Utente getTitolare() {
 		return titolare;
 	}
@@ -91,5 +88,5 @@ public class Luogo
 	public void setEventi(LinkedList<Evento> eventi) {
 		this.eventi = eventi;
 	}
-	
+
 }

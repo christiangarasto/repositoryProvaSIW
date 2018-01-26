@@ -15,41 +15,40 @@ import persistence.dao.TicketDao;
 
 class TicketDaoJDBC implements TicketDao {
 	private DataSource dataSource;
-	
-	public TicketDaoJDBC(DataSource dataSource){
+
+	public TicketDaoJDBC(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
-	
-	public void save(Ticket ticket){
+
+	public void save(Ticket ticket) {
 		System.out.println("save ticket");
 		Connection connection = this.dataSource.getConnection();
 		try {
 			Long id = IDBroker.getId(connection);
 			ticket.setCodice("tk" + Long.toString(id));
-			
+
 			String insert = "insert into ticket(codice, prezzo, intestatario, evento) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-			
+
 			statement.setString(1, ticket.getCodice());
 			statement.setString(2, ticket.getPrezzo());
 			statement.setString(3, ticket.getIntestatario());
 			statement.setString(4, ticket.getEvento().getCodice());
-			
+
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			try {
-				if(connection != null)
+				if (connection != null)
 					connection.close();
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}
 		}
 	}
-	
-	public Ticket findByPrimaryKey(String codice) 
-	{
+
+	public Ticket findByPrimaryKey(String codice) {
 		Connection connection = this.dataSource.getConnection();
 		Ticket ticket = null;
 		try {
@@ -63,10 +62,10 @@ class TicketDaoJDBC implements TicketDao {
 				ticket.setCodice(result.getString("codice"));
 				ticket.setPrezzo(result.getString("prezzo"));
 				ticket.setIntestatario(result.getString("intestatario"));
-				
+
 				EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 				Evento e = ed.findByPrimaryKey(result.getString("evento"));
-				
+
 				ticket.setEvento(e);
 			}
 		} catch (SQLException e) {
@@ -77,15 +76,15 @@ class TicketDaoJDBC implements TicketDao {
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}
-		}	
+		}
 		return ticket;
 	}
-	
-	public LinkedList<Ticket> findAll(){
-		
+
+	public LinkedList<Ticket> findAll() {
+
 		Connection connection = this.dataSource.getConnection();
 		LinkedList<Ticket> tickets = new LinkedList<>();
-		
+
 		try {
 			Ticket ticket;
 			PreparedStatement statement;
@@ -97,17 +96,17 @@ class TicketDaoJDBC implements TicketDao {
 				ticket.setCodice(result.getString("codice"));
 				ticket.setPrezzo(result.getString("prezzo"));
 				ticket.setIntestatario(result.getString("intestatario"));
-				
+
 				EventoDao ed = DatabaseManager.getInstance().getDaoFactory().getEventoDAO();
 				Evento e = ed.findByPrimaryKey(result.getString("evento"));
-				
+
 				ticket.setEvento(e);
-				
+
 				tickets.add(ticket);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
-		}	 finally {
+		} finally {
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -116,9 +115,8 @@ class TicketDaoJDBC implements TicketDao {
 		}
 		return tickets;
 	}
-	
-	public void update(Ticket ticket) 
-	{
+
+	public void update(Ticket ticket) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			String update = "update ticket SET codice = ?, prezzo = ?, intestatario = ?, evento = ? WHERE codice = ?";
@@ -138,19 +136,18 @@ class TicketDaoJDBC implements TicketDao {
 			}
 		}
 	}
-	
-	public void delete(Ticket ticket) 
-	{
+
+	public void delete(Ticket ticket) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			String delete = "delete FROM ticket WHERE codice = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, ticket.getCodice());
 
-			//this.removeForeignKeyFromEvento(ticket, connection);
-//			connection.setAutoCommit(false);
-//			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-			
+			// this.removeForeignKeyFromEvento(ticket, connection);
+			// connection.setAutoCommit(false);
+			// connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -160,7 +157,7 @@ class TicketDaoJDBC implements TicketDao {
 			} catch (SQLException e) {
 				throw new PersistenceException(e.getMessage());
 			}
-		}		
+		}
 	}
 
 	private void removeForeignKeyFromEvento(Ticket ticket, Connection connection) {
@@ -169,6 +166,8 @@ class TicketDaoJDBC implements TicketDao {
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, ticket.getCodice());
 			statement.executeUpdate();
-		} catch (SQLException e) {e.printStackTrace();}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

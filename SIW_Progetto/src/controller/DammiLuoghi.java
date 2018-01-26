@@ -50,7 +50,7 @@ public class DammiLuoghi extends HttpServlet {
 					String jsonToReturn = new Gson().toJson(luoghi);
 					resp.getWriter().write(jsonToReturn);
 				}
-				
+
 			}
 		}
 	}

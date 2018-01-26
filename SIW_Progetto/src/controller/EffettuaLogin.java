@@ -12,7 +12,7 @@ import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.UtenteDao;
 
-public class EffettuaLogin extends HttpServlet{
+public class EffettuaLogin extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
@@ -23,10 +23,10 @@ public class EffettuaLogin extends HttpServlet{
 		String piva = ut.findByCredenziali(email, password);
 		HttpSession session = req.getSession();
 
-		if(piva != null) {
+		if (piva != null) {
 
 			Utente utente = ut.findByPrimaryKey(piva);
-			
+
 			session.setAttribute("utente", utente);
 			session.setAttribute("nome", utente.getNome());
 			session.setAttribute("piva", utente.getpIva());
@@ -34,12 +34,12 @@ public class EffettuaLogin extends HttpServlet{
 			session.setAttribute("password", password);
 
 			session.setAttribute("loggato", true);
-			session.setAttribute("credenzialiErrate", false);			
-		}else{
+			session.setAttribute("credenzialiErrate", false);
+		} else {
 			session.setAttribute("credenzialiErrate", true);
 		}
 
 		resp.sendRedirect("Home");
 	}
-	
+
 }

@@ -74,9 +74,9 @@ public class GestioneLuoghi extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		if (session.getAttribute("loggato") == null) {
-//			 RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
-//			 dispatcher.forward(req, resp);
-//				resp.sendRedirect("homepage.jsp");
+			// RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
+			// dispatcher.forward(req, resp);
+			// resp.sendRedirect("homepage.jsp");
 			System.out.println("utente non loggato nella doGet di GestioneLuoghi");
 		} else {
 
