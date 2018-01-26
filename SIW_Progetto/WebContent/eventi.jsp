@@ -14,6 +14,8 @@
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 <script src="js/eventihandler.js"></script>
+<script src="js/acquistoBiglietto.js"></script>
+
 
 </head>
 
@@ -67,29 +69,75 @@
 		</div>
 		<br>
 		<div class="form-group col-md-2">
-			<input name="valoreFiltro" id="valoreFiltro" type="text" class="form-control"/>
-			</div>
-			
-			
-			<button class="btn btn-success" id="cercaPerFiltroButton">Cerca</button>
-			<br>
-			<div class="form-group">
-				<select id="filtro" name="filtro" class="btn btn-default">
-					<option value="">Filtra per...</option>
-					<option value="luogo">Eventi per luogo</option>
-					<option value="genere">Eventi per genere</option>
-					<option value="data" disabled>Eventi in data</option>
-					<option value="oggi" disabled>Eventi oggi</option>
-					<option value="ora" disabled>Eventi per le ore</option>
-					<option value="comune">Eventi per comune</option>
-					<option value="provincia">Eventi per provincia</option>
-					<option value="gratuiti">Eventi gratuiti</option>
-					<option value="pagamento">Eventi a pagamento</option>
-
-				</select>
-			</div>
+			<input name="valoreFiltro" id="valoreFiltro" type="text"
+				class="form-control" />
 		</div>
 
-		<div id="show_all_events" class="container"></div>
+
+		<button class="btn btn-success" id="cercaPerFiltroButton">Cerca</button>
+		<br>
+		<div class="form-group">
+			<select id="filtro" name="filtro" class="btn btn-default">
+				<option value="">Filtra per...</option>
+				<option value="luogo">Eventi per luogo</option>
+				<option value="genere">Eventi per genere</option>
+				<option value="data" disabled>Eventi in data</option>
+				<option value="oggi" disabled>Eventi oggi</option>
+				<option value="ora" disabled>Eventi per le ore</option>
+				<option value="comune">Eventi per comune</option>
+				<option value="provincia">Eventi per provincia</option>
+				<option value="gratuiti">Eventi gratuiti</option>
+				<option value="pagamento">Eventi a pagamento</option>
+
+			</select>
+		</div>
+	</div>
+
+	<div id="show_all_events" class="container"></div>
+
+	<div class="modal fade" id="acquisto" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Effettua il
+						pagamento</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="messaggioAcquisto">
+				
+					<form id="acquistaBiglietto" method="post"
+						action="acquistabiglietto">
+						<div class="form-group">
+							<label>Codice fiscale: </label> <input type="text"
+								id="intestatarioB" name="intestatarioB">
+						</div>
+						<div class="form-group">
+							<label>Carta di credito: </label> <input type="text" id="cartaB"
+								name="cartaB">
+						</div>
+						<div class="form-group">
+							<label>Data di scadenza: </label> <input type="text"
+								id="scadenzaCCB" name="scadenzaCCB" placeholder="MM/AA">
+						</div>
+						<div class="form-group">
+							<label>CVV: </label> <input type="text" id="cvvB" name="cvvB">
+						</div>
+
+					</form>
+
+				</div>
+				<div class="modal-footer" id="cambioBottone">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Annulla</button>
+
+					<button id="acquista" class="btn btn-primary">Acquista</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

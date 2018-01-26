@@ -57,11 +57,11 @@ public class MainJDBC {
 
 		EventoDao eventoDao = factory.getEventoDAO();
 		Evento e1 = new Evento("DJ Set", "Serata di musica con ospite speciale Fabrizio Maurizio", "Musicale",
-				new java.sql.Date(31, 01, 2018), new java.sql.Time(23, 00, 00), l1);
+				new java.sql.Date(2018, 01, 3), new java.sql.Time(23, 00, 00), l1);
 		eventoDao.save(e1);
 
 		Evento e2 = new Evento("San Valentino", "Trascorri una romantica serata presso il nostro ristorante",
-				"Gastronomico", new java.sql.Date(14, 02, 2018), new java.sql.Time(21, 00, 00), l3);
+				"Gastronomico", new java.sql.Date(02, 14, 2018), new java.sql.Time(21, 00, 00), l3);
 		eventoDao.save(e2);
 
 		Evento e3 = new Evento("Jazz Music Live", "Dicono di essere dei predestinati", "Musicale",

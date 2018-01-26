@@ -290,8 +290,8 @@ public class EventoDaoJDBC implements EventoDao {
 		for (Evento e : ed.findAll()) {
 			for (Ticket t : td.findAll()) {
 				if (t.getEvento().getCodice().equals(e.getCodice())) {
-					if (!eventiPagamento.contains(e))
 						eventiPagamento.add(e);
+						break;
 				}
 			}
 		}

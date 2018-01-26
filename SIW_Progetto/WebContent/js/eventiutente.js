@@ -3,13 +3,14 @@ $(window).on('load', function(){
 	$.ajax({
 		type: "GET",
 		url: "gestioneeventi",
-		datatype: "json",
+		//datatype: "json",
 		success: function(eventi){
 			var ev = JSON.parse(eventi);
-			var cont = 0;			
 			var txt = "";
-			for(var i = 0; i < ev.length; i++)
-			{				
+			var i = 0;
+			//for(var i = 0; i < ev.length; i++)
+			for(i in ev)
+			{
 				txt += "<div class=\"row\">";				
 				txt += "<div class=\"panel\">";
 				txt += 		"<div id=\"eventoinbacheca\" class=\"panel-heading\">" +
@@ -28,8 +29,10 @@ $(window).on('load', function(){
 							"</div>";
 					txt += "</div>";
 					txt += "</div><br>";
-			}
-			txt += "</div>";				
+			}	
+			
+			alert(txt);
+			
 			$("#mieieventi").html(txt);			
 		}
 	});

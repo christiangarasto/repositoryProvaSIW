@@ -127,4 +127,12 @@
 		<servlet-name>ModificaEventiServlet</servlet-name>
 		<url-pattern>/modificaeventi</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>AcquistaBigliettoServlet</servlet-name>
+		<servlet-class>controller.AcquistaBiglietto</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcquistaBigliettoServlet</servlet-name>
+		<url-pattern>/acquistabiglietto</url-pattern>
+	</servlet-mapping>
 </web-app>

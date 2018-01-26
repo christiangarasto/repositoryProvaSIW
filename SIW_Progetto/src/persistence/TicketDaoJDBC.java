@@ -125,6 +125,8 @@ class TicketDaoJDBC implements TicketDao {
 			statement.setString(2, ticket.getPrezzo());
 			statement.setString(3, ticket.getIntestatario());
 			statement.setString(4, ticket.getEvento().getCodice());
+			statement.setString(5, ticket.getCodice());
+			
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
